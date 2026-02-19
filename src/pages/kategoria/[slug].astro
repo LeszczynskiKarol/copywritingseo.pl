@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES, getCategoryInfo } from '../../utils';
+
+export function getStaticPaths() {
+  return Object.keys(CATEGORIES).map(slug => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const catInfo = getCategoryInfo(slug!);
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft && data.category === slug);
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Pillars first
+const pillars = sortedPosts.filter(p => p.data.pillar);
+const articles = sortedPosts.filter(p => !p.data.pillar);
+---
+
+<BaseLayout
+  title={`${catInfo.name} — Poradniki i artykuły`}
+  description={catInfo.description}
+>
+  <div class="container">
+    <Breadcrumbs items={[
+      { label: 'Blog', href: '/blog' },
+      { label: catInfo.name },
+    ]} />
+  </div>
+
+  <section class="page-header">
+    <span style="font-size: var(--fs-4xl); display:block; margin-bottom: var(--space-4);">{catInfo.icon}</span>
+    <h1>{catInfo.name}</h1>
+    <p>{catInfo.description}</p>
+  </section>
+
+  <div class="container">
+    {/* Pillar pages first */}
+    {pillars.length > 0 && (
+      <section style="margin-bottom: var(--space-12);">
+        <div class="section-heading">
+          <h2>📖 Pillar Pages — kompleksowe przewodniki</h2>
+        </div>
+        <div class="posts-grid">
+          {pillars.map(post => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              heroImage={post.data.heroImage}
+              category={post.data.category}
+              slug={post.slug}
+              readingTime={post.data.readingTime}
+              pillar={true}
+              featured={true}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {/* Cluster articles */}
+    {articles.length > 0 && (
+      <section>
+        <div class="section-heading">
+          <h2>Wszystkie artykuły</h2>
+        </div>
+        <div class="posts-grid">
+          {articles.map(post => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              heroImage={post.data.heroImage}
+              category={post.data.category}
+              slug={post.slug}
+              readingTime={post.data.readingTime}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {sortedPosts.length === 0 && (
+      <p style="text-align:center; color:var(--c-text-muted); padding:var(--space-16) 0;">
+        Artykuły w tej kategorii już wkrótce — pracujemy nad tym!
+      </p>
+    )}
+
+    <Newsletter />
+  </div>
+</BaseLayout>

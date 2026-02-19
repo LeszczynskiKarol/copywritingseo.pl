@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import PostCard from './PostCard.astro';
+
+interface Props {
+  category: string;
+  currentSlug: string;
+  max?: number;
+}
+
+const { category, currentSlug, max = 3 } = Astro.props;
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const related = allPosts
+  .filter(p => p.data.category === category && p.slug !== currentSlug)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, max);
+---
+
+{related.length > 0 && (
+  <section style="margin-top: var(--space-16);" aria-label="Powiązane artykuły">
+    <div class="section-heading">
+      <h2>Powiązane artykuły</h2>
+    </div>
+    <div class="posts-grid">
+      {related.map(post => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          heroImage={post.data.heroImage}
+          category={post.data.category}
+          slug={post.slug}
+          readingTime={post.data.readingTime}
+          pillar={post.data.pillar}
+        />
+      ))}
+    </div>
+  </section>
+)}

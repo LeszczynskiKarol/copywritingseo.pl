@@ -1,0 +1,20 @@
+---
+// GDPR Cookie banner
+---
+
+<div class="cookie-banner" id="cookie-banner" style="display:none;" role="alert">
+  <p>Strona korzysta z plików cookies w celu analizy ruchu i poprawy jakości treści. <a href="/polityka-prywatnosci">Dowiedz się więcej</a>.</p>
+  <button class="cookie-btn" id="cookie-accept">Akceptuję</button>
+</div>
+
+<script>
+  const banner = document.getElementById('cookie-banner');
+  const btn = document.getElementById('cookie-accept');
+  if (!localStorage.getItem('cookies-accepted')) {
+    banner && (banner.style.display = 'flex');
+  }
+  btn?.addEventListener('click', () => {
+    localStorage.setItem('cookies-accepted', 'true');
+    banner && (banner.style.display = 'none');
+  });
+</script>

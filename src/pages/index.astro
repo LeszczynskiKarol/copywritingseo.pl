@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES, SITE } from '../utils';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const featuredPost = sortedPosts.find(p => p.data.pillar) || sortedPosts[0];
+const recentPosts = sortedPosts.filter(p => p !== featuredPost).slice(0, 6);
+const categoryEntries = Object.entries(CATEGORIES);
+
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": SITE.title,
+  "url": SITE.url,
+  "description": SITE.description,
+  "inLanguage": "pl-PL",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": `${SITE.url}/blog?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
+---
+
+<BaseLayout title={SITE.title} description={SITE.description} jsonLd={homeSchema}>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-label">🚀 Nowy na stronie? Zacznij tutaj</span>
+      <h1>
+        Twórz treści, które <span class="highlight">rankują</span> i konwertują
+      </h1>
+      <p class="hero-desc">
+        Praktyczne poradniki SEO copywritingu, strategii content, sztucznej inteligencji w tworzeniu treści i Generative Engine Optimization — dla twórców, marketerów i firm.
+      </p>
+      <div class="hero-actions">
+        <a href="/blog" class="btn btn--primary">Przeglądaj poradniki</a>
+        <a href="/szablony" class="btn btn--outline">Darmowe szablony</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Post -->
+  {featuredPost && (
+    <section class="container" style="margin-bottom: var(--space-16);">
+      <div class="section-heading">
+        <h2>Wyróżniony artykuł</h2>
+      </div>
+      <PostCard
+        title={featuredPost.data.title}
+        description={featuredPost.data.description}
+        pubDate={featuredPost.data.pubDate}
+        heroImage={featuredPost.data.heroImage}
+        category={featuredPost.data.category}
+        slug={featuredPost.slug}
+        readingTime={featuredPost.data.readingTime}
+        pillar={featuredPost.data.pillar}
+        featured={true}
+      />
+    </section>
+  )}
+
+  <!-- Categories -->
+  <section class="container" style="padding: var(--space-16) 0;">
+    <div class="section-heading section-heading--center">
+      <h2>Odkryj tematy</h2>
+      <p>Kompleksowe poradniki w 7 filarach tematycznych — od podstaw SEO po optymalizację pod AI.</p>
+    </div>
+    <div class="categories-grid">
+      {categoryEntries.map(([slug, cat]) => (
+        <a href={`/kategoria/${slug}`} class="category-card">
+          <span class="category-card__icon">{cat.icon}</span>
+          <div>
+            <div class="category-card__name">{cat.name}</div>
+            <p class="category-card__desc">{cat.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Recent Posts -->
+  {recentPosts.length > 0 && (
+    <section class="container" style="padding-bottom: var(--space-16);">
+      <div class="section-heading">
+        <h2>Najnowsze wpisy</h2>
+        <p>Świeże artykuły, poradniki i analizy ze świata SEO i content marketingu.</p>
+      </div>
+      <div class="posts-grid">
+        {recentPosts.map(post => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            heroImage={post.data.heroImage}
+            category={post.data.category}
+            slug={post.slug}
+            readingTime={post.data.readingTime}
+            pillar={post.data.pillar}
+          />
+        ))}
+      </div>
+      <div style="text-align:center; margin-top: var(--space-10);">
+        <a href="/blog" class="btn btn--outline">Zobacz wszystkie wpisy →</a>
+      </div>
+    </section>
+  )}
+
+  <!-- Newsletter -->
+  <div class="container">
+    <Newsletter />
+  </div>
+
+</BaseLayout>

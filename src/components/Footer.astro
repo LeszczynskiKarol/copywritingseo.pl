@@ -1,0 +1,52 @@
+---
+import { CATEGORIES, SITE } from '../utils';
+const year = new Date().getFullYear();
+const categoryEntries = Object.entries(CATEGORIES).slice(0, 5);
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo" style="font-size: var(--fs-lg);">
+          <span class="logo-icon" style="width:30px;height:30px;font-size:var(--fs-sm);">CS</span>
+          <span>Copywriting<strong>SEO</strong></span>
+        </a>
+        <p>Praktyczne poradniki SEO copywritingu, strategii treści, wykorzystania AI w tworzeniu contentu i optymalizacji pod wyszukiwarki generatywne (GEO).</p>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">Kategorie</h3>
+        <ul class="footer-links">
+          {categoryEntries.map(([slug, cat]) => (
+            <li><a href={`/kategoria/${slug}`}>{cat.icon} {cat.name}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">Nawigacja</h3>
+        <ul class="footer-links">
+          <li><a href="/blog">Wszystkie wpisy</a></li>
+          <li><a href="/szablony">Szablony i narzędzia</a></li>
+          <li><a href="/o-mnie">O mnie</a></li>
+          <li><a href="/kontakt">Kontakt</a></li>
+          <li><a href="/rss.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-heading">Informacje</h3>
+        <ul class="footer-links">
+          <li><a href="/polityka-prywatnosci">Polityka prywatności</a></li>
+          <li><a href="/sitemap-index.xml">Mapa strony</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; {year} {SITE.title}. Wszelkie prawa zastrzeżone.</span>
+      <span>Stworzone z pasją do SEO i treści.</span>
+    </div>
+  </div>
+</footer>

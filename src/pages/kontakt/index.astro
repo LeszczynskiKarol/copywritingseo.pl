@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+---
+
+<BaseLayout
+  title="Kontakt"
+  description="Skontaktuj się w sprawie współpracy, konsultacji SEO copywritingu lub audytu treści."
+>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Kontakt' }]} />
+  </div>
+
+  <section class="page-header">
+    <h1>Kontakt</h1>
+    <p>Masz pytanie? Chcesz nawiązać współpracę? Napisz do mnie.</p>
+  </section>
+
+  <div class="container container--prose">
+    <div class="prose">
+      <h2>Jak mogę pomóc?</h2>
+      <ul>
+        <li><strong>Audyt treści SEO</strong> — ocena istniejących treści i rekomendacje optymalizacji</li>
+        <li><strong>Strategia content SEO</strong> — planowanie klastrów tematycznych, kalendarz redakcyjny, brief contentowy</li>
+        <li><strong>Konsultacje AI & GEO</strong> — wdrożenie narzędzi AI do produkcji treści, optymalizacja pod wyszukiwarki generatywne</li>
+        <li><strong>Współpraca contentowa</strong> — guest posting, wywiady, komentarze eksperckie</li>
+      </ul>
+
+      <h2>Napisz do mnie</h2>
+      <p>Najszybciej odpowiadam na maile. Zwykle wracam z odpowiedzią w ciągu 24 godzin roboczych.</p>
+
+      <div style="padding: var(--space-8); background: var(--c-bg-soft); border-radius: var(--radius-xl); margin: var(--space-6) 0;">
+        <p style="font-size: var(--fs-lg); text-align: center;">
+          ✉️ <strong>kontakt@copywritingseo.pl</strong>
+        </p>
+      </div>
+
+      <p>
+        W wiadomości opisz krótko, w czym mogę pomóc, i podaj link do strony, której dotyczy zapytanie.
+        Dzięki temu szybciej przejdziemy do konkretów.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { SITE } from '../../utils';
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Karol Leszczyński",
+  "url": `${SITE.url}/o-mnie`,
+  "jobTitle": "Full-Stack Developer & SEO Copywriting Specialist",
+  "description": "Full-Stack Developer i specjalista SEO copywritingu z 15+ lat doświadczenia w digital marketingu.",
+  "knowsAbout": ["SEO Copywriting", "Content Strategy", "AI Content Generation", "Next.js", "React", "AWS"],
+  "sameAs": [],
+};
+---
+
+<BaseLayout
+  title="O mnie — Karol Leszczyński"
+  description="Full-Stack Developer i specjalista SEO copywritingu z 15+ lat doświadczenia. Twórca narzędzi AI do generowania treści."
+  jsonLd={personSchema}
+>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'O mnie' }]} />
+  </div>
+
+  <section class="page-header">
+    <h1>O mnie</h1>
+    <p>Developer, copywriter, praktyk SEO — łączę technologię z treścią.</p>
+  </section>
+
+  <div class="container container--prose">
+    <div class="prose">
+      <div class="author-box" style="margin-bottom: var(--space-10);">
+        <div class="author-box__avatar" style="width:100px;height:100px;font-size:var(--fs-3xl);">KL</div>
+        <div>
+          <div class="author-box__name" style="font-size:var(--fs-2xl);">Karol Leszczyński</div>
+          <p class="author-box__bio" style="font-size:var(--fs-base);">
+            Full-Stack Developer & SEO Copywriting Specialist<br/>
+            15+ lat w digital marketingu | Twórca Smart-Copy.ai
+          </p>
+        </div>
+      </div>
+
+      <h2>Kim jestem</h2>
+      <p>
+        Jestem Full-Stack Developerem i specjalistą SEO copywritingu z ponad 15-letnim doświadczeniem
+        w digital marketingu. Prowadzę agencję web developmentu i kilka platform SaaS, w tym
+        narzędzia AI do generowania i optymalizacji treści.
+      </p>
+      <p>
+        Moja unikalna perspektywa wynika z połączenia dwóch światów: rozumiem zarówno techniczne aspekty SEO
+        (struktura strony, schema markup, Core Web Vitals), jak i stronę kreatywną — pisanie angażujących
+        treści, które jednocześnie spełniają wymagania algorytmów wyszukiwarek.
+      </p>
+
+      <h2>Moje doświadczenie</h2>
+      <p>
+        Przeszedłem drogę od copywritera przez specjalistę SEO do programisty full-stack. Ta ewolucja
+        dała mi wgląd w cały proces tworzenia treści — od strategii i planowania, przez pisanie
+        i optymalizację, po wdrożenie techniczne i analizę wyników.
+      </p>
+      <p>
+        Buduję narzędzia AI do generowania treści, tworzę platformy edukacyjne i zarządzam infrastrukturą
+        cloud (AWS). Piszę o tym, co faktycznie testuję i wdrażam w swoich projektach.
+      </p>
+
+      <h2>Dlaczego CopywritingSEO.pl</h2>
+      <p>
+        Stworzyłem tę stronę, bo brakowało mi kompleksowego, polskojęzycznego zasobu, który łączy
+        SEO copywriting z nowoczesnymi narzędziami AI i optymalizacją pod wyszukiwarki generatywne (GEO).
+        Każdy poradnik na tej stronie bazuje na moim praktycznym doświadczeniu — nie na teorii z podręczników.
+      </p>
+
+      <h2>Kompetencje techniczne</h2>
+      <p>
+        Next.js, React, Node.js, TypeScript, AWS (EC2, S3, CloudFront, Elastic Beanstalk), PostgreSQL,
+        Prisma, Astro, Anthropic Claude API, OpenAI API, Python, Git, Linux.
+      </p>
+    </div>
+
+    <Newsletter />
+  </div>
+</BaseLayout>

@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+---
+
+<BaseLayout
+  title="Polityka prywatności"
+  description="Polityka prywatności serwisu CopywritingSEO.pl"
+  noindex={true}
+>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Polityka prywatności' }]} />
+  </div>
+
+  <section class="page-header">
+    <h1>Polityka prywatności</h1>
+  </section>
+
+  <div class="container container--prose">
+    <div class="prose">
+      <h2>1. Informacje ogólne</h2>
+      <p>
+        Niniejsza polityka dotyczy serwisu CopywritingSEO.pl. Operatorem serwisu i administratorem
+        danych osobowych jest Karol Leszczyński. Serwis respektuje prawo do prywatności
+        i dba o bezpieczeństwo danych.
+      </p>
+
+      <h2>2. Pliki cookies</h2>
+      <p>
+        Serwis korzysta z plików cookies w celach statystycznych i funkcjonalnych. Użytkownik może
+        zmienić ustawienia cookies w swojej przeglądarce. Wyłączenie cookies może ograniczyć
+        niektóre funkcje serwisu.
+      </p>
+
+      <h2>3. Zakres zbieranych danych</h2>
+      <p>
+        Serwis zbiera informacje podane dobrowolnie przez użytkownika (np. adres e-mail przy zapisie
+        na newsletter) oraz dane zbierane automatycznie (np. adres IP, typ przeglądarki) w celach
+        analitycznych.
+      </p>
+
+      <h2>4. Cel przetwarzania danych</h2>
+      <p>
+        Dane osobowe przetwarzane są w celu: realizacji usług (newsletter), analizy ruchu na stronie,
+        odpowiedzi na zapytania kontaktowe. Podstawą prawną przetwarzania jest zgoda użytkownika
+        (art. 6 ust. 1 lit. a RODO) oraz uzasadniony interes administratora (art. 6 ust. 1 lit. f RODO).
+      </p>
+
+      <h2>5. Prawa użytkownika</h2>
+      <p>
+        Użytkownik ma prawo do: dostępu do swoich danych, sprostowania, usunięcia, ograniczenia
+        przetwarzania, przenoszenia danych, wniesienia sprzeciwu oraz cofnięcia zgody w dowolnym momencie.
+      </p>
+
+      <h2>6. Kontakt</h2>
+      <p>W sprawie ochrony danych osobowych prosimy o kontakt: kontakt@copywritingseo.pl</p>
+
+      <p><em>Ostatnia aktualizacja: luty 2026</em></p>
+    </div>
+  </div>
+</BaseLayout>

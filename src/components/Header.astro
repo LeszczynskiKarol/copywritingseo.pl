@@ -1,0 +1,48 @@
+---
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
+---
+
+<header class="site-header" id="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="CopywritingSEO — Strona główna">
+        <span class="logo-icon">CS</span>
+        <span>Copywriting<strong>SEO</strong></span>
+      </a>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="main-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6" class="line-top" />
+          <line x1="3" y1="12" x2="21" y2="12" class="line-mid" />
+          <line x1="3" y1="18" x2="21" y2="18" class="line-bot" />
+        </svg>
+      </button>
+
+      <nav class="nav-main" id="main-nav" aria-label="Nawigacja główna">
+        <a href="/blog" class:list={["nav-link", { active: isActive('/blog') }]}>Blog</a>
+        <a href="/kategoria/ai-copywriting" class:list={["nav-link", { active: isActive('/kategoria/ai-copywriting') }]}>AI & SEO</a>
+        <a href="/kategoria/geo-optymalizacja" class:list={["nav-link", { active: isActive('/kategoria/geo-optymalizacja') }]}>GEO</a>
+        <a href="/szablony" class:list={["nav-link", { active: isActive('/szablony') }]}>Szablony</a>
+        <a href="/o-mnie" class:list={["nav-link", { active: isActive('/o-mnie') }]}>O mnie</a>
+        <a href="/kontakt" class="nav-cta">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('main-nav');
+  toggle?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Sticky header shadow on scroll
+  const header = document.getElementById('site-header');
+  const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 10);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>

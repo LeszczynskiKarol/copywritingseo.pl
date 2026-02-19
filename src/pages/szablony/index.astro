@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Newsletter from '../../components/Newsletter.astro';
+
+const templates = [
+  {
+    title: 'Brief contentowy — szablon',
+    desc: 'Kompletny szablon briefu contentowego z instrukcją wypełniania. Zawiera sekcje na keyword research, intencję wyszukiwania, strukturę tekstu i wytyczne SEO.',
+    icon: '📋',
+    tag: 'PDF + Google Docs',
+    soon: false,
+  },
+  {
+    title: 'Checklist SEO copywritera',
+    desc: 'Lista kontrolna 40+ punktów do sprawdzenia przed publikacją każdego artykułu — od meta tagów po internal linking.',
+    icon: '✅',
+    tag: 'PDF',
+    soon: false,
+  },
+  {
+    title: 'Kalendarz redakcyjny',
+    desc: 'Szablon kalendarza redakcyjnego w Google Sheets z automatycznym śledzeniem statusów, kategorii i KPI.',
+    icon: '📅',
+    tag: 'Google Sheets',
+    soon: true,
+  },
+  {
+    title: 'Prompt library — SEO copywriting',
+    desc: 'Biblioteka 50+ sprawdzonych promptów do generowania treści SEO z pomocą AI (Claude, ChatGPT).',
+    icon: '🤖',
+    tag: 'Notion + PDF',
+    soon: true,
+  },
+  {
+    title: 'Topical Map Template',
+    desc: 'Szablon mapy topicznej do planowania klastrów tematycznych i strategii content SEO.',
+    icon: '🗺️',
+    tag: 'Google Sheets',
+    soon: true,
+  },
+  {
+    title: 'GEO Audit Checklist',
+    desc: 'Lista kontrolna optymalizacji treści pod wyszukiwarki generatywne — ChatGPT, Perplexity, Google AI Overviews.',
+    icon: '🚀',
+    tag: 'PDF',
+    soon: true,
+  },
+];
+---
+
+<BaseLayout
+  title="Szablony i narzędzia SEO Copywritingu"
+  description="Darmowe szablony, checklisty i narzędzia do SEO copywritingu: brief contentowy, checklist SEO, kalendarz redakcyjny, prompt library."
+>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Szablony i narzędzia' }]} />
+  </div>
+
+  <section class="page-header">
+    <h1>Szablony i narzędzia</h1>
+    <p>Gotowe do użycia szablony, checklisty i zasoby — przyspieszą Twoją pracę z treściami SEO.</p>
+  </section>
+
+  <div class="container">
+    <div class="posts-grid" style="margin-bottom: var(--space-16);">
+      {templates.map(t => (
+        <div class="post-card" style="cursor: default;">
+          <div class="post-card__body">
+            <span style="font-size: var(--fs-3xl); margin-bottom: var(--space-3); display: block;">{t.icon}</span>
+            <h3 class="post-card__title" style="margin-bottom: var(--space-2);">
+              {t.title}
+              {t.soon && <span style="font-size:var(--fs-xs); background:var(--c-warning); color:#fff; padding:2px 8px; border-radius:var(--radius-full); margin-left:var(--space-2); vertical-align:middle;">Wkrótce</span>}
+            </h3>
+            <p class="post-card__excerpt">{t.desc}</p>
+            <div class="post-card__footer">
+              <span class="tag">{t.tag}</span>
+              {!t.soon
+                ? <a href="#newsletter" class="post-card__readmore">Pobierz →</a>
+                : <span style="color:var(--c-text-muted); font-size:var(--fs-sm);">Zapisz się, aby dostać powiadomienie</span>
+              }
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div id="newsletter">
+      <Newsletter />
+    </div>
+  </div>
+</BaseLayout>

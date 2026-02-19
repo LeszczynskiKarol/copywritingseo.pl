@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../../utils';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const categoryEntries = Object.entries(CATEGORIES);
+---
+
+<BaseLayout
+  title="Blog — Poradniki SEO Copywritingu, AI i Content Marketingu"
+  description="Wszystkie artykuły i poradniki o SEO copywritingu, strategii treści, AI w content marketingu i optymalizacji pod wyszukiwarki generatywne."
+>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Blog' }]} />
+  </div>
+
+  <section class="page-header">
+    <h1>Blog</h1>
+    <p>Poradniki, strategie i praktyczne wskazówki — twórz treści, które pracują na Twoje pozycje.</p>
+  </section>
+
+  <!-- Category Filter -->
+  <div class="container" style="margin-bottom: var(--space-10);">
+    <div style="display:flex; flex-wrap:wrap; gap:var(--space-2); justify-content:center;">
+      <a href="/blog" class="btn btn--sm btn--primary">Wszystkie</a>
+      {categoryEntries.map(([slug, cat]) => (
+        <a href={`/kategoria/${slug}`} class="btn btn--sm btn--outline">
+          {cat.icon} {cat.name}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Posts Grid -->
+  <div class="container">
+    {sortedPosts.length > 0 ? (
+      <div class="posts-grid">
+        {sortedPosts.map((post, i) => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            heroImage={post.data.heroImage}
+            category={post.data.category}
+            slug={post.slug}
+            readingTime={post.data.readingTime}
+            pillar={post.data.pillar}
+            featured={i === 0}
+          />
+        ))}
+      </div>
+    ) : (
+      <p style="text-align:center; color:var(--c-text-muted); padding:var(--space-16) 0;">
+        Artykuły już wkrótce — pracujemy nad kompleksowymi poradnikami!
+      </p>
+    )}
+
+    <Newsletter />
+  </div>
+</BaseLayout>

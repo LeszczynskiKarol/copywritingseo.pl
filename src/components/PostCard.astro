@@ -1,0 +1,63 @@
+---
+import { formatDate, getCategoryInfo, truncate } from '../utils';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  heroImage?: string;
+  heroImageAlt?: string;
+  category: string;
+  slug: string;
+  readingTime?: number;
+  pillar?: boolean;
+  featured?: boolean;
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  heroImage,
+  heroImageAlt = title,
+  category,
+  slug,
+  readingTime,
+  pillar = false,
+  featured = false,
+} = Astro.props;
+
+const catInfo = getCategoryInfo(category);
+const href = `/blog/${slug}`;
+---
+
+<article class:list={["post-card", { "post-card--featured": featured }]}>
+  {heroImage && (
+    <a href={href} class="post-card__image" aria-hidden="true" tabindex="-1">
+      <img src={heroImage} alt={heroImageAlt} width="680" height="383" loading="lazy" decoding="async" />
+    </a>
+  )}
+  <div class="post-card__body">
+    <div class="post-card__meta">
+      <a
+        href={`/kategoria/${category}`}
+        class="post-card__category"
+        style={`background: ${catInfo.color}15; color: ${catInfo.color};`}
+      >
+        {catInfo.icon} {catInfo.name}
+      </a>
+      {pillar && <span class="pillar-badge">📖 Pillar</span>}
+    </div>
+    <h3 class="post-card__title">
+      <a href={href}>{title}</a>
+    </h3>
+    <p class="post-card__excerpt">{truncate(description, 160)}</p>
+    <div class="post-card__footer">
+      <span>
+        <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+        {readingTime && <span> · {readingTime} min</span>}
+      </span>
+      <a href={href} class="post-card__readmore">Czytaj więcej →</a>
+    </div>
+  </div>
+</article>
