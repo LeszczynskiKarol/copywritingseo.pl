@@ -1,44 +1,823 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { SITE } from '../../utils';
+
+const pageTitle = "Kontakt — zamów treści SEO, zapytaj o wycenę | CopywritingSEO.pl";
+const pageDescription = "Opisz swój projekt — wrócimy z wyceną i propozycją w ciągu 24 godzin. Formularz kontaktowy, e-mail, telefon. Bez zobowiązań.";
+
+// ⚠️ UZUPEŁNIJ po uruchomieniu setup-aws.sh — wstaw swoje API_URL
+const API_URL = 'https://84rzs9nddi.execute-api.eu-central-1.amazonaws.com';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": SITE.url },
+    { "@type": "ListItem", "position": 2, "name": "Kontakt", "item": `${SITE.url}/kontakt` },
+  ],
+};
 ---
 
-<BaseLayout
-  title="Kontakt"
-  description="Skontaktuj się w sprawie współpracy, konsultacji SEO copywritingu lub audytu treści."
->
+<BaseLayout title={pageTitle} description={pageDescription} jsonLd={breadcrumbSchema}>
+
   <div class="container">
-    <Breadcrumbs items={[{ label: 'Kontakt' }]} />
+    <nav class="breadcrumbs" aria-label="Ścieżka nawigacyjna">
+      <ol>
+        <li><a href="/">Strona główna</a></li>
+        <li aria-current="page">Kontakt</li>
+      </ol>
+    </nav>
   </div>
 
-  <section class="page-header">
-    <h1>Kontakt</h1>
-    <p>Masz pytanie? Chcesz nawiązać współpracę? Napisz do mnie.</p>
-  </section>
-
-  <div class="container container--prose">
-    <div class="prose">
-      <h2>Jak mogę pomóc?</h2>
-      <ul>
-        <li><strong>Audyt treści SEO</strong> — ocena istniejących treści i rekomendacje optymalizacji</li>
-        <li><strong>Strategia content SEO</strong> — planowanie klastrów tematycznych, kalendarz redakcyjny, brief contentowy</li>
-        <li><strong>Konsultacje AI & GEO</strong> — wdrożenie narzędzi AI do produkcji treści, optymalizacja pod wyszukiwarki generatywne</li>
-        <li><strong>Współpraca contentowa</strong> — guest posting, wywiady, komentarze eksperckie</li>
-      </ul>
-
-      <h2>Napisz do mnie</h2>
-      <p>Najszybciej odpowiadam na maile. Zwykle wracam z odpowiedzią w ciągu 24 godzin roboczych.</p>
-
-      <div style="padding: var(--space-8); background: var(--c-bg-soft); border-radius: var(--radius-xl); margin: var(--space-6) 0;">
-        <p style="font-size: var(--fs-lg); text-align: center;">
-          ✉️ <strong>kontakt@copywritingseo.pl</strong>
-        </p>
-      </div>
-
-      <p>
-        W wiadomości opisz krótko, w czym mogę pomóc, i podaj link do strony, której dotyczy zapytanie.
-        Dzięki temu szybciej przejdziemy do konkretów.
+  <section class="contact-hero">
+    <div class="container">
+      <h1>Porozmawiajmy o <span class="contact-hero__accent">Twoim projekcie</span></h1>
+      <p class="contact-hero__desc">
+        Opisz czego potrzebujesz — wrócimy z wyceną, propozycją i harmonogramem w ciągu 24 godzin. Bez zobowiązań.
       </p>
     </div>
-  </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- LEFT: INFO -->
+        <div class="contact-info">
+          <div class="info-card">
+            <div class="info-card__icon">📧</div>
+            <div>
+              <div class="info-card__label">Email</div>
+              <a href="mailto:kontakt@copywritingseo.pl" class="info-card__value">kontakt@copywritingseo.pl</a>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card__icon">📍</div>
+            <div>
+              <div class="info-card__label">Lokalizacja</div>
+              <span class="info-card__value">Toruń, kujawsko-pomorskie</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card__icon">⏱️</div>
+            <div>
+              <div class="info-card__label">Czas odpowiedzi</div>
+              <span class="info-card__value">Do 24 godzin w dni robocze</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card__icon">💳</div>
+            <div>
+              <div class="info-card__label">Płatność</div>
+              <span class="info-card__value">Faktura VAT · po dostarczeniu treści</span>
+            </div>
+          </div>
+
+          <!-- Quick links -->
+          <div class="contact-links">
+            <h3>Szukasz konkretnej usługi?</h3>
+            <a href="/oferta/artykuly-blogowe">📝 Artykuły blogowe — od 349 zł</a>
+            <a href="/oferta/opisy-produktow">📦 Opisy produktów — od 29 zł</a>
+            <a href="/oferta/opisy-kategorii">🗂️ Opisy kategorii — od 149 zł</a>
+            <a href="/oferta/teksty-strony-firmowe">💼 Teksty firmowe — od 499 zł</a>
+            <a href="/oferta/landing-pages">🎯 Landing pages — od 999 zł</a>
+            <a href="/oferta/artykuly-eksperckie">🧠 Artykuły eksperckie — od 799 zł</a>
+            <a href="/oferta/tworzenie-stron-zapleczowych">🌐 Strony zapleczowe — od 1 499 zł</a>
+          </div>
+        </div>
+
+        <!-- RIGHT: FORM -->
+        <div class="contact-form-wrap">
+
+          <!-- Success -->
+          <div id="form-success" class="form-message form-message--success" style="display:none;">
+            <div class="form-message__icon">✓</div>
+            <h3>Wiadomość wysłana!</h3>
+            <p>Odpowiemy w ciągu 24 godzin w dni robocze.</p>
+          </div>
+
+          <!-- Error -->
+          <div id="form-error" class="form-message form-message--error" style="display:none;">
+            <span id="form-error-text"></span>
+          </div>
+
+          <form id="contact-form" class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Imię i nazwisko <span class="required">*</span></label>
+                <input type="text" id="name" name="name" required placeholder="Jan Kowalski" />
+              </div>
+            </div>
+
+            <div class="form-row form-row--2col">
+              <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="jan@firma.pl" />
+              </div>
+              <div class="form-group">
+                <label for="phone">Telefon</label>
+                <input type="tel" id="phone" name="phone" placeholder="+48 000 000 000" />
+              </div>
+            </div>
+
+            <div class="form-row form-row--2col">
+              <div class="form-group">
+                <label for="serviceType">Interesująca usługa</label>
+                <select id="serviceType" name="serviceType">
+                  <option value="">Wybierz (opcjonalnie)</option>
+                  <option value="Artykuły blogowe SEO">Artykuły blogowe SEO</option>
+                  <option value="Opisy produktów">Opisy produktów</option>
+                  <option value="Opisy kategorii">Opisy kategorii</option>
+                  <option value="Teksty na stronę firmową">Teksty na stronę firmową</option>
+                  <option value="Landing page">Landing page</option>
+                  <option value="Artykuły eksperckie">Artykuły eksperckie / white paper</option>
+                  <option value="Strona zapleczowa">Strona zapleczowa SEO</option>
+                  <option value="Strategia treści">Strategia treści / audyt</option>
+                  <option value="Inne">Inne</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="budget">Orientacyjny budżet</label>
+                <select id="budget" name="budget">
+                  <option value="">Wybierz (opcjonalnie)</option>
+                  <option value="do 500 zł">do 500 zł</option>
+                  <option value="500–1 500 zł">500–1 500 zł</option>
+                  <option value="1 500–3 000 zł">1 500–3 000 zł</option>
+                  <option value="3 000–5 000 zł">3 000–5 000 zł</option>
+                  <option value="powyżej 5 000 zł">powyżej 5 000 zł</option>
+                  <option value="stała współpraca">Stała współpraca miesięczna</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="website">Adres strony www <span class="optional">(opcjonalnie)</span></label>
+                <input type="url" id="website" name="website" placeholder="https://twojafirma.pl" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="message">Wiadomość <span class="required">*</span></label>
+                <textarea id="message" name="message" rows="5" required
+                  placeholder="Opisz swój projekt: czym się zajmujesz, jakich treści potrzebujesz, ile stron/artykułów, w jakim terminie..."></textarea>
+              </div>
+            </div>
+
+            <!-- File upload -->
+            <div class="form-row">
+              <div class="form-group">
+                <label>Załączniki <span class="optional">(opcjonalnie, maks. 10 MB/plik)</span></label>
+                <div id="dropzone" class="dropzone">
+                  <input type="file" id="file-input" multiple
+                    accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.webp,.svg,.pptx,.xlsx,.xls,.csv,.zip,.rar,.7z,.md,.html" />
+                  <div class="dropzone__content">
+                    <div class="dropzone__icon">📎</div>
+                    <p>Przeciągnij pliki lub <span class="dropzone__link">kliknij aby wybrać</span></p>
+                    <p class="dropzone__hint">PDF, obrazy, dokumenty, archiwa</p>
+                  </div>
+                </div>
+                <div id="file-list" class="file-list"></div>
+              </div>
+            </div>
+
+            <!-- Upload progress -->
+            <div id="upload-progress" class="upload-progress" style="display:none;">
+              <div class="upload-progress__spinner"></div>
+              <span id="upload-status">Przesyłanie plików...</span>
+            </div>
+
+            <button type="submit" id="submit-btn" class="btn btn--primary btn--lg submit-btn">
+              <span id="submit-text">Wyślij zapytanie</span>
+              <span id="submit-spinner" class="btn-spinner" style="display:none;"></span>
+            </button>
+
+            <p class="form-consent">
+              Wysyłając formularz, wyrażasz zgodę na kontakt w sprawie wyceny.
+              Twoje dane przetwarzamy zgodnie z <a href="/polityka-prywatnosci">polityką prywatności</a>.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
+
+<script is:inline define:vars={{ API_URL }}>
+(function() {
+  var MAX_FILE_SIZE = 10 * 1024 * 1024;
+  var MAX_FILES = 5;
+  var selectedFiles = [];
+
+  var form = document.getElementById('contact-form');
+  var fileInput = document.getElementById('file-input');
+  var fileList = document.getElementById('file-list');
+  var dropzone = document.getElementById('dropzone');
+  var submitBtn = document.getElementById('submit-btn');
+  var submitText = document.getElementById('submit-text');
+  var submitSpinner = document.getElementById('submit-spinner');
+  var uploadProgress = document.getElementById('upload-progress');
+  var uploadStatus = document.getElementById('upload-status');
+  var formSuccess = document.getElementById('form-success');
+  var formError = document.getElementById('form-error');
+  var formErrorText = document.getElementById('form-error-text');
+
+  // Dropzone hover
+  dropzone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    dropzone.classList.add('dropzone--active');
+  });
+  dropzone.addEventListener('dragleave', function() {
+    dropzone.classList.remove('dropzone--active');
+  });
+  dropzone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    dropzone.classList.remove('dropzone--active');
+    addFiles(e.dataTransfer.files);
+  });
+
+  fileInput.addEventListener('change', function(e) {
+    addFiles(e.target.files);
+    fileInput.value = '';
+  });
+
+  function addFiles(files) {
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (selectedFiles.length >= MAX_FILES) {
+        showError('Maksymalnie ' + MAX_FILES + ' plików.');
+        break;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        showError(file.name + ' jest za duży (maks. 10 MB).');
+        continue;
+      }
+      var isDuplicate = false;
+      for (var j = 0; j < selectedFiles.length; j++) {
+        if (selectedFiles[j].name === file.name && selectedFiles[j].size === file.size) {
+          isDuplicate = true;
+          break;
+        }
+      }
+      if (!isDuplicate) selectedFiles.push(file);
+    }
+    renderFileList();
+  }
+
+  function renderFileList() {
+    fileList.innerHTML = '';
+    for (var i = 0; i < selectedFiles.length; i++) {
+      var file = selectedFiles[i];
+      var div = document.createElement('div');
+      div.className = 'file-item';
+      div.innerHTML =
+        '<div class="file-item__info">' +
+          '<span class="file-item__name">' + file.name + '</span>' +
+          '<span class="file-item__size">(' + formatSize(file.size) + ')</span>' +
+        '</div>' +
+        '<button type="button" data-idx="' + i + '" class="file-item__remove" title="Usuń">×</button>';
+      fileList.appendChild(div);
+    }
+    var removeBtns = fileList.querySelectorAll('.file-item__remove');
+    for (var k = 0; k < removeBtns.length; k++) {
+      removeBtns[k].addEventListener('click', function() {
+        selectedFiles.splice(parseInt(this.dataset.idx), 1);
+        renderFileList();
+      });
+    }
+  }
+
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function uploadFile(file) {
+    return fetch(API_URL + '/presign', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        filename: file.name,
+        contentType: file.type || 'application/octet-stream',
+        size: file.size,
+      }),
+    })
+    .then(function(res) {
+      if (!res.ok) return res.json().then(function(e) { throw new Error(e.error || 'Błąd presign'); });
+      return res.json();
+    })
+    .then(function(data) {
+      return fetch(data.uploadUrl, {
+        method: 'PUT',
+        headers: { 'Content-Type': file.type || 'application/octet-stream' },
+        body: file,
+      }).then(function(uploadRes) {
+        if (!uploadRes.ok) throw new Error('Błąd przesyłania: ' + file.name);
+        return { key: data.key, name: file.name, size: file.size };
+      });
+    });
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    hideError();
+
+    var name = form.querySelector('#name').value.trim();
+    var email = form.querySelector('#email').value.trim();
+    var phone = form.querySelector('#phone').value.trim();
+    var serviceType = form.querySelector('#serviceType').value;
+    var budget = form.querySelector('#budget').value;
+    var website = form.querySelector('#website').value.trim();
+    var message = form.querySelector('#message').value.trim();
+
+    if (!name || !email || !message) {
+      showError('Uzupełnij wymagane pola (imię, email, wiadomość).');
+      return;
+    }
+
+    setLoading(true);
+
+    var attachments = [];
+    var uploadChain = Promise.resolve();
+
+    if (selectedFiles.length > 0) {
+      uploadProgress.style.display = 'flex';
+      selectedFiles.forEach(function(file, idx) {
+        uploadChain = uploadChain.then(function() {
+          uploadStatus.textContent = 'Przesyłanie pliku ' + (idx + 1) + ' z ' + selectedFiles.length + '...';
+          return uploadFile(file).then(function(result) {
+            attachments.push(result);
+          });
+        });
+      });
+    }
+
+    uploadChain
+      .then(function() {
+        uploadProgress.style.display = 'none';
+        return fetch(API_URL + '/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            phone: phone || undefined,
+            serviceType: serviceType || undefined,
+            budget: budget || undefined,
+            website: website || undefined,
+            message: message,
+            attachments: attachments.length > 0 ? attachments : undefined,
+          }),
+        });
+      })
+      .then(function(res) {
+        if (!res.ok) return res.json().then(function(e) { throw new Error(e.error || 'Błąd wysyłania'); });
+        return res.json();
+      })
+      .then(function() {
+        form.style.display = 'none';
+        formSuccess.style.display = 'block';
+        selectedFiles = [];
+        renderFileList();
+      })
+      .catch(function(err) {
+        console.error('Contact form error:', err);
+        showError(err.message || 'Wystąpił błąd. Spróbuj ponownie lub napisz na kontakt@copywritingseo.pl');
+        uploadProgress.style.display = 'none';
+      })
+      .then(function() {
+        setLoading(false);
+      });
+  });
+
+  function setLoading(loading) {
+    submitBtn.disabled = loading;
+    submitText.textContent = loading ? 'Wysyłanie...' : 'Wyślij zapytanie';
+    submitSpinner.style.display = loading ? 'inline-block' : 'none';
+    submitBtn.style.opacity = loading ? '0.7' : '1';
+    submitBtn.style.cursor = loading ? 'not-allowed' : 'pointer';
+  }
+
+  function showError(msg) {
+    formErrorText.textContent = msg;
+    formError.style.display = 'block';
+  }
+
+  function hideError() {
+    formError.style.display = 'none';
+  }
+})();
+</script>
+
+<style>
+  /* ==========================================
+     Contact Page — Scoped Styles
+     Uses global.css design system variables
+     ========================================== */
+
+  .contact-hero {
+    padding: var(--space-16) 0 var(--space-8);
+    text-align: center;
+  }
+
+  .contact-hero h1 {
+    font-size: clamp(var(--fs-3xl), 5vw, var(--fs-5xl));
+    max-width: 700px;
+    margin-inline: auto;
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-hero__accent {
+    background: linear-gradient(135deg, var(--c-primary), var(--c-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .contact-hero__desc {
+    font-size: var(--fs-lg);
+    color: var(--c-text-secondary);
+    max-width: 540px;
+    margin-inline: auto;
+    line-height: var(--lh-relaxed);
+  }
+
+  .contact-section {
+    padding: var(--space-8) 0 var(--space-16);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+  }
+
+  /* --- Info cards --- */
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .info-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-6);
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .info-card__icon {
+    font-size: var(--fs-xl);
+    flex-shrink: 0;
+  }
+
+  .info-card__label {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--c-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+  }
+
+  .info-card__value {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-text);
+    text-decoration: none;
+  }
+
+  a.info-card__value:hover {
+    color: var(--c-primary);
+  }
+
+  /* Quick links */
+  .contact-links {
+    margin-top: var(--space-4);
+    padding: var(--space-6);
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .contact-links h3 {
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-links a {
+    display: block;
+    font-size: var(--fs-sm);
+    color: var(--c-text-secondary);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--c-border-light);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .contact-links a:last-child {
+    border-bottom: none;
+  }
+
+  .contact-links a:hover {
+    color: var(--c-primary);
+  }
+
+  /* --- Form --- */
+  .contact-form-wrap {
+    padding: var(--space-8);
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-xl);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .form-row {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .form-row--2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  @media (max-width: 600px) {
+    .form-row--2col {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .form-group label {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-text);
+  }
+
+  .required { color: var(--c-danger); }
+  .optional { font-weight: 400; color: var(--c-text-muted); font-size: var(--fs-xs); }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--fs-sm);
+    font-family: var(--font-sans);
+    color: var(--c-text);
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--c-primary);
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--c-text-muted);
+  }
+
+  /* Dropzone */
+  .dropzone {
+    position: relative;
+    padding: var(--space-6);
+    border: 2px dashed var(--c-border);
+    border-radius: var(--radius-lg);
+    background: var(--c-bg-soft);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .dropzone:hover,
+  .dropzone--active {
+    border-color: var(--c-primary);
+    background: var(--c-primary-light);
+  }
+
+  .dropzone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .dropzone__icon {
+    font-size: var(--fs-2xl);
+    margin-bottom: var(--space-2);
+  }
+
+  .dropzone__content p {
+    font-size: var(--fs-sm);
+    color: var(--c-text-muted);
+    margin: 0;
+  }
+
+  .dropzone__link {
+    color: var(--c-primary);
+    font-weight: 600;
+  }
+
+  .dropzone__hint {
+    font-size: var(--fs-xs) !important;
+    margin-top: var(--space-1) !important;
+  }
+
+  /* File list */
+  .file-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-3);
+    background: var(--c-bg-muted);
+    border: 1px solid var(--c-border-light);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+  }
+
+  .file-item__info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  .file-item__name {
+    color: var(--c-text);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .file-item__size {
+    color: var(--c-text-muted);
+    font-size: var(--fs-xs);
+    flex-shrink: 0;
+  }
+
+  .file-item__remove {
+    background: none;
+    border: none;
+    color: var(--c-text-muted);
+    font-size: var(--fs-xl);
+    cursor: pointer;
+    padding: 0 var(--space-2);
+    line-height: 1;
+    transition: color var(--transition-fast);
+  }
+
+  .file-item__remove:hover {
+    color: var(--c-danger);
+  }
+
+  /* Upload progress */
+  .upload-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--fs-sm);
+    color: var(--c-text-secondary);
+  }
+
+  .upload-progress__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--c-border);
+    border-top-color: var(--c-primary);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+
+  /* Submit button */
+  .submit-btn {
+    width: 100%;
+    margin-top: var(--space-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+  }
+
+  .btn-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .form-consent {
+    font-size: var(--fs-xs);
+    color: var(--c-text-muted);
+    text-align: center;
+  }
+
+  .form-consent a {
+    color: var(--c-primary);
+  }
+
+  /* Messages */
+  .form-message {
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+
+  .form-message--success {
+    background: rgba(5, 150, 105, 0.06);
+    border: 1px solid rgba(5, 150, 105, 0.2);
+  }
+
+  .form-message--success .form-message__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--c-success);
+    color: #fff;
+    border-radius: var(--radius-full);
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-4);
+  }
+
+  .form-message--success h3 {
+    font-size: var(--fs-xl);
+    margin-bottom: var(--space-2);
+  }
+
+  .form-message--success p {
+    font-size: var(--fs-sm);
+    color: var(--c-text-secondary);
+  }
+
+  .form-message--error {
+    background: rgba(220, 38, 38, 0.06);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    color: var(--c-danger);
+    font-size: var(--fs-sm);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    text-align: left;
+  }
+</style>

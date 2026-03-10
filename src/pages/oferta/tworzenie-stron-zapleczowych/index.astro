@@ -1,0 +1,592 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../utils';
+
+const pageTitle = "Tworzenie stron zapleczowych SEO — od treści po hosting | Od 1 499 zł";
+const pageDescription = "Tworzymy strony zapleczowe (satellite sites) od A do Z: strategia, treści eksperckie, projekt graficzny, Astro SSG, hosting AWS, CMS do zarządzania treścią. Lighthouse 95–100, koszt hostingu <1 USD/mies. Cena od 1 499 zł brutto.";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Tworzenie stron zapleczowych SEO",
+  "description": pageDescription,
+  "provider": {
+    "@type": "Organization",
+    "name": SITE.title,
+    "url": SITE.url,
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Polska",
+  },
+  "serviceType": "Tworzenie stron internetowych SEO",
+  "offers": {
+    "@type": "Offer",
+    "price": "1499",
+    "priceCurrency": "PLN",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "price": "1499",
+      "priceCurrency": "PLN",
+      "valueAddedTaxIncluded": true,
+    },
+    "description": "Kompletna strona zapleczowa: strategia, treści, projekt, wdrożenie techniczne, hosting, CMS",
+    "availability": "https://schema.org/InStock",
+  },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Czym strona zapleczowa różni się od PBN?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Strona zapleczowa to samodzielna witryna z unikalną, wartościową treścią, własnym designem i realnym ruchem organicznym. PBN (Private Blog Network) to sieć stron tworzonych wyłącznie do manipulacji linkami, bez realnej wartości dla użytkowników. Google aktywnie wykrywa i karze PBN-y. Nasze strony przechodzą test: 'Czy ta strona miałaby sens, gdyby nie generowała korzyści SEO?' — odpowiedź brzmi tak.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Ile kosztuje utrzymanie strony zapleczowej miesięcznie?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hosting na AWS S3 + CloudFront kosztuje poniżej 1 USD miesięcznie (ok. 4 zł). Nie ma opłat za serwer, licencje ani aktualizacje bezpieczeństwa. To 50–100× taniej niż utrzymanie strony WordPress na VPS.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Czy Google nie wykryje, że to strona zapleczowa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Strona zapleczowa stworzona w Astro SSG to czysty HTML na globalnym CDN — nie ma żadnych wspólnych elementów technologicznych z innymi stronami (brak wp-content, brak wspólnych wtyczek, brak wspólnego IP serwera). Każda strona wygląda jak unikalna, profesjonalnie zbudowana witryna, bo nią jest. Kluczem jest jakość treści i naturalność linkowania.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Co zawiera cena 1 499 zł?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kompletna usługa: strategia i dobór domeny, projekt graficzny, wdrożenie techniczne w Astro SSG, 5 artykułów eksperckich (łącznie 7 500–12 500 słów), pełna optymalizacja SEO (schema, sitemap, meta tagi, Core Web Vitals), hosting na AWS (konfiguracja S3, CloudFront, SSL, DNS), CMS do samodzielnego dodawania artykułów, oraz szkolenie z obsługi.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Ile czasu zajmuje stworzenie strony zapleczowej?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Od zlecenia do uruchomienia: 5–10 dni roboczych. Etapy: strategia i domena (dzień 1–2), projekt i wdrożenie techniczne (dzień 3–5), tworzenie treści (dzień 4–8), optymalizacja SEO i testy (dzień 7–9), uruchomienie i konfiguracja CMS (dzień 9–10).",
+      },
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": SITE.url },
+    { "@type": "ListItem", "position": 2, "name": "Oferta", "item": `${SITE.url}/oferta` },
+    { "@type": "ListItem", "position": 3, "name": "Tworzenie stron zapleczowych", "item": `${SITE.url}/oferta/tworzenie-stron-zapleczowych` },
+  ],
+};
+
+const combinedSchema = [serviceSchema, faqSchema, breadcrumbSchema];
+
+const processSteps = [
+  { num: "01", title: "Strategia i domena", desc: "Analizujemy Twoją niszę, dobieramy domenę tematycznie powiązaną z money site, planujemy architekturę treści i klastry tematyczne.", duration: "Dzień 1–2" },
+  { num: "02", title: "Projekt i wdrożenie", desc: "Tworzymy unikalny design (żadnych szablonów), kodujemy stronę w Astro SSG z pełnym zestawem komponentów SEO, konfigurujemy infrastrukturę AWS.", duration: "Dzień 3–5" },
+  { num: "03", title: "Treści eksperckie", desc: "Piszemy 5 artykułów merytorycznych (1 500–2 500 słów każdy), zoptymalizowanych pod frazy kluczowe, z danymi strukturalnymi i sekcjami FAQ.", duration: "Dzień 4–8" },
+  { num: "04", title: "Optymalizacja SEO", desc: "Wdrażamy schema markup (Article, FAQPage, BreadcrumbList, Organization), konfigurujemy sitemap, robots.txt, meta tagi, Open Graph i canonical URLs.", duration: "Dzień 7–9" },
+  { num: "05", title: "Uruchomienie i CMS", desc: "Deploy na AWS, konfiguracja SSL i DNS, wdrożenie CMS do samodzielnego dodawania artykułów, szkolenie z obsługi. Strona gotowa do pracy.", duration: "Dzień 9–10" },
+];
+
+const techFeatures = [
+  { icon: "⚡", title: "Lighthouse 95–100", desc: "Zero JavaScript by default. Czysty HTML na CDN. Strony ładują się w <1 sekundę." },
+  { icon: "🔒", title: "Zero surface attack", desc: "Brak bazy danych, serwera, panelu logowania. Nie istnieje powierzchnia ataku typowa dla WordPress." },
+  { icon: "🌍", title: "225+ edge locations", desc: "CloudFront CDN serwuje stronę z najbliższego serwera na świecie. Auto-scaling wbudowany." },
+  { icon: "🕵️", title: "Brak footprintu", desc: "Każda strona to unikatowy czysty HTML. Brak wp-content/, wspólnych wtyczek ani IP serwera." },
+  { icon: "📊", title: "Pełne SEO on-page", desc: "Schema.org JSON-LD, sitemap XML, RSS, breadcrumbs, canonical, Open Graph, hreflang — z automatu." },
+  { icon: "✏️", title: "CMS bez WordPress", desc: "Markdown + Git = Twój CMS. Dodajesz artykuł, robisz push — strona się przebudowuje w 60 sekund." },
+];
+
+const comparisonRows = [
+  { feature: "Lighthouse Performance", astro: "95–100", wp: "40–70", winner: "astro" },
+  { feature: "Czas ładowania (LCP)", astro: "< 1 sek.", wp: "2–5 sek.", winner: "astro" },
+  { feature: "Koszt hostingu / mies.", astro: "~4 zł (< 1 USD)", wp: "60–200 zł (VPS)", winner: "astro" },
+  { feature: "JavaScript na stronie", astro: "0 KB (domyślnie)", wp: "200–800 KB", winner: "astro" },
+  { feature: "Aktualizacje bezpieczeństwa", astro: "Niepotrzebne", wp: "Co tydzień", winner: "astro" },
+  { feature: "Footprint technologiczny", astro: "Brak (czysty HTML)", wp: "wp-content/, wp-admin/", winner: "astro" },
+  { feature: "Crawlowalność Google", astro: "Natychmiastowa (HTML)", wp: "Wymaga renderowania JS", winner: "astro" },
+  { feature: "Skalowalność", astro: "CDN — bez limitu", wp: "Zależy od serwera", winner: "astro" },
+  { feature: "Panel dodawania treści", astro: "Markdown + CMS", wp: "wp-admin", winner: "wp" },
+  { feature: "Dynamiczne funkcje", astro: "Przez Lambda/API", wp: "Wbudowane", winner: "wp" },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogType="website"
+  jsonLd={combinedSchema}
+>
+
+  <!-- Breadcrumbs -->
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Ścieżka nawigacyjna">
+      <ol>
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/oferta">Oferta</a></li>
+        <li aria-current="page">Tworzenie stron zapleczowych</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="service-hero">
+    <div class="container">
+      <div class="service-hero__badge">Usługa kompleksowa — od strategii po hosting</div>
+      <h1>
+        Strony zapleczowe SEO<br />
+        <span class="service-hero__accent">od A do Z — treść, technologia, hosting</span>
+      </h1>
+      <p class="service-hero__desc">
+        Tworzymy strony zapleczowe (satellite sites), które wyglądają i działają jak profesjonalne witryny — bo nimi są.
+        Unikalna treść ekspercka, indywidualny projekt, technologia Astro SSG, hosting na AWS za grosze.
+        Lighthouse 95–100. Brak footprintu WordPress. Gotowa do pracy w 10 dni.
+      </p>
+      <div class="service-hero__cta">
+        <a href="#cennik" class="btn btn--primary btn--lg">Sprawdź cennik — od 1 499 zł</a>
+        <a href="#proces" class="btn btn--outline btn--lg">Jak to działa?</a>
+      </div>
+      <div class="service-hero__proof">
+        <div class="proof-item">
+          <span class="proof-item__number">15+</span>
+          <span class="proof-item__label">zrealizowanych stron</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-item__number">&lt;1$</span>
+          <span class="proof-item__label">hosting miesięcznie</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-item__number">95–100</span>
+          <span class="proof-item__label">Lighthouse score</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-item__number">5–10</span>
+          <span class="proof-item__label">dni do uruchomienia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROBLEM / PAIN POINTS
+       ============================================================ -->
+  <section class="service-section service-section--muted" id="problem">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Dlaczego typowe „zaplecza" nie działają</h2>
+        <p>Większość stron zapleczowych to WordPress na tanim hostingu z generycznym szablonem i AI-owym tekstem. Google widzi to na kilometr.</p>
+      </div>
+
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="problem-card__icon">🚩</div>
+          <h3>Wspólny footprint</h3>
+          <p>Te same wtyczki, ten sam motyw, ten sam hosting, ta sama struktura wp-content/. SpamBrain wykrywa takie wzorce automatycznie i dewaluuje linki z całej sieci.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card__icon">🐌</div>
+          <h3>Wolne i ciężkie</h3>
+          <p>WordPress z 20 wtyczkami, nieoptymalizowany motyw, tani shared hosting. Lighthouse 35–50. Google traktuje takie strony jako niskiej jakości — niezależnie od treści.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card__icon">🤖</div>
+          <h3>Treść bez wartości</h3>
+          <p>Nieredagowane artykuły z ChatGPT, bez danych, bez autora, bez doświadczenia. Quality Raters od 2025 roku mają instrukcję oceniać takie treści najniżej.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card__icon">💸</div>
+          <h3>Drogie utrzymanie</h3>
+          <p>VPS 60–200 zł/mies. per strona. Aktualizacje WordPressa, łatki bezpieczeństwa, monitoring uptime. Przy 10 stronach to 600–2 000 zł/mies. samego hostingu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SOLUTION — WHAT WE DO
+       ============================================================ -->
+  <section class="service-section" id="rozwiazanie">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Nasze podejście — strona zapleczowa, która jest prawdziwą stroną</h2>
+        <p>Nie stawiamy „zaplecz". Tworzymy profesjonalną witrynę z eksperckimi treściami, indywidualnym designem i infrastrukturą klasy enterprise — za ułamek typowych kosztów.</p>
+      </div>
+
+      <div class="solution-columns">
+        <div class="solution-col">
+          <h3>📝 Treści, które mają wartość</h3>
+          <p>
+            Każda strona startuje z <strong>5 artykułami eksperckimi</strong> (1 500–2 500 słów każdy).
+            Pisane przez ludzi ze wsparciem AI — z weryfikacją faktów, danymi ze źródeł, biogramem autora i sekcjami FAQ.
+            Zoptymalizowane pod frazy kluczowe z Twojej niszy, ze strukturą przystosowaną do cytowania przez Google AI Overviews.
+          </p>
+          <p>
+            To nie jest thin content do podlinkowania. To treść, która sama generuje ruch organiczny i buduje autorytet tematyczny domeny.
+          </p>
+        </div>
+        <div class="solution-col">
+          <h3>🛠️ Technologia bez kompromisów</h3>
+          <p>
+            Każda strona jest <strong>kodowana indywidualnie w Astro SSG</strong> — frameworku, który generuje czysty HTML bez runtime JavaScript.
+            Hosting na <strong>AWS S3 + CloudFront CDN</strong> z certyfikatem SSL i 225+ edge locations na świecie.
+          </p>
+          <p>
+            Efekt: Lighthouse 95–100, czas ładowania poniżej 1 sekundy, zero footprintu technologicznego, koszty hostingu poniżej 1 USD miesięcznie.
+            Google widzi profesjonalną, szybką, bezpieczną stronę — bo nią jest.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TECH FEATURES
+       ============================================================ -->
+  <section class="service-section service-section--muted" id="technologia">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Technologia, która robi różnicę</h2>
+        <p>Astro SSG + AWS — stack, który daje przewagę techniczną nad 95% stron w polskim internecie.</p>
+      </div>
+
+      <div class="features-grid">
+        {techFeatures.map(f => (
+          <div class="feature-card">
+            <span class="feature-card__icon">{f.icon}</span>
+            <h3 class="feature-card__title">{f.title}</h3>
+            <p class="feature-card__desc">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COMPARISON TABLE
+       ============================================================ -->
+  <section class="service-section" id="porownanie">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Astro SSG vs WordPress — twarde dane</h2>
+        <p>Porównanie na podstawie 15+ zrealizowanych projektów i 18 miesięcy danych produkcyjnych.</p>
+      </div>
+
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Parametr</th>
+              <th class="comparison-table__highlight">Nasze strony (Astro SSG)</th>
+              <th>Typowy WordPress</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map(row => (
+              <tr>
+                <td>{row.feature}</td>
+                <td class={row.winner === 'astro' ? 'comparison-table__winner' : ''}>
+                  {row.winner === 'astro' && <span class="winner-badge">✓</span>}
+                  {row.astro}
+                </td>
+                <td class={row.winner === 'wp' ? 'comparison-table__winner' : ''}>
+                  {row.winner === 'wp' && <span class="winner-badge">✓</span>}
+                  {row.wp}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="comparison-note">
+        Dane na podstawie pomiarów Lighthouse, Google Search Console i rachunków AWS z realizowanych projektów (2024–2026).
+        WordPress testowany na shared hostingu (nazwa.pl, home.pl) i VPS (DigitalOcean, Hetzner) z popularnymi motywami.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROCESS
+       ============================================================ -->
+  <section class="service-section service-section--muted" id="proces">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Jak wygląda proces — od zlecenia do uruchomienia</h2>
+        <p>5 etapów, 10 dni roboczych. Ty dostajesz gotową, działającą stronę z treściami i CMS-em.</p>
+      </div>
+
+      <div class="process-timeline">
+        {processSteps.map((step, i) => (
+          <div class="process-step">
+            <div class="process-step__marker">
+              <span class="process-step__num">{step.num}</span>
+              {i < processSteps.length - 1 && <div class="process-step__line"></div>}
+            </div>
+            <div class="process-step__content">
+              <div class="process-step__duration">{step.duration}</div>
+              <h3 class="process-step__title">{step.title}</h3>
+              <p class="process-step__desc">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHAT'S INCLUDED
+       ============================================================ -->
+  <section class="service-section" id="co-dostajesz">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Co dokładnie dostajesz</h2>
+        <p>Kompletna usługa — nie zostawiamy Cię z plikami do samodzielnej konfiguracji.</p>
+      </div>
+
+      <div class="included-grid">
+        <div class="included-group">
+          <h3>📝 Treści</h3>
+          <ul>
+            <li>5 artykułów eksperckich (1 500–2 500 słów każdy)</li>
+            <li>Badanie fraz kluczowych dla Twojej niszy</li>
+            <li>Optymalizacja pod intencję wyszukiwania</li>
+            <li>Sekcje FAQ oparte na „Ludzie też pytają"</li>
+            <li>Biogram autora z kwalifikacjami (E-E-A-T)</li>
+            <li>Meta title i meta description per strona</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>🎨 Design i kod</h3>
+          <ul>
+            <li>Indywidualny projekt graficzny (nie szablon)</li>
+            <li>Responsywny design (mobile-first)</li>
+            <li>Kodowanie w Astro SSG z TypeScript</li>
+            <li>Komponenty: Header, Footer, PostCard, CookieBanner</li>
+            <li>Dark/light mode (opcjonalnie)</li>
+            <li>Breadcrumbs z schema BreadcrumbList</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>🔍 SEO techniczne</h3>
+          <ul>
+            <li>Schema.org JSON-LD (Article, Organization, FAQPage, Person)</li>
+            <li>Sitemap XML automatyczny</li>
+            <li>RSS feed</li>
+            <li>Robots.txt skonfigurowany</li>
+            <li>Canonical URLs</li>
+            <li>Open Graph i Twitter Cards</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>☁️ Infrastruktura</h3>
+          <ul>
+            <li>Hosting AWS S3 + CloudFront CDN</li>
+            <li>Certyfikat SSL (ACM — automatyczne odnawianie)</li>
+            <li>DNS na Route 53</li>
+            <li>Deploy pipeline (push → build → deploy w 60 sek.)</li>
+            <li>Google Consent Mode v2 (GDPR)</li>
+            <li>Konfiguracja Google Search Console</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>✏️ CMS i obsługa</h3>
+          <ul>
+            <li>System dodawania artykułów (Markdown + Git)</li>
+            <li>Szkolenie z obsługi (wideo + dokumentacja)</li>
+            <li>Auto-rebuild po dodaniu treści</li>
+            <li>Wsparcie techniczne 30 dni po uruchomieniu</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>📈 Bonus: monitoring</h3>
+          <ul>
+            <li>Podpięcie Google Analytics 4</li>
+            <li>Podpięcie Google Search Console</li>
+            <li>Podstawowy raport indeksowania po 30 dniach</li>
+            <li>Rekomendacje kolejnych treści do publikacji</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRICING
+       ============================================================ -->
+  <section class="service-section service-section--dark" id="cennik">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <h2>Cennik — przejrzyście i bez ukrytych kosztów</h2>
+        <p>Jedna cena, kompletna usługa. Potem płacisz tylko za hosting (~4 zł/mies.) i opcjonalne nowe treści.</p>
+      </div>
+
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <div class="pricing-card__badge">Najpopularniejszy</div>
+          <h3 class="pricing-card__name">Strona zapleczowa — pakiet kompletny</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">1 499 zł</span>
+            <span class="pricing-card__period">brutto / jednorazowo</span>
+          </div>
+          <p class="pricing-card__desc">Wszystko, co potrzebne do uruchomienia profesjonalnej strony zapleczowej — od strategii po działający CMS.</p>
+          <ul class="pricing-card__features">
+            <li>Indywidualny projekt i kodowanie w Astro</li>
+            <li>5 artykułów eksperckich (7 500–12 500 słów)</li>
+            <li>Pełna optymalizacja SEO (schema, sitemap, meta)</li>
+            <li>Hosting AWS (S3 + CloudFront + SSL + DNS)</li>
+            <li>CMS do samodzielnego dodawania artykułów</li>
+            <li>Szkolenie z obsługi + 30 dni wsparcia</li>
+            <li>GA4 + Search Console skonfigurowane</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--primary btn--lg" style="width:100%;">Zamów stronę zapleczową</a>
+          <p class="pricing-card__note">Realizacja: 5–10 dni roboczych. Płatność po uruchomieniu strony.</p>
+        </div>
+
+        <div class="pricing-card pricing-card--secondary">
+          <h3 class="pricing-card__name">Dodatkowe treści</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">199 zł</span>
+            <span class="pricing-card__period">brutto / artykuł</span>
+          </div>
+          <p class="pricing-card__desc">Kolejne artykuły eksperckie do istniejącej strony zapleczowej — pisanie + optymalizacja + publikacja.</p>
+          <ul class="pricing-card__features">
+            <li>Artykuł 1 500–2 500 słów</li>
+            <li>Badanie frazy i analiza SERP</li>
+            <li>Optymalizacja SEO (meta, schema, linki)</li>
+            <li>Publikacja na stronie + indeksowanie w GSC</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zamów dodatkowe treści</a>
+        </div>
+
+        <div class="pricing-card pricing-card--secondary">
+          <h3 class="pricing-card__name">Pakiet 5 stron zapleczowych</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">5 999 zł</span>
+            <span class="pricing-card__period">brutto / jednorazowo</span>
+          </div>
+          <p class="pricing-card__desc">Sieć 5 stron zapleczowych z indywidualną strategią linkowania i zróżnicowanymi designami. Oszczędność 1 496 zł.</p>
+          <ul class="pricing-card__features">
+            <li>5 unikalnych stron z indywidualnymi projektami</li>
+            <li>25 artykułów eksperckich łącznie</li>
+            <li>Strategia linkowania między stronami</li>
+            <li>5× hosting AWS (konfiguracja w cenie)</li>
+            <li>CMS na każdej stronie</li>
+            <li>Wspólna strategia fraz kluczowych</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zapytaj o pakiet 5 stron</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TRUST — REAL PROJECTS
+       ============================================================ -->
+  <section class="service-section" id="realizacje">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Realne projekty — nie obietnice</h2>
+        <p>Tworzymy strony od 2023 roku. Oto parametry techniczne z rzeczywistych realizacji.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card__value">&lt; 10 zł</div>
+          <div class="stat-card__label">średni koszt hostingu / mies.</div>
+          <div class="stat-card__detail">Na podstawie 18 mies. danych z rachunków AWS. Z czego 0,51 USD to Route 53 hosted zone.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value">&lt; 0,5 sek.</div>
+          <div class="stat-card__label">typowy LCP na mobile</div>
+          <div class="stat-card__detail">Mierzone w Lighthouse i Google Search Console. Dla porównania: WordPress na shared hostingu — 2–5 sek.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value">0,00</div>
+          <div class="stat-card__label">CLS (zero przesunięć layoutu)</div>
+          <div class="stat-card__detail">Statyczny HTML = statyczny layout. Brak elementów ładujących się dynamicznie i przesuwających treść.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value">30–60 sek.</div>
+          <div class="stat-card__label">czas deployu nowej treści</div>
+          <div class="stat-card__detail">Push → build → S3 sync → CloudFront invalidation. Automatycznie, bez logowania na serwer.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ
+       ============================================================ -->
+  <section class="service-section service-section--muted" id="faq">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Najczęściej zadawane pytania</h2>
+      </div>
+
+      <div class="faq-list">
+        {faqSchema.mainEntity.map(q => (
+          <details class="faq-item">
+            <summary class="faq-item__question">{q.name}</summary>
+            <div class="faq-item__answer">
+              <p>{q.acceptedAnswer.text}</p>
+            </div>
+          </details>
+        ))}
+
+        <details class="faq-item">
+          <summary class="faq-item__question">Czy mogę samodzielnie dodawać artykuły po uruchomieniu?</summary>
+          <div class="faq-item__answer">
+            <p>Tak — dostajesz CMS oparty na Markdown i Git. Nowy artykuł to nowy plik .md z tytułem, opisem i treścią. Po zapisaniu (push do repozytorium) strona automatycznie się przebudowuje i aktualizuje w ciągu 60 sekund. Szkolimy Cię z obsługi — nie potrzebujesz wiedzy programistycznej.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__question">Czy potrzebuję własnej domeny?</summary>
+          <div class="faq-item__answer">
+            <p>Tak — domena musi być tematycznie powiązana z Twoją branżą. Możesz kupić ją sam (np. na nazwa.pl lub OVH, koszt ~40–80 zł/rok) albo możemy to zrobić za Ciebie. Pomagamy w wyborze domeny, która wspiera strategię SEO.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__question">Czym to się różni od zwykłego zlecenia „postaw mi stronę na WordPress"?</summary>
+          <div class="faq-item__answer">
+            <p>Trzema rzeczami. Po pierwsze: technologia — Astro SSG generuje czysty HTML bez JavaScript, co daje Lighthouse 95–100 i brak footprintu (WordPress zostawia ślady, które SpamBrain rozpoznaje). Po drugie: treści — nie dostajesz pustej strony, lecz stronę z 5 artykułami eksperckimi zoptymalizowanymi pod SEO. Po trzecie: koszty utrzymania — ~4 zł/mies. zamiast 60–200 zł za VPS z WordPress.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINAL CTA
+       ============================================================ -->
+  <section class="service-section service-section--cta">
+    <div class="container">
+      <div class="final-cta">
+        <h2>Gotowy na profesjonalną stronę zapleczową?</h2>
+        <p>Opisz swoją niszę i cel — wrócimy z propozycją domeny, strategii treści i harmonogramem realizacji w ciągu 24 godzin.</p>
+        <div class="final-cta__actions">
+          <a href="/kontakt" class="btn btn--primary btn--lg">Napisz do nas</a>
+          <a href="mailto:kontakt@copywritingseo.pl" class="btn btn--outline btn--lg">kontakt@copywritingseo.pl</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</BaseLayout>

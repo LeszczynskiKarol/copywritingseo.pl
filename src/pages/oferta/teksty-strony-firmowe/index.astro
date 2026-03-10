@@ -1,0 +1,466 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+import { SITE } from '../../../utils';
+
+const pageTitle = "Teksty na strony firmowe — treści, które budują zaufanie i pozycje w Google";
+const pageDescription = "Piszemy treści na strony firmowe: stronę główną, o nas, ofertę, usługi, zespół, kontakt. Zoptymalizowane pod SEO i E-E-A-T, z formułą problem→rozwiązanie→dowód. Od 499 zł brutto za podstronę. Dla firm usługowych, kancelarii, gabinетов, agencji.";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Teksty na strony firmowe",
+  "description": pageDescription,
+  "provider": { "@type": "Organization", "name": SITE.title, "url": SITE.url },
+  "areaServed": { "@type": "Country", "name": "Polska" },
+  "serviceType": "SEO copywriting — strony firmowe i usługowe",
+  "offers": [
+    { "@type": "Offer", "name": "Podstrona firmowa — standard", "price": "499", "priceCurrency": "PLN", "priceSpecification": { "@type": "PriceSpecification", "price": "499", "priceCurrency": "PLN", "valueAddedTaxIncluded": true } },
+    { "@type": "Offer", "name": "Pakiet strony firmowej (5 podstron)", "price": "1999", "priceCurrency": "PLN", "priceSpecification": { "@type": "PriceSpecification", "price": "1999", "priceCurrency": "PLN", "valueAddedTaxIncluded": true } },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Dlaczego strona firmowa potrzebuje profesjonalnych tekstów, a nie wystarczą 2–3 zdania?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Google ocenia jakość strony na podstawie E-E-A-T: doświadczenia, ekspertyzy, autorytetu i wiarygodności. Strona firmowa z dwoma zdaniami na podstronie 'O nas' wysyła sygnał: 'ta firma nie ma nic do powiedzenia'. Strona z 400–800 słowami opisującymi historię, zespół, proces pracy i konkretne wyniki wysyła sygnał: 'ta firma zna się na rzeczy i chce, żebyś to wiedział'. Klienci decydują o kontakcie na podstawie treści — a Google decyduje o widoczności na podstawie jakości tej treści." }
+    },
+    {
+      "@type": "Question",
+      "name": "Jakie podstrony powinnam mieć firma na swojej stronie?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Minimum: Strona główna, O nas / O firmie, Oferta (z osobnymi podstronami per usługa), Kontakt. Rekomendowane: Blog (buduje ruch organiczny), Realizacje / Portfolio (dowód społeczny), Zespół (wiarygodność E-E-A-T), FAQ (pokrywa dodatkowe frazy), Polityka prywatności i regulamin (wymóg prawny). Przy 5–8 podstronach firma pokrywa kluczowe frazy i buduje kompletny obraz wiarygodności." }
+    },
+    {
+      "@type": "Question",
+      "name": "Ile czasu zajmuje napisanie tekstów na stronę firmową?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Pojedyncza podstrona (np. O nas, Oferta): 2–3 dni robocze. Kompletny pakiet 5 podstron: 5–10 dni roboczych. Pełna strona firmowa z 8–10 podstronami i blogiem: 10–15 dni. Czas obejmuje: brief i research, pisanie, redakcję, optymalizację SEO i dostarczenie w formacie gotowym do wdrożenia." }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy pomagacie też z wdrożeniem tekstów na stronę?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Dostarczamy teksty w formacie gotowym do wklejenia (HTML, Markdown, Google Docs z formatowaniem). Jeśli Twoja strona jest na WordPress, Astro lub innym CMS, do którego mamy dostęp — możemy wdrożyć teksty bezpośrednio. Dla stron na zamkniętych platformach (Wix, Squarespace) dostarczamy teksty z dokładnymi instrukcjami, gdzie co wkleić." }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy teksty będą zoptymalizowane pod lokalne SEO?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Tak — jeśli Twoja firma działa lokalnie (np. kancelaria w Toruniu, gabinet w Bydgoszczy), teksty zawierają frazy lokalne naturalnie osadzone w treści. Dodatkowo przygotowujemy schema LocalBusiness z adresem, godzinami otwarcia i obszarem obsługi. Lokalne SEO to nie tylko wizytówka Google — to treść na stronie, która potwierdza lokalizację i specjalizację." }
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": SITE.url },
+    { "@type": "ListItem", "position": 2, "name": "Oferta", "item": `${SITE.url}/oferta` },
+    { "@type": "ListItem", "position": 3, "name": "Teksty na strony firmowe", "item": `${SITE.url}/oferta/teksty-strony-firmowe` },
+  ],
+};
+
+const combinedSchema = [serviceSchema, faqSchema, breadcrumbSchema];
+
+const pages = [
+  {
+    name: "Strona główna",
+    icon: "🏠",
+    words: "400–600 słów",
+    purpose: "Pierwsze wrażenie, kluczowa fraza brandowa, CTA do oferty/kontaktu",
+    elements: "Hero z nagłówkiem wartości, 3–4 sekcje (problem→rozwiązanie→dowody→CTA), schema Organization + WebSite, linki do najważniejszych podstron",
+  },
+  {
+    name: "O nas / O firmie",
+    icon: "👥",
+    words: "500–800 słów",
+    purpose: "Budowanie wiarygodności (E-E-A-T), historia firmy, zespół, wartości",
+    elements: "Narracja: skąd się wzięliśmy→co robimy→dlaczego jesteśmy dobrzy w tym co robimy. Konkretne liczby (lat doświadczenia, liczba klientów, realizacji). Zdjęcia zespołu. Schema Organization + Person",
+  },
+  {
+    name: "Oferta / Usługa",
+    icon: "💼",
+    words: "600–1 000 słów per usługa",
+    purpose: "Pozycjonowanie na frazy usługowe, konwersja (formularz/telefon)",
+    elements: "Struktura: problem klienta→nasze rozwiązanie→jak pracujemy (proces)→dowody (case study/opinie)→CTA. Schema Service z ceną i opisem. Osobna podstrona per usługę — nie jedna strona ze wszystkim",
+  },
+  {
+    name: "Realizacje / Portfolio",
+    icon: "🏆",
+    words: "200–400 słów per realizacja",
+    purpose: "Dowód społeczny, sygnał doświadczenia (E-E-A-T)",
+    elements: "Format: problem klienta→co zrobiliśmy→wynik (liczby). Zdjęcia/screeny. Link do strony klienta (jeśli zgoda). Schema z typem CreativeWork lub informacjami o projekcie",
+  },
+  {
+    name: "Kontakt",
+    icon: "📞",
+    words: "150–300 słów",
+    purpose: "Konwersja, lokalne SEO, pełne dane firmy",
+    elements: "Formularz kontaktowy, adres, telefon, e-mail, godziny pracy, mapa Google. Schema LocalBusiness z adresem, telefonem, godzinami. Frazy lokalne ('firma X w Toruniu')",
+  },
+  {
+    name: "Blog (setup)",
+    icon: "📝",
+    words: "Osobna strategia",
+    purpose: "Ruch organiczny na frazy informacyjne, autorytet tematyczny",
+    elements: "Konfiguracja kategorii, szablonu artykułu, schema Article + Person + BreadcrumbList + FAQPage. Strategia klastrów tematycznych. Pierwsze 3–5 artykułów w cenie pakietu rozszerzonego",
+  },
+];
+
+const antiPatterns = [
+  { bad: "„Firma X oferuje kompleksowe rozwiązania w zakresie innowacyjnych usług klasy enterprise.”", why: "Puste zdanie — zero informacji o tym, co firma robi, dla kogo i z jakim efektem.", good: "„Projektujemy instalacje elektryczne dla domów jednorodzinnych w Toruniu i okolicach. Od 2015 roku zrealizowaliśmy 340+ projektów — od 50 m² do 400 m².”" },
+  { bad: "„Nasz zespół wysoko wykwalifikowanych specjalistów zapewnia najwyższą jakość świadczonych usług.”", why: "Korporacyjna mgła — nie wiadomo, kto jest w zespole, jakie mają kwalifikacje i co oznacza 'najwyższa jakość'.", good: "„Zespół: 3 projektantów z uprawnieniami SEP, 5 elektryków z min. 8-letnim doświadczeniem. Każdy projekt przechodzi podwójną kontrolę — najpierw projektant, potem kierownik.”" },
+  { bad: "„Zapraszamy do kontaktu!”", why: "Brak motywacji — dlaczego mam się kontaktować i co się stanie po kontakcie?", good: "„Opisz swój projekt w formularzu — odezwiemy się w ciągu 4 godzin z wstępną wyceną i terminem realizacji. Bez zobowiązań.”" },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonLd={combinedSchema}>
+
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Ścieżka nawigacyjna">
+      <ol>
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/oferta">Oferta</a></li>
+        <li aria-current="page">Teksty na strony firmowe</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="svc-hero">
+    <div class="container">
+      <div class="svc-hero__badge">Copywriting firmowy + SEO + E-E-A-T</div>
+      <h1>Teksty na stronę firmową,<br /><span class="svc-hero__accent">które budują zaufanie i pozycje</span></h1>
+      <p class="svc-hero__desc">
+        Strona firmowa to Twoja wizytówka w Google — i jednocześnie najważniejszy argument sprzedażowy dla klienta, który szuka usługodawcy.
+        Piszemy treści na każdą podstronę: od „O nas" po szczegółowe strony usługowe. Z formułą problem→rozwiązanie→dowód,
+        danymi strukturalnymi i pełną optymalizacją pod lokalne i ogólnopolskie SEO.
+      </p>
+      <div class="svc-hero__cta">
+        <a href="#cennik" class="btn btn--primary btn--lg">Cennik — od 499 zł / podstrona</a>
+        <a href="#podstrony" class="btn btn--outline btn--lg">Jakie podstrony potrzebujesz?</a>
+      </div>
+      <div class="svc-hero__proof">
+        <div class="proof-item"><span class="proof-num">50+</span><span class="proof-label">stron firmowych</span></div>
+        <div class="proof-item"><span class="proof-num">od 499 zł</span><span class="proof-label">brutto za podstronę</span></div>
+        <div class="proof-item"><span class="proof-num">E-E-A-T</span><span class="proof-label">wbudowane w każdy tekst</span></div>
+        <div class="proof-item"><span class="proof-num">5–10 dni</span><span class="proof-label">kompletny pakiet</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="svc-section svc-section--muted" id="problem">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Problem: 80% stron firmowych brzmi jak skopiowany szablon</h2>
+        <p>„Oferujemy kompleksowe rozwiązania." „Nasz zespół wysoko wykwalifikowanych specjalistów." „Zapraszamy do kontaktu." — rozpoznajesz?</p>
+      </div>
+
+      <div class="antipatterns">
+        {antiPatterns.map(ap => (
+          <div class="antipattern">
+            <div class="antipattern__bad">
+              <div class="antipattern__tag">❌ Tak pisze 80% firm</div>
+              <p class="antipattern__text">{ap.bad}</p>
+              <p class="antipattern__why">{ap.why}</p>
+            </div>
+            <div class="antipattern__arrow">→</div>
+            <div class="antipattern__good">
+              <div class="antipattern__tag">✅ Tak piszemy my</div>
+              <p class="antipattern__text">{ap.good}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT MAKES A GOOD CORPORATE PAGE -->
+  <section class="svc-section" id="zasady">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>3 zasady, na których opieramy każdy tekst firmowy</h2>
+      </div>
+
+      <div class="principles-grid">
+        <div class="principle-card">
+          <div class="principle-card__num">01</div>
+          <h3>Konkret zamiast ogólników</h3>
+          <p>Nie „wieloletnie doświadczenie" — lecz „12 lat, 340 realizacji, 98% klientów wraca". Nie „innowacyjne rozwiązania" — lecz „projektujemy instalacje fotowoltaiczne 5–50 kW dla domów i firm w woj. kujawsko-pomorskim". Konkret buduje zaufanie. Ogólnik buduje podejrzenie, że firma nie ma nic konkretnego do powiedzenia.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-card__num">02</div>
+          <h3>Perspektywa klienta, nie firmy</h3>
+          <p>Tekst firmowy nie jest autobiografią — jest odpowiedzią na pytanie klienta: „Czy ta firma rozwiąże mój problem?". Dlatego każda strona usługowa zaczyna od problemu klienta, nie od opisu firmy. „Masz problem z wilgocią w piwnicy?" → „Izolujemy fundamenty metodą X — efekt widoczny po 2 tygodniach" → „Oto 3 realizacje w Twojej okolicy".</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-card__num">03</div>
+          <h3>SEO wbudowane, nie doklejone</h3>
+          <p>Frazy kluczowe nie są wstawiane po napisaniu tekstu — są częścią briefu od pierwszego zdania. Każda podstrona celuje w konkretną frazę (np. „elektryk Toruń", „projektowanie instalacji elektrycznych kujawsko-pomorskie"), z naturalnym osadzeniem w nagłówkach, meta tagach i treści. Schema.org dopasowana do typu strony.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGES BREAKDOWN -->
+  <section class="svc-section svc-section--muted" id="podstrony">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Jakie podstrony tworzymy — i co na każdej</h2>
+        <p>Każda podstrona ma inny cel, inną strukturę i inne dane strukturalne. Oto pełna mapa.</p>
+      </div>
+
+      <div class="pages-grid">
+        {pages.map(page => (
+          <div class="page-card">
+            <div class="page-card__header">
+              <span class="page-card__icon">{page.icon}</span>
+              <div>
+                <h3 class="page-card__name">{page.name}</h3>
+                <span class="page-card__words">{page.words}</span>
+              </div>
+            </div>
+            <p class="page-card__purpose"><strong>Cel:</strong> {page.purpose}</p>
+            <p class="page-card__elements"><strong>Elementy:</strong> {page.elements}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- E-E-A-T SECTION -->
+  <section class="svc-section" id="eeat">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>E-E-A-T na stronie firmowej — co to oznacza w praktyce</h2>
+        <p>Google ocenia strony firmowe przez pryzmat Doświadczenia, Ekspertyzy, Autorytetu i Wiarygodności. Oto jak to wbudowujemy w każdy tekst.</p>
+      </div>
+
+      <div class="eeat-grid">
+        <div class="eeat-card">
+          <h3>🧪 Experience (Doświadczenie)</h3>
+          <p>Opisy konkretnych realizacji z datami, lokalizacjami i wynikami. Zdjęcia z placu budowy, screeny z dashboardów, cytaty klientów. Nie „mamy doświadczenie" — lecz „w 2024 zrealizowaliśmy 47 projektów w Toruniu i okolicach".</p>
+        </div>
+        <div class="eeat-card">
+          <h3>🎓 Expertise (Ekspertyza)</h3>
+          <p>Kwalifikacje zespołu: certyfikaty, uprawnienia, lata w branży. Biogramy z imieniem, nazwiskiem i specjalizacją — nie „nasz zespół", lecz „Jan Kowalski, projektant instalacji elektrycznych, uprawnienia SEP od 2015 roku".</p>
+        </div>
+        <div class="eeat-card">
+          <h3>🏛️ Authoritativeness (Autorytet)</h3>
+          <p>Artykuły eksperckie na blogu, publikacje w mediach branżowych, współpraca z organizacjami branżowymi. Linki do profili na LinkedIn, do wpisów w rejestrach branżowych, do certyfikatów ISO.</p>
+        </div>
+        <div class="eeat-card">
+          <h3>🔒 Trustworthiness (Wiarygodność)</h3>
+          <p>Pełne dane kontaktowe (NIP, adres, telefon), polityka prywatności, regulamin, opinie na Google Maps, certyfikaty SSL. Strona, na której klient nie znajdzie adresu firmy, nie budzi zaufania — ani u ludzi, ani u Google.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="svc-section svc-section--muted" id="proces">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Jak wygląda współpraca</h2>
+      </div>
+
+      <div class="process-timeline">
+        <div class="process-step">
+          <div class="process-step__marker"><span class="process-step__num">01</span><div class="process-step__line"></div></div>
+          <div class="process-step__content">
+            <div class="process-step__duration">Dzień 1–2</div>
+            <h3 class="process-step__title">Brief i research</h3>
+            <p class="process-step__desc">Rozmowa (30–45 min) o Twojej firmie: co robisz, dla kogo, czym się wyróżniasz, jakie masz realizacje. Badamy frazy kluczowe, analizujemy konkurencję, ustalamy strukturę podstron i priorytety.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__marker"><span class="process-step__num">02</span><div class="process-step__line"></div></div>
+          <div class="process-step__content">
+            <div class="process-step__duration">Dzień 3–6</div>
+            <h3 class="process-step__title">Pisanie i optymalizacja</h3>
+            <p class="process-step__desc">Piszemy teksty per podstrona, z formułą problem→rozwiązanie→dowód. Każdy tekst przechodzi redakcję: weryfikacja faktów, osadzenie fraz, dodanie danych strukturalnych, meta tagi.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__marker"><span class="process-step__num">03</span><div class="process-step__line"></div></div>
+          <div class="process-step__content">
+            <div class="process-step__duration">Dzień 7–8</div>
+            <h3 class="process-step__title">Prezentacja i korekty</h3>
+            <p class="process-step__desc">Dostarczamy wszystkie teksty do przeglądu. Masz 2 rundy korekt w cenie — zmiany merytoryczne, tonu, dodanie/usunięcie elementów. Cel: teksty, z którymi czujesz się komfortowo.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__marker"><span class="process-step__num">04</span></div>
+          <div class="process-step__content">
+            <div class="process-step__duration">Dzień 8–10</div>
+            <h3 class="process-step__title">Dostawa i wdrożenie</h3>
+            <p class="process-step__desc">Teksty w formacie gotowym do wdrożenia (HTML/Markdown/Docs). Schema JSON-LD do wklejenia. Opcjonalnie: wdrażamy teksty bezpośrednio w Twoim CMS. Gotowe.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="svc-section" id="co-dostajesz">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Co dostajesz z każdą podstroną</h2>
+      </div>
+      <div class="included-grid">
+        <div class="included-group">
+          <h3>📝 Treść</h3>
+          <ul>
+            <li>Unikalny tekst 400–1 000 słów (zależy od typu podstrony)</li>
+            <li>Struktura: problem→rozwiązanie→dowód→CTA</li>
+            <li>Nagłówki H1–H3 z frazami kluczowymi</li>
+            <li>Konkretne liczby, daty, nazwy (nie ogólniki)</li>
+            <li>Ton dopasowany do branży i grupy docelowej</li>
+            <li>2 rundy korekt w cenie</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>🔍 SEO</h3>
+          <ul>
+            <li>Badanie frazy kluczowej per podstrona</li>
+            <li>Meta title (40–60 zn.) + meta description (135–155 zn.)</li>
+            <li>Schema.org JSON-LD (Organization / Service / LocalBusiness / Person)</li>
+            <li>Sugestie URL-i (jeśli istniejące wymagają poprawy)</li>
+            <li>Linki wewnętrzne między podstronami</li>
+            <li>Open Graph tags per strona</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>📦 Dostawa</h3>
+          <ul>
+            <li>Format: HTML / Markdown / Google Docs</li>
+            <li>Schema JSON-LD jako gotowy kod do wklejenia</li>
+            <li>Instrukcje wdrożenia per CMS</li>
+            <li>Opcjonalnie: wdrożenie w WordPress / Astro</li>
+            <li>Raport z frazami kluczowymi per podstrona</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="svc-section svc-section--dark" id="cennik">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <h2>Cennik tekstów na strony firmowe</h2>
+        <p>Cena za podstronę lub pakiet. Im więcej podstron, tym niższy koszt jednostkowy.</p>
+      </div>
+
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">Pojedyncza podstrona</h3>
+          <div class="pricing-card__price"><span class="pricing-card__amount">499 zł</span><span class="pricing-card__period">brutto / podstrona</span></div>
+          <p class="pricing-card__desc">Jedna podstrona firmowa z pełną optymalizacją SEO. Idealne jako uzupełnienie istniejącej strony.</p>
+          <ul class="pricing-card__features">
+            <li>400–1 000 słów unikalnego tekstu</li>
+            <li>Badanie frazy + analiza konkurencji</li>
+            <li>Meta title + description + schema</li>
+            <li>Struktura problem→rozwiązanie→dowód</li>
+            <li>2 rundy korekt</li>
+            <li>Dostawa w HTML / Markdown / Docs</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zamów podstronę</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-card__badge">Najczęściej wybierany</div>
+          <h3 class="pricing-card__name">Pakiet 5 podstron</h3>
+          <div class="pricing-card__price"><span class="pricing-card__amount">1 999 zł</span><span class="pricing-card__period">brutto / 5 podstron</span></div>
+          <p class="pricing-card__desc">Kompletna strona firmowa: główna + o nas + 2 usługi + kontakt. Spójny ton, strategia fraz, linkowanie wewnętrzne.</p>
+          <ul class="pricing-card__features">
+            <li>5 podstron z pełną optymalizacją</li>
+            <li>Strategia fraz dla całej witryny</li>
+            <li>Spójna architektura informacji</li>
+            <li>Schema Organization + Service + LocalBusiness</li>
+            <li>Linkowanie wewnętrzne między podstronami</li>
+            <li>Brief i rozmowa strategiczna w cenie</li>
+            <li>2 rundy korekt per podstrona</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--primary btn--lg" style="width:100%;">Zamów pakiet 5 podstron</a>
+          <p class="pricing-card__note">Oszczędność 496 zł vs zamówienie pojedyncze</p>
+        </div>
+
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">Pakiet rozszerzony (8–10 podstron)</h3>
+          <div class="pricing-card__price"><span class="pricing-card__amount">od 3 499 zł</span><span class="pricing-card__period">brutto</span></div>
+          <p class="pricing-card__desc">Pełna strona firmowa z blogiem: wszystkie podstrony + 3–5 pierwszych artykułów blogowych + strategia content.</p>
+          <ul class="pricing-card__features">
+            <li>8–10 podstron firmowych</li>
+            <li>3–5 artykułów blogowych (1 500–2 500 słów)</li>
+            <li>Strategia klastrów tematycznych dla bloga</li>
+            <li>Kompletne schema.org per strona</li>
+            <li>Konfiguracja kategorii blogowych</li>
+            <li>Rekomendacje kolejnych 10 artykułów</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zapytaj o pakiet rozszerzony</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR WHOM -->
+  <section class="svc-section" id="dla-kogo">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Dla kogo piszemy teksty firmowe</h2>
+      </div>
+      <div class="audience-grid">
+        <div class="audience-card"><h3>⚖️ Kancelarie i biura rachunkowe</h3><p>Treści budujące autorytet prawny/finansowy: specjalizacje, doświadczenie, opisy usług per branża. Schema z Professional Service. Frazy lokalne + branżowe.</p></div>
+        <div class="audience-card"><h3>🏥 Gabinety i przychodnie</h3><p>Treści YMYL wymagające podwyższonych standardów E-E-A-T: kwalifikacje lekarzy, opisy procedur, FAQ pacjenckie. Schema MedicalBusiness + Physician.</p></div>
+        <div class="audience-card"><h3>🔧 Firmy usługowe (remonty, instalacje, transport)</h3><p>Strony usługowe per specjalizacja z frazami lokalnymi. Realizacje z konkretnymi adresami/dzielnicami. Schema LocalBusiness z obszarem obsługi.</p></div>
+        <div class="audience-card"><h3>💻 Agencje i software house'y</h3><p>Strony z case study, procesem pracy, stack technologicznym. Ton profesjonalny, ale przystępny — jak na spotkaniu z kompetentnym klientem. Schema Organization + Service.</p></div>
+        <div class="audience-card"><h3>🏗️ Firmy budowlane i deweloperzy</h3><p>Opisy inwestycji, technologii budowy, standardów. Treści dla klientów indywidualnych i biznesowych. Galerie realizacji z parametrami technicznymi.</p></div>
+        <div class="audience-card"><h3>🎓 Szkoły, kursy, szkolenia</h3><p>Opisy oferty edukacyjnej, kadry, programów. Treści budujące zaufanie rodziców/uczestników. Schema EducationalOrganization + Course.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="svc-section svc-section--muted" id="faq">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center"><h2>Najczęściej zadawane pytania</h2></div>
+      <div class="faq-list">
+        {faqSchema.mainEntity.map(q => (
+          <details class="faq-item">
+            <summary class="faq-item__question">{q.name}</summary>
+            <div class="faq-item__answer"><p>{q.acceptedAnswer.text}</p></div>
+          </details>
+        ))}
+        <details class="faq-item">
+          <summary class="faq-item__question">Czy mogę zamówić tylko jedną podstronę, np. „O nas"?</summary>
+          <div class="faq-item__answer"><p>Tak — nie ma minimalnego zamówienia. Pojedyncza podstrona kosztuje 499 zł brutto. Ale rekomendujemy pakiet 5 podstron (1 999 zł) — bo spójna strategia fraz i linkowanie wewnętrzne między podstronami daje znacznie lepsze efekty SEO niż izolowana podstrona.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-item__question">Czy piszecie też teksty na strony w językach obcych?</summary>
+          <div class="faq-item__answer"><p>Skupiamy się na polskim rynku — piszemy po polsku. Jeśli potrzebujesz wersji angielskiej lub niemieckiej, możemy przygotować tekst bazowy po polsku, który następnie przetłumaczy native speaker (współpracujemy z tłumaczami). Nie tłumaczymy maszynowo — to widać w jakości i Google też to widzi.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="svc-section svc-section--cta">
+    <div class="container">
+      <div class="final-cta">
+        <h2>Gotowy na stronę firmową, która sprzedaje?</h2>
+        <p>Opisz swoją firmę w 2–3 zdaniach i podaj link do obecnej strony — wrócimy z audytem treści i propozycją pakietu w ciągu 24 godzin.</p>
+        <div class="final-cta__actions">
+          <a href="/kontakt" class="btn btn--primary btn--lg">Zamów teksty firmowe</a>
+          <a href="mailto:kontakt@copywritingseo.pl" class="btn btn--outline btn--lg">kontakt@copywritingseo.pl</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</BaseLayout>
+

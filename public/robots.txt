@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /polityka-prywatnosci
 
-Sitemap: https://copywritingseo.pl/sitemap-index.xml
+Sitemap: https://www.copywritingseo.pl/sitemap-index.xml

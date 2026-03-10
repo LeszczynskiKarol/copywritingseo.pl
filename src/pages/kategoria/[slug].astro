@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
-import Newsletter from '../../components/Newsletter.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 import { CATEGORIES, getCategoryInfo } from '../../utils';
@@ -93,6 +92,6 @@ const articles = sortedPosts.filter(p => !p.data.pillar);
       </p>
     )}
 
-    <Newsletter />
+
   </div>
 </BaseLayout>

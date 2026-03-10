@@ -1,0 +1,654 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+import { SITE } from '../../../utils';
+
+const pageTitle = "Pisanie opisów produktów SEO — unikalne opisy, które rankują i sprzedają";
+const pageDescription = "Tworzymy unikalne opisy produktów zoptymalizowane pod SEO i konwersję. Formuła cecha→korzyść→scenariusz, dane strukturalne Product, skalowanie z AI+redakcja. Od 29 zł brutto za opis. Dla sklepów z 50–5 000 produktów.";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Pisanie opisów produktów SEO",
+  "description": pageDescription,
+  "provider": {
+    "@type": "Organization",
+    "name": SITE.title,
+    "url": SITE.url,
+  },
+  "areaServed": { "@type": "Country", "name": "Polska" },
+  "serviceType": "SEO copywriting — opisy produktów e-commerce",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Opis produktu — standard",
+      "price": "29",
+      "priceCurrency": "PLN",
+      "priceSpecification": { "@type": "PriceSpecification", "price": "29", "priceCurrency": "PLN", "valueAddedTaxIncluded": true },
+      "description": "Unikalny opis produktu 150–300 słów z optymalizacją SEO",
+    },
+    {
+      "@type": "Offer",
+      "name": "Opis produktu — rozszerzony",
+      "price": "59",
+      "priceCurrency": "PLN",
+      "priceSpecification": { "@type": "PriceSpecification", "price": "59", "priceCurrency": "PLN", "valueAddedTaxIncluded": true },
+      "description": "Rozszerzony opis 300–500 słów z tabelą parametrów, korzyściami i FAQ",
+    },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Dlaczego opisy producenta nie wystarczą do SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Te same opisy producenta są kopiowane przez dziesiątki lub setki sklepów. Google traktuje to jako treść zduplikowaną i nie ma powodu wyróżniać akurat Twojej strony. Ponadto opisy producenta są pisane językiem technicznym, bez uwzględnienia pytań kupującego i bez fraz, których klienci faktycznie szukają w Google.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Ile słów powinien mieć opis produktu?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Zależy od złożoności produktu i konkurencji. Proste produkty (śrubki, kable): 100–200 słów. Produkty średniej złożoności (odzież, kosmetyki): 200–350 słów. Produkty złożone lub drogie (elektronika, maszyny, meble): 300–500 słów. Kluczowe jest nie ile słów, lecz czy opis odpowiada na pytania kupującego.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Jak wygląda proces przy zamówieniu 100+ opisów?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Krok 1: Dostarczasz specyfikacje produktów (CSV/Excel). Krok 2: Tworzymy szablon opisu per kategoria. Krok 3: Generujemy szkice z AI na podstawie szablonu i danych. Krok 4: Każdy opis przechodzi redakcję ludzką (weryfikacja, korzyści, ton marki). Krok 5: Dostarczamy gotowe opisy w formacie CSV gotowym do importu do CMS. Czas: 50–100 opisów tygodniowo.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Czy opisy będą unikalne, jeśli mam te same produkty co konkurencja?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tak — każdy opis jest pisany od zera z perspektywy Twojego klienta, nie producenta. Dwa sklepy sprzedające ten sam silnik elektryczny mogą mieć zupełnie inne opisy, bo celują w inne grupy docelowe, podkreślają inne korzyści i używają innego języka. Unikatowość wynika z perspektywy i formuły, nie z samego produktu.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Czy pomagacie też z opisami kategorii?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tak — opisy kategorii to osobna usługa, ale najczęściej zamawiamy je łącznie z opisami produktów. Strona kategorii targetuje frazy ogólne o wyższym wolumenie (np. 'silniki elektryczne'), podczas gdy strony produktowe targetują frazy szczegółowe (np. 'silnik 2,2 kW IE3'). Razem tworzą spójną strategię SEO dla sklepu.",
+      },
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": SITE.url },
+    { "@type": "ListItem", "position": 2, "name": "Oferta", "item": `${SITE.url}/oferta` },
+    { "@type": "ListItem", "position": 3, "name": "Opisy produktów SEO", "item": `${SITE.url}/oferta/opisy-produktow` },
+  ],
+};
+
+const combinedSchema = [serviceSchema, faqSchema, breadcrumbSchema];
+
+const layers = [
+  { num: "1", title: "Nagłówek produktowy (H1)", desc: "Pełna nazwa z kluczowym parametrem i korzyścią. Nie sam model — model plus cecha, której szuka kupujący.", example: "„Silnik elektryczny 2,2 kW 1400 obr/min IE3 — cichy, energooszczędny”" },
+  { num: "2", title: "Wprowadzenie sprzedażowe", desc: "50–100 słów odpowiadających na: czym jest, dla kogo, jaki problem rozwiązuje. Fragment cytowalny przez AI.", example: "" },
+  { num: "3", title: "Tabela parametrów", desc: "Specyfikacja techniczna w czytelnej tabeli — wymiary, waga, moc, materiał. Format, który Google wyciąga jako featured snippet.", example: "" },
+  { num: "4", title: "Korzyści (cecha → korzyść → scenariusz)", desc: "Zamiana suchych parametrów na wartość dla kupującego. 'Klasa IE3' → 'niższe rachunki' → 'oszczędzasz 15–20% energii rocznie'.", example: "" },
+  { num: "5", title: "Dowody społeczne", desc: "Opinie, oceny, certyfikaty, gwarancje. 31% konsumentów polega na recenzjach jako głównym źródle informacji zakupowej.", example: "" },
+  { num: "6", title: "Dane strukturalne Product", desc: "Schema.org z ceną, dostępnością, ocenami, marką i GTIN/MPN. Gwiazdki i cena w wynikach Google.", example: "" },
+];
+
+const processSteps = [
+  { num: "01", title: "Analiza i szablon", desc: "Analizujemy Twoje produkty, konkurencję i frazy kluczowe. Tworzymy szablon opisu per kategoria — z sekcjami, tonem i wytycznymi.", duration: "Dzień 1–2" },
+  { num: "02", title: "Dane produktowe", desc: "Otrzymujemy od Ciebie specyfikacje (CSV, Excel, API). Mapujemy parametry na korzyści i scenariusze użycia.", duration: "Dzień 2–3" },
+  { num: "03", title: "Generowanie + redakcja", desc: "AI generuje szkice na bazie szablonu i danych. Każdy opis przechodzi ludzką redakcję: weryfikacja, korzyści, ton marki, frazy kluczowe.", duration: "Dzień 3–8" },
+  { num: "04", title: "Optymalizacja SEO", desc: "Meta title i description per produkt, alt texty obrazów, dane strukturalne Product, linkowanie wewnętrzne do kategorii.", duration: "Dzień 6–9" },
+  { num: "05", title: "Dostawa i import", desc: "Opisy w formacie gotowym do importu (CSV, JSON, bezpośredni upload do WooCommerce/Shopify/PrestaShop). Weryfikacja po imporcie.", duration: "Dzień 9–10" },
+];
+
+const beforeAfter = [
+  {
+    label: "Opis producenta (kopiowany przez 80 sklepów)",
+    text: "Silnik indukcyjny trójfazowy SG132S-4. Moc: 2,2 kW. Obroty: 1400 obr/min. Klasa sprawności: IE3. Obudowa: aluminium. Stopień ochrony: IP55. Napięcie: 400V. Waga: 28 kg.",
+    type: "before",
+  },
+  {
+    label: "Nasz opis (unikalny, zoptymalizowany, sprzedający)",
+    text: "Silnik elektryczny 2,2 kW 1400 obr/min IE3 — cichy, energooszczędny motor do warsztatu i przemysłu. Szukasz silnika, który nie generuje astronomicznych rachunków za prąd i jednocześnie jest na tyle cichy, żeby zamontować go w pomieszczeniu, w którym pracują ludzie? Silnik SG132S-4 w klasie energetycznej IE3 zużywa 15–20% mniej energii niż starsze modele IE1 — przy pracy ciągłej (8h/dzień) oszczędność wynosi 800–1 200 zł rocznie. Aluminiowa obudowa z IP55 oznacza pełną ochronę przed pyłem i zachlapaniem — możesz zamontować go w warsztacie, hali produkcyjnej lub na zewnątrz pod wiatą. Poziom hałasu 58 dB to mniej niż przeciętna rozmowa — Twoi pracownicy nie będą musieli przekrzykiwać maszyny.",
+    type: "after",
+  },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogType="website"
+  jsonLd={combinedSchema}
+>
+
+  <!-- Breadcrumbs -->
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Ścieżka nawigacyjna">
+      <ol>
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/oferta">Oferta</a></li>
+        <li aria-current="page">Opisy produktów SEO</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="svc-hero">
+    <div class="container">
+      <div class="svc-hero__badge">E-commerce SEO copywriting</div>
+      <h1>
+        Opisy produktów, które<br />
+        <span class="svc-hero__accent">rankują w Google i sprzedają</span>
+      </h1>
+      <p class="svc-hero__desc">
+        Tworzymy unikalne opisy produktów z formułą cecha→korzyść→scenariusz, zoptymalizowane pod frazy kluczowe
+        i przygotowane pod dane strukturalne Product. Dla sklepów z 50 do 5 000 produktów — system skalowania AI+redakcja,
+        który daje jakość ręcznego pisania przy prędkości automatyzacji.
+      </p>
+      <div class="svc-hero__cta">
+        <a href="#cennik" class="btn btn--primary btn--lg">Cennik — od 29 zł / opis</a>
+        <a href="#przyklad" class="btn btn--outline btn--lg">Zobacz przykład opisu</a>
+      </div>
+      <div class="svc-hero__proof">
+        <div class="proof-item">
+          <span class="proof-num">2 000+</span>
+          <span class="proof-label">opisów dostarczonych</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">od 29 zł</span>
+          <span class="proof-label">brutto za opis</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">50–100</span>
+          <span class="proof-label">opisów tygodniowo</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">6</span>
+          <span class="proof-label">warstw opisu</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROBLEM
+       ============================================================ -->
+  <section class="svc-section svc-section--muted" id="problem">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Problem: 80% sklepów ma te same opisy co konkurencja</h2>
+        <p>Kopiujesz opisy od producenta? Twoja konkurencja też. Google widzi 80 identycznych stron — i nie ma powodu wyróżniać żadnej.</p>
+      </div>
+
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-card__icon">📋</div>
+          <h3>Duplikacja treści</h3>
+          <p>Te same opisy producenta na dziesiątkach sklepów. Google nie penalizuje tego jawnie, ale nie ma powodu rankować Twojej strony wyżej niż 79 pozostałych z identycznym tekstem. Efekt: pozycja 50+.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card__icon">🤷</div>
+          <h3>Język producenta ≠ język klienta</h3>
+          <p>Producent pisze „silnik indukcyjny trójfazowy SG132S-4 IE3". Klient wpisuje „cichy silnik do warsztatu" albo „energooszczędny silnik 2 kW". Opis producenta nie pokrywa fraz, których szukają kupujący.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card__icon">😐</div>
+          <h3>Parametry bez korzyści</h3>
+          <p>„Klasa IP55, obudowa aluminiowa, 1400 obr/min" — co to znaczy dla kupującego? Nic, dopóki ktoś nie przetłumaczy: „możesz zamontować na dworze", „nie hałasuje", „nie rdzewieje". Suche parametry nie sprzedają.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card__icon">📉</div>
+          <h3>Brak danych strukturalnych</h3>
+          <p>Bez schema Product Twoje produkty w Google wyglądają jak zwykłe linki. Z schema — mają gwiazdki, cenę, dostępność. To różnica 20–30% w klikalności na tej samej pozycji.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BEFORE / AFTER EXAMPLE
+       ============================================================ -->
+  <section class="svc-section" id="przyklad">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Przed i po — ten sam produkt, inny opis</h2>
+        <p>Porównaj opis producenta kopiowany przez 80 sklepów z naszym unikalnym opisem tego samego silnika.</p>
+      </div>
+
+      <div class="ba-grid">
+        {beforeAfter.map(item => (
+          <div class={`ba-card ba-card--${item.type}`}>
+            <div class="ba-card__label">{item.type === 'before' ? '❌ Przed' : '✅ Po'}</div>
+            <h3 class="ba-card__title">{item.label}</h3>
+            <div class="ba-card__text">{item.text}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="ba-verdict">
+        <p>Ten sam silnik. Dwa opisy. Jeden kopiuje specyfikację — drugi odpowiada na pytania kupującego: <strong>ile zaoszczędzę, czy mogę zamontować w warsztacie, czy jest cichy?</strong> Google nagradza ten drugi, bo lepiej spełnia intencję wyszukiwania.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6 LAYERS OF A PRODUCT DESCRIPTION
+       ============================================================ -->
+  <section class="svc-section svc-section--muted" id="anatomia">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>6 warstw opisu produktu, który rankuje i sprzedaje</h2>
+        <p>Każdy nasz opis składa się z 6 warstw — od nagłówka H1 po dane strukturalne. Każda warstwa pełni inną funkcję SEO i konwersyjną.</p>
+      </div>
+
+      <div class="layers-list">
+        {layers.map(layer => (
+          <div class="layer-card">
+            <div class="layer-card__num">Warstwa {layer.num}</div>
+            <div class="layer-card__content">
+              <h3 class="layer-card__title">{layer.title}</h3>
+              <p class="layer-card__desc">{layer.desc}</p>
+              {layer.example && <p class="layer-card__example">{layer.example}</p>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FORMULA: CECHA → KORZYŚĆ → SCENARIUSZ
+       ============================================================ -->
+  <section class="svc-section" id="formula">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Formuła, która zamienia parametry w sprzedaż</h2>
+        <p>Klienci nie kupują parametrów. Kupują rozwiązania swoich problemów. Nasza formuła tłumaczy jedno na drugie.</p>
+      </div>
+
+      <div class="formula-table-wrap">
+        <table class="formula-table">
+          <thead>
+            <tr>
+              <th>Cecha techniczna</th>
+              <th>→ Korzyść</th>
+              <th>→ Scenariusz użycia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Klasa energetyczna IE3</td>
+              <td>Niższe rachunki za prąd</td>
+              <td>Oszczędzasz 800–1 200 zł rocznie przy pracy ciągłej 8h/dzień</td>
+            </tr>
+            <tr>
+              <td>Obudowa aluminium IP55</td>
+              <td>Odporność na pył i zachlapanie</td>
+              <td>Bezpiecznie montujesz w warsztacie, hali lub na zewnątrz</td>
+            </tr>
+            <tr>
+              <td>Poziom hałasu 58 dB</td>
+              <td>Cicha praca</td>
+              <td>Montujesz w pomieszczeniu, gdzie pracują ludzie — bez ochraniaczy słuchu</td>
+            </tr>
+            <tr>
+              <td>Tkanina: 100% bawełna organiczna</td>
+              <td>Bezpieczeństwo dla skóry wrażliwej</td>
+              <td>Idealna na co dzień przy skłonności do alergii — bez sztucznych włókien</td>
+            </tr>
+            <tr>
+              <td>Pojemność baterii: 5 000 mAh</td>
+              <td>Dwa dni pracy na jednym ładowaniu</td>
+              <td>Wyjeżdżasz na weekend bez ładowarki — telefon wytrzyma</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="formula-note">Tę formułę stosujemy do każdego parametru w każdym opisie. Efekt: opis, który jednocześnie informuje i przekonuje.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCALING SYSTEM
+       ============================================================ -->
+  <section class="svc-section svc-section--muted" id="skalowanie">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>System skalowania — 50–100 opisów tygodniowo bez utraty jakości</h2>
+        <p>Przy katalogach z setkami produktów ręczne pisanie każdego opisu od zera jest nierealne. Nasz system łączy AI z ludzką redakcją.</p>
+      </div>
+
+      <div class="scale-steps">
+        <div class="scale-step">
+          <div class="scale-step__icon">📐</div>
+          <h3>1. Szablon per kategoria</h3>
+          <p>Każda kategoria produktów ma swoją specyfikę. Tworzymy szablon z sekcjami (wprowadzenie, parametry, korzyści, zastosowania), wytycznymi tonu i listą fraz.</p>
+        </div>
+        <div class="scale-step">
+          <div class="scale-step__icon">📊</div>
+          <h3>2. Dane produktowe</h3>
+          <p>Eksportujesz specyfikacje do CSV/Excel — parametry, ceny, kategorie. Mapujemy parametry na korzyści w arkuszu formuł.</p>
+        </div>
+        <div class="scale-step">
+          <div class="scale-step__icon">🤖</div>
+          <h3>3. Szkice z AI</h3>
+          <p>Na bazie szablonu i danych generujemy szkice opisów. AI zamienia suche parametry w akapity z korzyściami — w ułamku czasu ręcznego pisania.</p>
+        </div>
+        <div class="scale-step">
+          <div class="scale-step__icon">✍️</div>
+          <h3>4. Redakcja ludzka</h3>
+          <p>Każdy opis przechodzi weryfikację: czy dane są prawidłowe, czy korzyści są realistyczne, czy ton pasuje do marki, czy frazy osadzone naturalnie.</p>
+        </div>
+        <div class="scale-step">
+          <div class="scale-step__icon">📦</div>
+          <h3>5. Dostawa w Twoim formacie</h3>
+          <p>Gotowe opisy w CSV do importu (WooCommerce, PrestaShop, Shopify, BaseLinker) lub jako pliki Markdown. Z meta title i description dla każdego produktu.</p>
+        </div>
+      </div>
+
+      <div class="scale-result">
+        <p>Efekt: jeden redaktor obsługuje <strong>30–50 opisów dziennie</strong> zamiast 5–8 bez AI — przy zachowaniu jakości, której wymaga Google.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROCESS
+       ============================================================ -->
+  <section class="svc-section" id="proces">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Jak wygląda współpraca — krok po kroku</h2>
+        <p>Od przesłania specyfikacji po gotowe opisy w Twoim CMS. Zwykle 5–10 dni roboczych na pierwszą partię.</p>
+      </div>
+
+      <div class="process-timeline">
+        {processSteps.map((step, i) => (
+          <div class="process-step">
+            <div class="process-step__marker">
+              <span class="process-step__num">{step.num}</span>
+              {i < processSteps.length - 1 && <div class="process-step__line"></div>}
+            </div>
+            <div class="process-step__content">
+              <div class="process-step__duration">{step.duration}</div>
+              <h3 class="process-step__title">{step.title}</h3>
+              <p class="process-step__desc">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHAT YOU GET
+       ============================================================ -->
+  <section class="svc-section svc-section--muted" id="co-dostajesz">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Co dokładnie dostajesz z każdym opisem</h2>
+      </div>
+
+      <div class="included-grid">
+        <div class="included-group">
+          <h3>📝 Treść opisu</h3>
+          <ul>
+            <li>Unikalny tekst 150–500 słów (zależy od pakietu)</li>
+            <li>Nagłówek H1 z frazą kluczową i parametrem</li>
+            <li>Wprowadzenie sprzedażowe (cytowalny fragment)</li>
+            <li>Korzyści w formule cecha→korzyść→scenariusz</li>
+            <li>Tabela parametrów technicznych</li>
+            <li>Scenariusze zastosowań</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>🔍 SEO on-page</h3>
+          <ul>
+            <li>Meta title (40–60 znaków z frazą i parametrem)</li>
+            <li>Meta description (135–155 znaków z zachętą)</li>
+            <li>Alt texty do zdjęć produktowych</li>
+            <li>Frazy kluczowe z długiego ogona w naturalnym kontekście</li>
+            <li>Sugestie linków wewnętrznych (do kategorii i powiązanych)</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>📊 Dane strukturalne</h3>
+          <ul>
+            <li>Schema Product (nazwa, cena, dostępność, marka)</li>
+            <li>AggregateRating (jeśli masz recenzje)</li>
+            <li>GTIN / MPN (jeśli dotyczy)</li>
+            <li>Instrukcja wdrożenia schema (lub wdrożenie za Ciebie)</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>📦 Dostawa</h3>
+          <ul>
+            <li>Format CSV / Excel / JSON — gotowy do importu</li>
+            <li>Kompatybilność: WooCommerce, PrestaShop, Shopify, IdoSell, BaseLinker</li>
+            <li>Weryfikacja po imporcie (sprawdzamy, czy opisy wyświetlają się poprawnie)</li>
+            <li>Raport z użytymi frazami kluczowymi per produkt</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SEO CHECKLIST FOR PRODUCT PAGE
+       ============================================================ -->
+  <section class="svc-section" id="checklist">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Checklist SEO strony produktowej — co weryfikujemy</h2>
+        <p>Każdy opis dostarczamy ze zweryfikowaną listą kontrolną. Oto minimum, które musi spełniać strona produktowa.</p>
+      </div>
+
+      <div class="checklist-wrap">
+        <div class="checklist-col">
+          <h3>Treść i on-page</h3>
+          <ul class="check-list">
+            <li>Title tag: nazwa + parametr + marka, 40–60 zn.</li>
+            <li>Meta description: fraza + korzyść + zachęta, 135–155 zn.</li>
+            <li>H1: pełna nazwa z parametrem rozpoznawalnym dla kupującego</li>
+            <li>Opis unikalny: minimum 150 słów (nie kopiowany)</li>
+            <li>Tabela parametrów w czytelnym formacie</li>
+            <li>Korzyści przetłumaczone z języka technicznego</li>
+          </ul>
+        </div>
+        <div class="checklist-col">
+          <h3>Technika i schema</h3>
+          <ul class="check-list">
+            <li>Schema Product z ceną, dostępnością, marką</li>
+            <li>Zdjęcia z alt textami (fraza + opis wizualny)</li>
+            <li>Linki wewnętrzne do kategorii + 2–3 powiązanych produktów</li>
+            <li>URL krótki, z frazą kluczową</li>
+            <li>Szybkość ładowania poniżej 2,5 sek. (obrazy skompresowane)</li>
+            <li>Sekcja recenzji (nawet pusta — z zachętą do wystawienia)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRICING
+       ============================================================ -->
+  <section class="svc-section svc-section--dark" id="cennik">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <h2>Cennik opisów produktów — przejrzyście</h2>
+        <p>Cena zależy od długości i złożoności. Im większe zamówienie, tym niższa cena jednostkowa.</p>
+      </div>
+
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">Opis standardowy</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">29 zł</span>
+            <span class="pricing-card__period">brutto / opis</span>
+          </div>
+          <p class="pricing-card__desc">Unikalny opis 150–300 słów z H1, meta title/description, korzyściami i frazami kluczowymi.</p>
+          <ul class="pricing-card__features">
+            <li>150–300 słów unikalnego tekstu</li>
+            <li>H1 z frazą i kluczowym parametrem</li>
+            <li>Meta title + meta description</li>
+            <li>Korzyści w formule cecha→korzyść</li>
+            <li>Alt text do głównego zdjęcia</li>
+            <li>Dostawa w CSV / Excel</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zamów opisy standardowe</a>
+          <p class="pricing-card__note">Min. zamówienie: 20 opisów</p>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-card__badge">Rekomendowany</div>
+          <h3 class="pricing-card__name">Opis rozszerzony</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">59 zł</span>
+            <span class="pricing-card__period">brutto / opis</span>
+          </div>
+          <p class="pricing-card__desc">Pełna 6-warstwowa struktura: H1, intro, tabela, korzyści, scenariusze, meta, schema Product.</p>
+          <ul class="pricing-card__features">
+            <li>300–500 słów unikalnego tekstu</li>
+            <li>Pełna struktura 6 warstw</li>
+            <li>Tabela parametrów technicznych</li>
+            <li>Scenariusze zastosowań</li>
+            <li>Schema Product JSON-LD (gotowy kod)</li>
+            <li>Meta title + description + alt texty</li>
+            <li>Sugestie linków wewnętrznych</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--primary btn--lg" style="width:100%;">Zamów opisy rozszerzone</a>
+          <p class="pricing-card__note">Min. zamówienie: 10 opisów</p>
+        </div>
+
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">Pakiet sklepowy</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">od 2 499 zł</span>
+            <span class="pricing-card__period">brutto / 100 opisów</span>
+          </div>
+          <p class="pricing-card__desc">Dla sklepów z dużym katalogiem. Szablon per kategoria + system skalowania AI + redakcja + import do CMS.</p>
+          <ul class="pricing-card__features">
+            <li>100+ opisów rozszerzonych</li>
+            <li>Szablony per kategoria produktowa</li>
+            <li>Badanie fraz per kategoria</li>
+            <li>System skalowania AI + redakcja</li>
+            <li>Import do Twojego CMS</li>
+            <li>Weryfikacja po imporcie</li>
+            <li>Raport z frazami kluczowymi</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zapytaj o pakiet sklepowy</a>
+          <p class="pricing-card__note">Cena zależy od liczby produktów i złożoności</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHO IS THIS FOR
+       ============================================================ -->
+  <section class="svc-section" id="dla-kogo">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Dla kogo są nasze opisy produktów</h2>
+      </div>
+
+      <div class="audience-grid">
+        <div class="audience-card">
+          <h3>🏪 Sklepy internetowe z 50–500 produktów</h3>
+          <p>Masz katalog z opisami producenta, które nie generują ruchu organicznego. Chcesz unikalne opisy, ale nie masz czasu pisać ich sam. Nasze opisy standardowe (29 zł/szt.) dają największy zwrot z inwestycji.</p>
+        </div>
+        <div class="audience-card">
+          <h3>🏭 Sklepy B2B / techniczne</h3>
+          <p>Sprzedajesz silniki, pompy, narzędzia, komponenty. Klienci szukają po parametrach technicznych — ale w Google wpisują pytania, nie numery katalogowe. Opisy rozszerzone tłumaczą parametry na korzyści.</p>
+        </div>
+        <div class="audience-card">
+          <h3>🏢 Duże katalogi (500–5 000+ produktów)</h3>
+          <p>Nie opłaca się pisać ręcznie. Nasz system skalowania (szablony + AI + redakcja) pozwala obsłużyć 50–100 opisów tygodniowo — priorytetyzując produkty o najwyższym potencjale.</p>
+        </div>
+        <div class="audience-card">
+          <h3>🚀 Sklepy po migracji / rebrandingu</h3>
+          <p>Przenosisz się na nową platformę i chcesz zacząć z czystymi, unikalnymi opisami zamiast ciągnąć stare duplikaty. Dostarczamy opisy w formacie gotowym do importu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ
+       ============================================================ -->
+  <section class="svc-section svc-section--muted" id="faq">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Najczęściej zadawane pytania</h2>
+      </div>
+
+      <div class="faq-list">
+        {faqSchema.mainEntity.map(q => (
+          <details class="faq-item">
+            <summary class="faq-item__question">{q.name}</summary>
+            <div class="faq-item__answer">
+              <p>{q.acceptedAnswer.text}</p>
+            </div>
+          </details>
+        ))}
+
+        <details class="faq-item">
+          <summary class="faq-item__question">Czy mogę zamówić próbny opis zanim zamówię cały pakiet?</summary>
+          <div class="faq-item__answer">
+            <p>Tak — na start możesz zamówić 5 opisów próbnych w cenie standardowej. Jeśli jakość Ci odpowiada, przechodzimy do pełnego zamówienia. Jeśli nie — nie ma zobowiązań.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__question">W jakich branżach macie doświadczenie?</summary>
+          <div class="faq-item__answer">
+            <p>Pisaliśmy opisy produktów dla branż: silniki i napędy elektryczne, meble i wyposażenie wnętrz, elektronika, odzież, kosmetyki, narzędzia, części samochodowe, artykuły biurowe. System szablonów per kategoria pozwala efektywnie wejść w każdą branżę — pod warunkiem, że dostarczysz specyfikacje produktów.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__question">Czy opisy będą pisane przez AI?</summary>
+          <div class="faq-item__answer">
+            <p>Szkice są generowane z AI na bazie Twoich danych produktowych i naszych szablonów. Ale każdy opis przechodzi ludzką redakcję: weryfikacja faktów, dodanie korzyści specyficznych dla Twojego klienta, dopasowanie tonu do marki, usunięcie wzorców AI. Efekt końcowy to tekst, pod którym redaktor podpisuje się z imienia i nazwiska.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINAL CTA
+       ============================================================ -->
+  <section class="svc-section svc-section--cta">
+    <div class="container">
+      <div class="final-cta">
+        <h2>Gotowy na opisy, które wyróżnią Twój sklep?</h2>
+        <p>Wyślij nam link do sklepu i liczbę produktów — wrócimy z propozycją pakietu, szablonu i harmonogramu w ciągu 24 godzin.</p>
+        <div class="final-cta__actions">
+          <a href="/kontakt" class="btn btn--primary btn--lg">Zamów opisy produktów</a>
+          <a href="/oferta/opisy-kategorii" class="btn btn--outline btn--lg">Potrzebujesz też opisów kategorii? →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+</BaseLayout>

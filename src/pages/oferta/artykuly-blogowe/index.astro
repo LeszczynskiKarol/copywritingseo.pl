@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+import { SITE } from '../../../utils';
+
+const pageTitle = "Artykuły blogowe SEO — eksperckie treści, które generują ruch organiczny";
+const pageDescription = "Piszemy artykuły blogowe zoptymalizowane pod SEO: poradniki, rankingi, analizy, case study. Strategia klastrów tematycznych, badanie fraz, redakcja AI+człowiek, dane strukturalne. Od 349 zł brutto za artykuł 1 500–2 500 słów.";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Artykuły blogowe SEO",
+  "description": pageDescription,
+  "provider": { "@type": "Organization", "name": SITE.title, "url": SITE.url },
+  "areaServed": { "@type": "Country", "name": "Polska" },
+  "serviceType": "SEO copywriting — artykuły blogowe",
+  "offers": [
+    { "@type": "Offer", "name": "Artykuł standardowy", "price": "349", "priceCurrency": "PLN", "priceSpecification": { "@type": "PriceSpecification", "price": "349", "priceCurrency": "PLN", "valueAddedTaxIncluded": true } },
+    { "@type": "Offer", "name": "Artykuł ekspercki rozszerzony", "price": "599", "priceCurrency": "PLN", "priceSpecification": { "@type": "PriceSpecification", "price": "599", "priceCurrency": "PLN", "valueAddedTaxIncluded": true } },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Ile artykułów miesięcznie potrzebuję, żeby zobaczyć efekty SEO?", "acceptedAnswer": { "@type": "Answer", "text": "Minimum 4 artykuły miesięcznie w jednym klastrze tematycznym, żeby Google zaczął budować autorytet tematyczny. Optymalne tempo to 8–12 artykułów miesięcznie — pozwala wypełnić klaster w 2–3 miesiące. Pojedynczy artykuł, nawet doskonały, ma mniejsze szanse na ranking niż artykuł będący częścią kompletnego klastra. Efekty w ruchu organicznym: 3–6 miesięcy od startu publikacji." } },
+    { "@type": "Question", "name": "Czy artykuły będą pisane przez AI?", "acceptedAnswer": { "@type": "Answer", "text": "Szkice generujemy z AI, ale każdy artykuł przechodzi pełną ludzką redakcję: weryfikacja faktów i źródeł, dodanie danych z pierwszej ręki i ekspertyzy branżowej, usunięcie wzorców AI (frazesy, strona bierna, generyczność), dopasowanie tonu do marki, humanizacja stylu. Efekt końcowy to artykuł, pod którym autor podpisuje się z imienia i nazwiska — bo jest wart podpisu." } },
+    { "@type": "Question", "name": "Jakie formaty artykułów piszecie?", "acceptedAnswer": { "@type": "Answer", "text": "Poradniki krok po kroku (jak zrobić X), listy i rankingi (10 najlepszych Y), analizy i porównania (X vs Y), case study (jak firma Z osiągnęła wynik W), artykuły definicyjne (co to jest X i dlaczego ma znaczenie), FAQ rozszerzone (kompletna odpowiedź na pytanie). Format dobieramy do intencji wyszukiwania — poradnik dla frazy 'jak...', ranking dla 'najlepsze...', definicja dla 'co to jest...'." } },
+    { "@type": "Question", "name": "Czy mogę zamówić strategię treści bez samych artykułów?", "acceptedAnswer": { "@type": "Answer", "text": "Tak — oferujemy samodzielną strategię treści (mapa tematyczna, klastry, kalendarz redakcyjny, briefs per artykuł) jako osobną usługę. Cena: od 999 zł za strategię na 3 miesiące z 20–30 briefami artykułów. Możesz potem pisać artykuły sam, zlecić nam lub innemu copywriterowi." } },
+    { "@type": "Question", "name": "Jak mierzycie skuteczność artykułów?", "acceptedAnswer": { "@type": "Answer", "text": "Po 30 dniach od publikacji sprawdzamy w Google Search Console: czy artykuł jest zaindeksowany, na jakie frazy się wyświetla, jaką ma średnią pozycję i klikalność. Po 90 dniach: pełna analiza wyników — pozycje, ruch, konwersje (jeśli masz śledzenie). Raport z rekomendacjami: co zaktualizować, jakie frazy dodać, gdzie wzmocnić linkowanie." } },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": SITE.url },
+    { "@type": "ListItem", "position": 2, "name": "Oferta", "item": `${SITE.url}/oferta` },
+    { "@type": "ListItem", "position": 3, "name": "Artykuły blogowe SEO", "item": `${SITE.url}/oferta/artykuly-blogowe` },
+  ],
+};
+
+const combinedSchema = [serviceSchema, faqSchema, breadcrumbSchema];
+
+const articleTypes = [
+  { icon: "📋", name: "Poradnik krok po kroku", intent: "„jak zrobić X”", desc: "Instrukcja z numerowanymi krokami, checklistami i konkretnymi narzędziami. Targetuje frazy informacyjne z najwyższym wolumenem.", example: "„Jak przeprowadzić audyt treści — 7 kroków z checklistą”" },
+  { icon: "🏆", name: "Ranking / lista", intent: "„„najlepsze X”, „top 10 Y”", desc: "Porównanie narzędzi, metod lub rozwiązań z oceną i rekomendacją. Wysoka klikalność w wynikach — ludzie lubią listy.", example: "„7 najlepszych narzędzi do badania fraz kluczowych w 2026”" },
+  { icon: "⚖️", name: "Porównanie / analiza", intent: "„X vs Y”, „X czy Y”", desc: "Obiektywne porównanie dwóch rozwiązań z tabelą, zaletami/wadami i verdiktem. Targetuje frazy decyzyjne.", example: "„Ahrefs vs Semrush — które narzędzie SEO wybrać w 2026”" },
+  { icon: "📊", name: "Case study", intent: "„jak firma X osiągnęła Y”", desc: "Opis konkretnej realizacji: problem→działania→wyniki z liczbami. Najsilniejszy dowód ekspertyzy (E-E-A-T).", example: "„Jak zwiększyliśmy ruch organiczny o 340% w 6 miesięcy — case study”" },
+  { icon: "📖", name: "Kompletny przewodnik (pillar)", intent: "„kompletny przewodnik po X”", desc: "Artykuł 3 000–5 000 słów pokrywający temat kompleksowo. Strona filarowa klastra — linkuje do wszystkich artykułów klastrowych.", example: "„Kompletny przewodnik SEO copywritingu — od podstaw po zaawansowane techniki”" },
+  { icon: "❓", name: "FAQ / definicyjny", intent: "„co to jest X”, „czym jest Y”", desc: "Artykuł odpowiadający na konkretne pytanie z definicją, kontekstem i praktycznymi wskazówkami. Targetuje featured snippets i AI Overviews.”", example: "„E-E-A-T — co to jest i jak wpływa na pozycje w Google”" },
+];
+
+const whatYouGet = [
+  { title: "📝 Treść artykułu", items: ["1 500–2 500 słów unikalnego tekstu (standard) lub 2 500–5 000 (rozszerzony)", "Pogrubiony akapit otwierający z odpowiedzią na pytanie (GEO-ready)", "Hierarchia H1→H2→H3 z frazami kluczowymi", "Tabele, listy, porównania — tam gdzie dodają wartość", "Sekcja FAQ 4–5 pytań z „Ludzie też pytają”", "Biogram autora z kwalifikacjami (E-E-A-T)"] },
+  { title: "🔍 Optymalizacja SEO", items: ["Badanie frazy głównej + 5–10 fraz wspierających", "Analiza top 5 w Google (struktura, długość, luki)", "Meta title (40–60 zn.) + meta description (135–155 zn.)", "Schema Article + Person + BreadcrumbList + FAQPage", "Alt texty do obrazów", "Sugestie linków wewnętrznych (5–10 per artykuł)"] },
+  { title: "📊 Strategia", items: ["Przypisanie do klastra tematycznego", "Linkowanie do strony filarowej", "Rekomendacja kolejnych artykułów w klastrze", "Raport z frazami kluczowymi i wolumenami", "Po 30 dniach: raport indeksowania w GSC"] },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonLd={combinedSchema}>
+
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Ścieżka nawigacyjna">
+      <ol>
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/oferta">Oferta</a></li>
+        <li aria-current="page">Artykuły blogowe SEO</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="svc-hero">
+    <div class="container">
+      <div class="svc-hero__badge">Content marketing + SEO + GEO</div>
+      <h1>Artykuły blogowe, które<br /><span class="svc-hero__accent">generują ruch i budują autorytet</span></h1>
+      <p class="svc-hero__desc">
+        Blog to najskuteczniejszy kanał pozyskiwania ruchu organicznego — pod warunkiem, że artykuły są pisane pod konkretne frazy,
+        w ramach strategii klastrów tematycznych, z treścią wartą cytowania przez Google i systemy AI.
+        Piszemy artykuły, które spełniają te warunki — od briefu po publikację.
+      </p>
+      <div class="svc-hero__cta">
+        <a href="#cennik" class="btn btn--primary btn--lg">Cennik — od 349 zł / artykuł</a>
+        <a href="#formaty" class="btn btn--outline btn--lg">Jakie formaty piszemy?</a>
+      </div>
+      <div class="svc-hero__proof">
+        <div class="proof-item"><span class="proof-num">500+</span><span class="proof-label">artykułów napisanych</span></div>
+        <div class="proof-item"><span class="proof-num">od 349 zł</span><span class="proof-label">brutto za artykuł</span></div>
+        <div class="proof-item"><span class="proof-num">6</span><span class="proof-label">formatów artykułów</span></div>
+        <div class="proof-item"><span class="proof-num">AI+człowiek</span><span class="proof-label">system produkcji</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY BLOG -->
+  <section class="svc-section svc-section--muted" id="dlaczego">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Dlaczego blog jest najważniejszym kanałem SEO</h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <h3>📈 Ruch na frazy informacyjne</h3>
+          <p>70–80% wyszukiwań w Google ma intencję informacyjną: „jak…", „co to jest…", „najlepsze…". Stron usługowych masz 5–10 — artykułów blogowych możesz mieć 100. Każdy to osobna strona docelowa na inną frazę.</p>
+        </div>
+        <div class="why-card">
+          <h3>🏗️ Autorytet tematyczny</h3>
+          <p>Google ocenia, czy Twoja strona jest autorytetem w temacie. 5 artykułów o silnikach elektrycznych = „ta strona pisze o silnikach". 30 artykułów = „ta strona jest ekspertem od silników". Autorytet tematyczny wpływa na pozycje wszystkich stron w witrynie.</p>
+        </div>
+        <div class="why-card">
+          <h3>🔗 Węzły linkowania</h3>
+          <p>Artykuły blogowe generują linki naturalne — inne strony linkują do wartościowych poradników. Każdy link zewnętrzny podnosi autorytet domeny, co podnosi pozycje stron usługowych i produktowych. Blog karmi cały ekosystem SEO.</p>
+        </div>
+        <div class="why-card">
+          <h3>🤖 Widoczność w AI</h3>
+          <p>ChatGPT, Perplexity, Google AI Overviews cytują treści z artykułów blogowych. Artykuł z pogrubionym akapitem otwierającym, danymi ze źródeł i samodzielną sekcją H2 ma szansę na cytowanie. Strona usługowa — rzadko.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE FORMATS -->
+  <section class="svc-section" id="formaty">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>6 formatów artykułów — dobieramy do intencji wyszukiwania</h2>
+        <p>Format artykułu nie jest przypadkowy — wynika z intencji frazy kluczowej i tego, co rankuje w top 5 Google.</p>
+      </div>
+
+      <div class="formats-grid">
+        {articleTypes.map(at => (
+          <div class="format-card">
+            <span class="format-card__icon">{at.icon}</span>
+            <h3 class="format-card__name">{at.name}</h3>
+            <div class="format-card__intent">{at.intent}</div>
+            <p class="format-card__desc">{at.desc}</p>
+            <p class="format-card__example">{at.example}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CLUSTER STRATEGY -->
+  <section class="svc-section svc-section--muted" id="strategia">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Klastry tematyczne — nie pojedyncze artykuły, lecz system</h2>
+        <p>Pojedynczy artykuł to jak pojedynczy żołnierz. Klaster tematyczny to armia — strona filarowa + 8–12 artykułów klastrowych, które wzajemnie się wzmacniają.</p>
+      </div>
+
+      <div class="cluster-visual">
+        <div class="cluster-pillar">
+          <div class="cluster-pillar__label">Strona filarowa</div>
+          <div class="cluster-pillar__title">„Kompletny przewodnik SEO copywritingu"</div>
+          <div class="cluster-pillar__meta">3 000–5 000 słów · fraza ogólna · linkuje do wszystkich artykułów klastrowych</div>
+        </div>
+        <div class="cluster-arrows">
+          <span>↕</span><span>↕</span><span>↕</span><span>↕</span>
+        </div>
+        <div class="cluster-articles">
+          <div class="cluster-article">Intencja wyszukiwania</div>
+          <div class="cluster-article">Anatomia tekstu SEO</div>
+          <div class="cluster-article">SEO copywriting e-commerce</div>
+          <div class="cluster-article">Storytelling w SEO</div>
+          <div class="cluster-article">Błędy SEO copywritingu</div>
+          <div class="cluster-article">Checklist SEO copywritera</div>
+          <div class="cluster-article">E-E-A-T w praktyce</div>
+          <div class="cluster-article">Brief contentowy</div>
+        </div>
+        <p class="cluster-note">Każdy artykuł klastrowy linkuje do strony filarowej i 2–3 sąsiednich artykułów. Strona filarowa linkuje do wszystkich. Google widzi kompletną strukturę tematyczną — i nagradza ją wyższymi pozycjami na frazę ogólną.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="svc-section" id="co-dostajesz">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Co dostajesz z każdym artykułem</h2>
+      </div>
+
+      <div class="included-grid">
+        {whatYouGet.map(group => (
+          <div class="included-group">
+            <h3>{group.title}</h3>
+            <ul>
+              {group.items.map(item => <li>{item}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="svc-section svc-section--muted" id="proces">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Proces — od frazy do opublikowanego artykułu</h2>
+      </div>
+
+      <div class="process-timeline">
+        <div class="process-step"><div class="process-step__marker"><span class="process-step__num">01</span><div class="process-step__line"></div></div>
+          <div class="process-step__content"><div class="process-step__duration">Dzień 1</div><h3 class="process-step__title">Fraza i analiza SERP</h3><p class="process-step__desc">Badamy frazę kluczową (wolumen, trudność, intencja). Analizujemy top 5 w Google: nagłówki, długość, format, luki. Ustalamy strukturę artykułu i format.</p></div>
+        </div>
+        <div class="process-step"><div class="process-step__marker"><span class="process-step__num">02</span><div class="process-step__line"></div></div>
+          <div class="process-step__content"><div class="process-step__duration">Dzień 2–3</div><h3 class="process-step__title">Pisanie z AI + redakcja</h3><p class="process-step__desc">Generujemy szkic sekcja po sekcji z AI na bazie struktury i danych. Każda sekcja przechodzi ludzką redakcję: weryfikacja faktów, dodanie ekspertyzy, humanizacja stylu, osadzenie fraz.</p></div>
+        </div>
+        <div class="process-step"><div class="process-step__marker"><span class="process-step__num">03</span><div class="process-step__line"></div></div>
+          <div class="process-step__content"><div class="process-step__duration">Dzień 3–4</div><h3 class="process-step__title">Optymalizacja SEO</h3><p class="process-step__desc">Meta title + description, schema Article + FAQPage, alt texty, linki wewnętrzne, sprawdzenie hierarchii nagłówków, test czytelności. Artykuł gotowy do publikacji.</p></div>
+        </div>
+        <div class="process-step"><div class="process-step__marker"><span class="process-step__num">04</span></div>
+          <div class="process-step__content"><div class="process-step__duration">Dzień 4–5</div><h3 class="process-step__title">Dostawa + post-publikacja</h3><p class="process-step__desc">Artykuł w Markdown / HTML / Docs. Po publikacji: zgłoszenie URL w GSC, dodanie linków z istniejących artykułów, raport indeksowania po 30 dniach.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="svc-section svc-section--dark" id="cennik">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <h2>Cennik artykułów blogowych</h2>
+        <p>Cena za artykuł — zawiera badanie frazy, pisanie, redakcję, optymalizację SEO i dane strukturalne.</p>
+      </div>
+
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">Artykuł standardowy</h3>
+          <div class="pricing-card__price"><span class="pricing-card__amount">349 zł</span><span class="pricing-card__period">brutto / artykuł</span></div>
+          <p class="pricing-card__desc">Artykuł 1 500–2 500 słów z pełną optymalizacją SEO. Poradnik, ranking, FAQ lub definicyjny.</p>
+          <ul class="pricing-card__features">
+            <li>1 500–2 500 słów unikalnego tekstu</li>
+            <li>Badanie frazy + analiza SERP top 5</li>
+            <li>Meta title + description</li>
+            <li>FAQ 4–5 pytań</li>
+            <li>Schema Article + FAQPage</li>
+            <li>Sugestie linków wewnętrznych</li>
+            <li>Biogram autora</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zamów artykuł standardowy</a>
+          <p class="pricing-card__note">Czas realizacji: 3–5 dni roboczych</p>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-card__badge">Najlepsza wartość</div>
+          <h3 class="pricing-card__name">Artykuł rozszerzony</h3>
+          <div class="pricing-card__price"><span class="pricing-card__amount">599 zł</span><span class="pricing-card__period">brutto / artykuł</span></div>
+          <p class="pricing-card__desc">Artykuł 2 500–5 000 słów: kompletny przewodnik, case study lub pogłębiona analiza z danymi i tabelami.</p>
+          <ul class="pricing-card__features">
+            <li>2 500–5 000 słów</li>
+            <li>Pogłębione badanie frazy + 10+ fraz wspierających</li>
+            <li>Tabele porównawcze, wizualizacje danych</li>
+            <li>Case study lub oryginalne dane</li>
+            <li>Schema Article + FAQPage + BreadcrumbList</li>
+            <li>Spis treści (Table of Contents)</li>
+            <li>Raport indeksowania po 30 dniach</li>
+            <li>1 runda korekt</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--primary btn--lg" style="width:100%;">Zamów artykuł rozszerzony</a>
+          <p class="pricing-card__note">Czas realizacji: 5–7 dni roboczych</p>
+        </div>
+
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">Pakiet miesięczny</h3>
+          <div class="pricing-card__price"><span class="pricing-card__amount">od 2 499 zł</span><span class="pricing-card__period">brutto / mies.</span></div>
+          <p class="pricing-card__desc">8 artykułów standardowych miesięcznie ze strategią klastra, kalendarzem redakcyjnym i raportowaniem.</p>
+          <ul class="pricing-card__features">
+            <li>8 artykułów standardowych (12 000–20 000 słów)</li>
+            <li>Strategia klastra tematycznego</li>
+            <li>Kalendarz redakcyjny na miesiąc</li>
+            <li>Briefy per artykuł</li>
+            <li>Linkowanie wewnętrzne między artykułami</li>
+            <li>Raport GSC po 30 dniach</li>
+            <li>Rekomendacje kolejnego miesiąca</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zapytaj o pakiet miesięczny</a>
+          <p class="pricing-card__note">Oszczędność 293 zł vs zamówienie pojedyncze</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CROSS-SELL -->
+  <section class="svc-section" id="polacz">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Połącz z innymi usługami — pełna strategia content</h2>
+      </div>
+      <div class="crosssell-grid">
+        <div class="crosssell-card"><h3>🌐 Strony zapleczowe</h3><p>Dodatkowe domeny z artykułami, które budują autorytet i profil linkowy Twojej głównej strony.</p><a href="/oferta/tworzenie-stron-zapleczowych" class="btn btn--outline btn--sm">Strony zapleczowe →</a></div>
+        <div class="crosssell-card"><h3>📦 Opisy produktów</h3><p>Artykuły blogowe generują ruch — opisy produktów konwertują go na sprzedaż. Razem tworzą lejek.</p><a href="/oferta/opisy-produktow" class="btn btn--outline btn--sm">Opisy produktów →</a></div>
+        <div class="crosssell-card"><h3>🎯 Landing pages</h3><p>Artykuł buduje świadomość — landing page konwertuje. Kampaniowy tandem: blog post + LP pod każdą usługę.</p><a href="/oferta/landing-pages" class="btn btn--outline btn--sm">Landing pages →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="svc-section svc-section--muted" id="faq">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center"><h2>Najczęściej zadawane pytania</h2></div>
+      <div class="faq-list">
+        {faqSchema.mainEntity.map(q => (
+          <details class="faq-item"><summary class="faq-item__question">{q.name}</summary><div class="faq-item__answer"><p>{q.acceptedAnswer.text}</p></div></details>
+        ))}
+        <details class="faq-item"><summary class="faq-item__question">Czy mogę dostarczyć własne dane / ekspertyzę do artykułu?</summary><div class="faq-item__answer"><p>Tak — i zachęcamy do tego. Artykuły z danymi z pierwszej ręki (wyniki eksperymentów, statystyki z Twoich projektów, opinie ekspertów z Twojej firmy) rankują lepiej, bo dostarczają unikalną wartość, której AI nie wygeneruje. Możesz przesłać notatki, screeny, dane — my ulepimy z tego profesjonalny artykuł.</p></div></details>
+        <details class="faq-item"><summary class="faq-item__question">W jakim formacie dostarczacie artykuły?</summary><div class="faq-item__answer"><p>Markdown (gotowy do Astro, Hugo, Next.js), HTML (gotowy do WordPress, dowolnego CMS), Google Docs (z formatowaniem, komentarzami, sugestiami). Dla stałych klientów: bezpośrednia publikacja w CMS z pełną optymalizacją (za dodatkową opłatą).</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="svc-section svc-section--cta">
+    <div class="container">
+      <div class="final-cta">
+        <h2>Gotowy na artykuły, które budują ruch?</h2>
+        <p>Opisz swoją branżę i cel — wrócimy z propozycją klastra tematycznego, listą 10 artykułów i harmonogramem w ciągu 24 godzin.</p>
+        <div class="final-cta__actions">
+          <a href="/kontakt" class="btn btn--primary btn--lg">Zamów artykuły blogowe</a>
+          <a href="mailto:kontakt@copywritingseo.pl" class="btn btn--outline btn--lg">kontakt@copywritingseo.pl</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</BaseLayout>
+

@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
-import Newsletter from '../components/Newsletter.astro';
 import { getCollection } from 'astro:content';
 import { CATEGORIES, SITE } from '../utils';
 
@@ -40,8 +39,7 @@ const homeSchema = {
         Praktyczne poradniki SEO copywritingu, strategii content, sztucznej inteligencji w tworzeniu treści i Generative Engine Optimization — dla twórców, marketerów i firm.
       </p>
       <div class="hero-actions">
-        <a href="/blog" class="btn btn--primary">Przeglądaj poradniki</a>
-        <a href="/szablony" class="btn btn--outline">Darmowe szablony</a>
+        <a href="/blog" class="btn btn--primary">Przeglądaj poradniki</a>        
       </div>
     </div>
   </section>
@@ -112,9 +110,5 @@ const homeSchema = {
     </section>
   )}
 
-  <!-- Newsletter -->
-  <div class="container">
-    <Newsletter />
-  </div>
 
 </BaseLayout>

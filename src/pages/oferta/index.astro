@@ -1,0 +1,368 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../utils';
+
+const pageTitle = "Oferta — SEO copywriting, strony zapleczowe, treści eksperckie | CopywritingSEO.pl";
+const pageDescription = "Kompleksowa oferta SEO copywritingu: artykuły blogowe, opisy produktów i kategorii, teksty firmowe, landing pages, artykuły eksperckie, tworzenie stron zapleczowych. Od 29 zł brutto. Treść + technologia + strategia.";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": SITE.url },
+    { "@type": "ListItem", "position": 2, "name": "Oferta", "item": `${SITE.url}/oferta` },
+  ],
+};
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": SITE.title,
+  "url": SITE.url,
+  "description": SITE.description,
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Usługi SEO copywritingu",
+    "itemListElement": [
+      { "@type": "OfferCatalog", "name": "Artykuły blogowe SEO", "url": `${SITE.url}/oferta/artykuly-blogowe` },
+      { "@type": "OfferCatalog", "name": "Opisy produktów SEO", "url": `${SITE.url}/oferta/opisy-produktow` },
+      { "@type": "OfferCatalog", "name": "Opisy kategorii SEO", "url": `${SITE.url}/oferta/opisy-kategorii` },
+      { "@type": "OfferCatalog", "name": "Teksty na strony firmowe", "url": `${SITE.url}/oferta/teksty-strony-firmowe` },
+      { "@type": "OfferCatalog", "name": "Landing pages", "url": `${SITE.url}/oferta/landing-pages` },
+      { "@type": "OfferCatalog", "name": "Artykuły eksperckie", "url": `${SITE.url}/oferta/artykuly-eksperckie` },
+      { "@type": "OfferCatalog", "name": "Tworzenie stron zapleczowych", "url": `${SITE.url}/oferta/tworzenie-stron-zapleczowych` },
+    ],
+  },
+};
+
+const combinedSchema = [breadcrumbSchema, orgSchema];
+
+const services = [
+  {
+    icon: "📝",
+    name: "Artykuły blogowe SEO",
+    slug: "/oferta/artykuly-blogowe",
+    price: "od 349 zł",
+    tagline: "Ruch organiczny z fraz informacyjnych",
+    desc: "Poradniki, rankingi, analizy i case study zoptymalizowane pod frazy kluczowe. Strategia klastrów tematycznych, badanie fraz, redakcja AI+człowiek, dane strukturalne. 1 500–5 000 słów per artykuł.",
+    highlights: ["6 formatów artykułów", "Schema Article + FAQPage", "Pakiet 8 art./mies. od 2 499 zł"],
+    color: "#1d4ed8",
+  },
+  {
+    icon: "📦",
+    name: "Opisy produktów",
+    slug: "/oferta/opisy-produktow",
+    price: "od 29 zł",
+    tagline: "Unikalne opisy, które rankują i sprzedają",
+    desc: "Formuła cecha→korzyść→scenariusz zamiast suchych parametrów producenta. Schema Product, meta tagi, alt texty. System skalowania AI+redakcja: 50–100 opisów tygodniowo.",
+    highlights: ["6 warstw opisu", "CSV do importu w CMS", "Pakiet 100 opisów od 2 499 zł"],
+    color: "#059669",
+  },
+  {
+    icon: "🗂️",
+    name: "Opisy kategorii",
+    slug: "/oferta/opisy-kategorii",
+    price: "od 149 zł",
+    tagline: "Frazy ogólne o najwyższym wolumenie",
+    desc: "Tekst nad produktami (wprowadzenie) + pod produktami (FAQ). Targetowanie fraz ogólnych, wzmocnienie stron produktowych, niższy współczynnik odrzuceń. Schema FAQPage.",
+    highlights: ["2 bloki: nad + pod produktami", "FAQ z „Ludzie też pytają”", "Pakiet 15 kategorii od 1 999 zł"],
+    color: "#7c3aed",
+  },
+  {
+    icon: "💼",
+    name: "Teksty na strony firmowe",
+    slug: "/oferta/teksty-strony-firmowe",
+    price: "od 499 zł",
+    tagline: "Zaufanie i pozycje dla firm usługowych",
+    desc: "Strona główna, O nas, Oferta, Usługi, Kontakt — z formułą problem→rozwiązanie→dowód. E-E-A-T wbudowane w każdy tekst. Schema Organization, Service, LocalBusiness.",
+    highlights: ["Mapa 6 typów podstron", "Brief i rozmowa w cenie", "Pakiet 5 podstron za 1 999 zł"],
+    color: "#d97706",
+  },
+  {
+    icon: "🎯",
+    name: "Landing pages",
+    slug: "/oferta/landing-pages",
+    price: "od 999 zł",
+    tagline: "Konwersja + SEO w jednej stronie",
+    desc: "Strona lądowania z formułą AIDA: Hero→Problem→Rozwiązanie→Dowody→Oferta→FAQ→CTA. Sam copywriting lub kompletna strona (design + Astro + hosting AWS).",
+    highlights: ["7 sekcji konwersyjnych", "Lighthouse 95+ (Astro SSG)", "LP kompletny za 2 499 zł"],
+    color: "#dc2626",
+  },
+  {
+    icon: "🧠",
+    name: "Artykuły eksperckie",
+    slug: "/oferta/artykuly-eksperckie",
+    price: "od 799 zł",
+    tagline: "Pozycja lidera opinii w branży",
+    desc: "Thought leadership, analizy branżowe, white papers, case study pogłębione, artykuły do mediów. Rozmowa z ekspertem, 10+ źródeł, ghostwriting pod Twoje nazwisko.",
+    highlights: ["6 formatów eksperckich", "White paper od 1 999 zł", "White labeling dla agencji"],
+    color: "#6366f1",
+  },
+  {
+    icon: "🌐",
+    name: "Tworzenie stron zapleczowych",
+    slug: "/oferta/tworzenie-stron-zapleczowych",
+    price: "od 1 499 zł",
+    tagline: "Strona od A do Z — treść, technologia, hosting",
+    desc: "Kompletna strona zapleczowa: strategia, 5 artykułów eksperckich, indywidualny design, Astro SSG, hosting AWS (<1 USD/mies.), CMS do dodawania treści. Lighthouse 95–100, zero footprintu.",
+    highlights: ["5 artykułów w cenie", "Hosting <1 USD/mies.", "Pakiet 5 stron za 5 999 zł"],
+    color: "#0891b2",
+  },
+];
+
+const whyUs = [
+  { icon: "🔬", title: "SEO wbudowane, nie doklejone", desc: "Frazy kluczowe, dane strukturalne i linkowanie wewnętrzne są częścią procesu od pierwszego zdania — nie są dodawane po napisaniu tekstu." },
+  { icon: "🤖", title: "AI + człowiek — nie AI zamiast człowieka", desc: "AI generuje szkice, człowiek dodaje ekspertyzę, dane z pierwszej ręki i weryfikację. Efekt: prędkość automatyzacji przy jakości ręcznego pisania." },
+  { icon: "⚡", title: "Technologia Astro SSG + AWS", desc: "Strony, które tworzymy, mają Lighthouse 95–100 i koszty hostingu poniżej 1 USD/mies. Nie WordPress na tanim hostingu — czysty HTML na globalnym CDN." },
+  { icon: "📊", title: "Dane, nie obietnice", desc: "Każda statystyka w naszych treściach ma źródło. Każdy wynik ma pomiar. Raport GSC po 30 dniach od publikacji. Mierzymy — nie zgadujemy." },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonLd={combinedSchema}>
+
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Ścieżka nawigacyjna">
+      <ol>
+        <li><a href="/">Strona główna</a></li>
+        <li aria-current="page">Oferta</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="oferta-hero">
+    <div class="container">
+      <h1>
+        Treści, które <span class="oferta-hero__accent">rankują</span>.<br />
+        Strony, które <span class="oferta-hero__accent">konwertują</span>.
+      </h1>
+      <p class="oferta-hero__desc">
+        SEO copywriting, strony zapleczowe i treści eksperckie.
+        Jedno miejsce, jeden człowiek, jeden cel: widoczność w Google, która przekłada się na klientów.
+      </p>
+      <div class="oferta-hero__scroll-hint">
+        <span>↓</span> 7 usług — wybierz, co potrzebujesz
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SERVICES GRID
+       ============================================================ -->
+  <section class="oferta-section" id="uslugi">
+    <div class="container container--wide">
+
+      <div class="services-mosaic">
+        {services.map((svc, i) => (
+          <a href={svc.slug} class={`svc-tile ${i === services.length - 1 ? 'svc-tile--featured' : ''}`} style={`--svc-color: ${svc.color}`}>
+            <div class="svc-tile__top">
+              <span class="svc-tile__icon">{svc.icon}</span>
+              <span class="svc-tile__price">{svc.price}</span>
+            </div>
+            <h2 class="svc-tile__name">{svc.name}</h2>
+            <p class="svc-tile__tagline">{svc.tagline}</p>
+            <p class="svc-tile__desc">{svc.desc}</p>
+            <ul class="svc-tile__highlights">
+              {svc.highlights.map(h => <li>{h}</li>)}
+            </ul>
+            <span class="svc-tile__cta">Sprawdź szczegóły →</span>
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       QUICK PRICE TABLE
+       
+  <section class="oferta-section oferta-section--muted" id="cennik">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Cennik — szybki przegląd</h2>
+        <p>Wszystkie ceny brutto. Bez ukrytych opłat, abonamentów ani subskrypcji.</p>
+      </div>
+
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Usługa</th>
+              <th>Co dostajesz</th>
+              <th>Cena jednostkowa</th>
+              <th>Pakiet</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/oferta/artykuly-blogowe">📝 Artykuły blogowe</a></td>
+              <td>1 500–2 500 słów + SEO + schema + FAQ</td>
+              <td><strong>349 zł</strong></td>
+              <td>8 art./mies. — 2 499 zł</td>
+            </tr>
+            <tr>
+              <td><a href="/oferta/opisy-produktow">📦 Opisy produktów</a></td>
+              <td>150–500 słów + korzyści + meta + schema Product</td>
+              <td><strong>29–59 zł</strong></td>
+              <td>100 opisów — od 2 499 zł</td>
+            </tr>
+            <tr>
+              <td><a href="/oferta/opisy-kategorii">🗂️ Opisy kategorii</a></td>
+              <td>300–700 słów (intro + FAQ) + meta + schema</td>
+              <td><strong>149–249 zł</strong></td>
+              <td>15 kategorii — od 1 999 zł</td>
+            </tr>
+            <tr>
+              <td><a href="/oferta/teksty-strony-firmowe">💼 Teksty firmowe</a></td>
+              <td>400–1 000 słów/podstrona + schema + E-E-A-T</td>
+              <td><strong>499 zł</strong></td>
+              <td>5 podstron — 1 999 zł</td>
+            </tr>
+            <tr>
+              <td><a href="/oferta/landing-pages">🎯 Landing pages</a></td>
+              <td>Copy AIDA 800–1 500 słów (lub + design + Astro)</td>
+              <td><strong>999–2 499 zł</strong></td>
+              <td>Indywidualnie</td>
+            </tr>
+            <tr>
+              <td><a href="/oferta/artykuly-eksperckie">🧠 Artykuły eksperckie</a></td>
+              <td>2 500–8 000 słów + 10+ źródeł + ekspert</td>
+              <td><strong>799–1 999 zł</strong></td>
+              <td>Seria 5 art. — od 3 499 zł</td>
+            </tr>
+            <tr>
+              <td><a href="/oferta/tworzenie-stron-zapleczowych">🌐 Strony zapleczowe</a></td>
+              <td>Strona od A do Z: treści + Astro + AWS + CMS</td>
+              <td><strong>1 499 zł</strong></td>
+              <td>5 stron — 5 999 zł</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  ============================================================ -->
+
+
+  <!-- ============================================================
+       NOT SURE WHAT YOU NEED?
+       ============================================================ -->
+  <section class="oferta-section" id="nie-wiesz">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Nie wiesz, czego potrzebujesz? Oto krótki przewodnik</h2>
+      </div>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <h3>🛒 Mam sklep internetowy</h3>
+          <p>Zacznij od <strong>opisów kategorii</strong> (frazy ogólne o najwyższym wolumenie) → <strong>opisów produktów</strong> (frazy szczegółowe) → <strong>artykułów blogowych</strong> (poradniki zakupowe). W tej kolejności — od najszybszych efektów.</p>
+          <div class="guide-card__links">
+            <a href="/oferta/opisy-kategorii">Opisy kategorii →</a>
+            <a href="/oferta/opisy-produktow">Opisy produktów →</a>
+            <a href="/oferta/artykuly-blogowe">Blog →</a>
+          </div>
+        </div>
+        <div class="guide-card">
+          <h3>🏢 Mam firmę usługową</h3>
+          <p>Zacznij od <strong>tekstów firmowych</strong> (pakiet 5 podstron: główna + o nas + usługi + kontakt) → <strong>artykułów blogowych</strong> (ruch na frazy informacyjne) → <strong>landing pages</strong> (konwersja pod kampanie).</p>
+          <div class="guide-card__links">
+            <a href="/oferta/teksty-strony-firmowe">Teksty firmowe →</a>
+            <a href="/oferta/artykuly-blogowe">Blog →</a>
+            <a href="/oferta/landing-pages">Landing pages →</a>
+          </div>
+        </div>
+        <div class="guide-card">
+          <h3>📈 Chcę budować autorytet w branży</h3>
+          <p>Zacznij od <strong>artykułów eksperckich</strong> (thought leadership, analizy z danymi) → <strong>stron zapleczowych</strong> (dodatkowe domeny budujące profil linkowy) → <strong>serii eksperckiej</strong> (5 artykułów = kompletny kurs).</p>
+          <div class="guide-card__links">
+            <a href="/oferta/artykuly-eksperckie">Artykuły eksperckie →</a>
+            <a href="/oferta/tworzenie-stron-zapleczowych">Strony zapleczowe →</a>
+          </div>
+        </div>
+        <div class="guide-card">
+          <h3>🚀 Chcę szybko wygenerować ruch</h3>
+          <p>Zacznij od <strong>8 artykułów blogowych miesięcznie</strong> w jednym klastrze tematycznym → po 3 miesiącach dodaj <strong>stronę filarową</strong> → wzmocnij <strong>stroną zapleczową</strong> z linkami. Efekty: 3–6 miesięcy.</p>
+          <div class="guide-card__links">
+            <a href="/oferta/artykuly-blogowe">Artykuły blogowe →</a>
+            <a href="/oferta/tworzenie-stron-zapleczowych">Strony zapleczowe →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY US
+       ============================================================ -->
+  <section class="oferta-section oferta-section--muted" id="dlaczego-my">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Dlaczego my — 4 rzeczy, które nas wyróżniają</h2>
+      </div>
+
+      <div class="why-grid">
+        {whyUs.map(w => (
+          <div class="why-card">
+            <span class="why-card__icon">{w.icon}</span>
+            <h3>{w.title}</h3>
+            <p>{w.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HOW TO START
+       ============================================================ -->
+  <section class="oferta-section" id="jak-zaczac">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Jak zacząć współpracę — 3 kroki</h2>
+      </div>
+
+      <div class="start-steps">
+        <div class="start-step">
+          <div class="start-step__num">1</div>
+          <h3>Opisz, czego potrzebujesz</h3>
+          <p>Napisz do nas: jaka usługa Cię interesuje, jaka branża, ile treści. Nie musisz wiedzieć dokładnie — pomożemy doprecyzować. Formularz kontaktowy, e-mail lub telefon.</p>
+        </div>
+        <div class="start-step__arrow">→</div>
+        <div class="start-step">
+          <div class="start-step__num">2</div>
+          <h3>Dostajesz propozycję</h3>
+          <p>W ciągu 24 godzin wracamy z: rekomendacją usługi, wyceną, harmonogramem i (jeśli dotyczy) propozycją fraz kluczowych. Bez zobowiązań — oceniasz i decydujesz.</p>
+        </div>
+        <div class="start-step__arrow">→</div>
+        <div class="start-step">
+          <div class="start-step__num">3</div>
+          <h3>Realizacja i dostawa</h3>
+          <p>Po akceptacji ruszamy: brief → pisanie → redakcja → optymalizacja → dostawa w Twoim formacie. Płatność po dostarczeniu gotowych treści.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA
+       ============================================================ -->
+  <section class="oferta-section oferta-section--cta">
+    <div class="container">
+      <div class="final-cta">
+        <h2>Gotowy na treści, które pracują na Twój biznes?</h2>
+        <p>Opisz swój cel w 2–3 zdaniach — wrócimy z konkretną propozycją w ciągu 24 godzin. Bez zobowiązań.</p>
+        <div class="final-cta__actions">
+          <a href="/kontakt" class="btn btn--primary btn--lg">Napisz do nas</a>
+          <a href="mailto:kontakt@copywritingseo.pl" class="btn btn--outline btn--lg">kontakt@copywritingseo.pl</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+</BaseLayout>
+

@@ -1,0 +1,320 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../utils';
+
+const pageTitle = "Tworzenie landing pages — strony lądowania, które konwertują ruch na leady";
+const pageDescription = "Tworzymy landing pages zoptymalizowane pod konwersję i SEO: struktura AIDA, testy A/B copy, dane strukturalne, szybkość Astro SSG. Dla kampanii Google Ads, social media i SEO. Od 999 zł brutto za stronę lądowania.";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Tworzenie landing pages",
+  "description": pageDescription,
+  "provider": { "@type": "Organization", "name": SITE.title, "url": SITE.url },
+  "areaServed": { "@type": "Country", "name": "Polska" },
+  "serviceType": "Tworzenie stron lądowania — copywriting + design + wdrożenie",
+  "offers": [
+    { "@type": "Offer", "name": "Landing page — copywriting", "price": "999", "priceCurrency": "PLN", "priceSpecification": { "@type": "PriceSpecification", "price": "999", "priceCurrency": "PLN", "valueAddedTaxIncluded": true } },
+    { "@type": "Offer", "name": "Landing page — copywriting + design + wdrożenie", "price": "2499", "priceCurrency": "PLN", "priceSpecification": { "@type": "PriceSpecification", "price": "2499", "priceCurrency": "PLN", "valueAddedTaxIncluded": true } },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Czym landing page różni się od zwykłej podstrony?", "acceptedAnswer": { "@type": "Answer", "text": "Landing page (strona lądowania) ma jeden cel: konwersję — wypełnienie formularza, kliknięcie w przycisk, pobranie pliku, zapis na webinar. Zwykła podstrona ma nawigację, sidebar, linki do innych stron — co rozprasza uwagę. Landing page eliminuje rozpraszacze: brak menu głównego, brak sidebara, jeden CTA powtórzony kilka razy. Każdy element strony prowadzi do jednej akcji." } },
+    { "@type": "Question", "name": "Czy landing page może jednocześnie rankować w Google?", "acceptedAnswer": { "@type": "Answer", "text": "Tak — i to jest nasza specjalność. Typowe landing pages z kreatorów (Unbounce, Leadpages) są zoptymalizowane pod konwersję, ale nie pod SEO. Nasze LP mają pełną optymalizację: fraza kluczowa w H1 i meta tagach, 800–1 500 słów treści (nie tylko CTA), schema Service, szybkość Astro SSG (Lighthouse 95+). Efekt: strona generuje ruch organiczny I konwertuje — bez konieczności ciągłego płacenia za reklamy." } },
+    { "@type": "Question", "name": "Czy mogę zamówić sam copywriting bez designu i wdrożenia?", "acceptedAnswer": { "@type": "Answer", "text": "Tak — pakiet 'Copywriting LP' (999 zł) zawiera pełny tekst strony ze strukturą sekcji, nagłówkami, CTA, FAQ, meta tagami i schema. Dostarczamy w Google Docs z oznaczeniami sekcji — Twój designer/developer może wdrożyć tekst w dowolnej technologii. Jeśli chcesz kompletną stronę (design + kod + hosting) — pakiet 'LP kompletny' za 2 499 zł." } },
+    { "@type": "Question", "name": "Jaką strukturę ma landing page?", "acceptedAnswer": { "@type": "Answer", "text": "Stosujemy zmodyfikowaną formułę AIDA: (1) Hero z nagłówkiem wartości i głównym CTA, (2) Problem — ból klienta opisany jego językiem, (3) Rozwiązanie — Twoja usługa/produkt jako odpowiedź na problem, (4) Dowody — opinie, case study, liczby, logotypy klientów, (5) Szczegóły oferty — co dokładnie dostaje klient, (6) FAQ — obiekcje zamienione na odpowiedzi, (7) Finalny CTA — powtórzony formularz/przycisk. Każda sekcja eliminuje jedną obiekcję kupującego." } },
+    { "@type": "Question", "name": "Ile czasu zajmuje stworzenie landing page?", "acceptedAnswer": { "@type": "Answer", "text": "Sam copywriting: 3–5 dni roboczych. Kompletna strona (copy + design + wdrożenie w Astro): 7–10 dni roboczych. Jeśli potrzebujesz LP na konkretną datę kampanii — powiemy wprost, czy zdążymy. Nie obiecujemy terminów, których nie dotrzymamy." } },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": SITE.url },
+    { "@type": "ListItem", "position": 2, "name": "Oferta", "item": `${SITE.url}/oferta` },
+    { "@type": "ListItem", "position": 3, "name": "Landing pages", "item": `${SITE.url}/oferta/landing-pages` },
+  ],
+};
+
+const combinedSchema = [serviceSchema, faqSchema, breadcrumbSchema];
+
+const sections = [
+  { num: "1", name: "Hero", purpose: "Zatrzymać uwagę w 3 sekundy", elements: "Nagłówek wartości (H1 z frazą), podtytuł wyjaśniający, główny CTA, element dowodu (liczba klientów, ocena, badge)" },
+  { num: "2", name: "Problem", purpose: "Pokazać, że rozumiesz ból klienta", elements: "Opis sytuacji klienta jego językiem. 3–4 konkretne bóle. Empatia, nie manipulacja — „znasz to?” nie „musisz się bać”" },
+  { num: "3", name: "Rozwiązanie", purpose: "Przedstawić ofertę jako odpowiedź na problem", elements: "Co oferujesz, jak to działa, czym się różnisz. Formuła: cecha→korzyść→rezultat. Bez żargonu — język klienta" },
+  { num: "4", name: "Dowody", purpose: "Usunąć wątpliwości", elements: "Opinie klientów (z imieniem, firmą, zdjęciem). Case study z liczbami. Logotypy klientów. Certyfikaty. Gwarancja" },
+  { num: "5", name: "Szczegóły oferty", purpose: "Odpowiedzieć na „co dokładnie dostaję?”", elements: "Lista elementów oferty z ✓. Cennik (jeśli publiczny). Tabela porównawcza pakietów. Warunki współpracy" },
+  { num: "6", name: "FAQ", purpose: "Zamienić obiekcje na odpowiedzi", elements: "5–8 pytań opartych na realnych obiekcjach kupujących. Schema FAQPage. Każda odpowiedź kończy się impulsem do działania" },
+  { num: "7", name: "Finalny CTA", purpose: "Ostatnia szansa na konwersję", elements: "Powtórzony formularz/przycisk. Podsumowanie wartości w 1 zdaniu. Element pilności (jeśli prawdziwy — nie sztuczny)" },
+];
+
+const useCases = [
+  { icon: "🎯", name: "LP pod Google Ads", desc: "Strona lądowania dopasowana do grupy reklam: fraza z reklamy = fraza w H1. Quality Score rośnie, CPC spada, konwersja rośnie. Osobna LP per grupa reklam." },
+  { icon: "📱", name: "LP pod social media", desc: "Strona po kliknięciu w reklamę na Facebooku/Instagramie. Bez menu, bez rozpraszaczy — tylko kontynuacja obietnicy z reklamy. Mobile-first design." },
+  { icon: "🔍", name: "LP pod SEO (usługowa)", desc: "Strona, która jednocześnie rankuje na frazę usługową i konwertuje. 800–1 500 słów, schema Service, Lighthouse 95+. Ruch organiczny + konwersja w jednym." },
+  { icon: "📧", name: "LP z lead magnetem", desc: "Strona do pobrania ebooka, checklisty, szablonu. Formularz z e-mailem w zamian za wartość. Budowanie bazy mailingowej z ruchu organicznego i płatnego." },
+  { icon: "📅", name: "LP eventowa / webinarowa", desc: "Strona zapisu na webinar, konferencję, szkolenie. Countdown, agenda, prelegenci, formularz. Działa 2–4 tygodnie — ale w tym czasie musi konwertować maksymalnie." },
+  { icon: "🏢", name: "LP ofertowa B2B", desc: "Strona dla konkretnej oferty B2B: opis problemu branżowego, rozwiązanie, case study z tej branży, formularz „umów konsultację”. Personalizowana per segment." },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonLd={combinedSchema}>
+
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Ścieżka nawigacyjna">
+      <ol>
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/oferta">Oferta</a></li>
+        <li aria-current="page">Landing pages</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="svc-hero">
+    <div class="container">
+      <div class="svc-hero__badge">Konwersja + SEO + szybkość</div>
+      <h1>Landing pages, które<br /><span class="svc-hero__accent">zamieniają kliknięcia na leady</span></h1>
+      <p class="svc-hero__desc">
+        Strona lądowania ma jeden cel: sprawić, żeby odwiedzający wykonał akcję — wypełnił formularz, zadzwonił, kupił.
+        Tworzymy LP od copywritingu przez design po wdrożenie w Astro — z jednoczesną optymalizacją pod SEO,
+        żeby strona generowała ruch organiczny bez ciągłego budżetu reklamowego.
+      </p>
+      <div class="svc-hero__cta">
+        <a href="#cennik" class="btn btn--primary btn--lg">Cennik — od 999 zł</a>
+        <a href="#struktura" class="btn btn--outline btn--lg">Zobacz strukturę LP</a>
+      </div>
+      <div class="svc-hero__proof">
+        <div class="proof-item"><span class="proof-num">30+</span><span class="proof-label">landing pages</span></div>
+        <div class="proof-item"><span class="proof-num">od 999 zł</span><span class="proof-label">sam copywriting</span></div>
+        <div class="proof-item"><span class="proof-num">AIDA</span><span class="proof-label">formuła konwersji</span></div>
+        <div class="proof-item"><span class="proof-num">SEO+CRO</span><span class="proof-label">w jednym</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY DEDICATED LP -->
+  <section class="svc-section svc-section--muted" id="dlaczego">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Dlaczego dedykowany landing page, a nie podstrona oferty</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <h3>🎯 Jeden cel = wyższy współczynnik konwersji</h3>
+          <p>Podstrona oferty ma menu, sidebar, linki do bloga — 10+ dróg wyjścia. Landing page ma jeden przycisk i jeden formularz. Mniej rozpraszaczy = więcej konwersji. Typowa podstrona konwertuje 2–5%. Dobrze zrobiony LP: 8–15%.</p>
+        </div>
+        <div class="why-card">
+          <h3>📊 Mierzalność i testy</h3>
+          <p>LP z jednym celem = proste mierzenie. Wiesz dokładnie, ile osób weszło i ile wypełniło formularz. Możesz testować warianty nagłówków, CTA, kolorów przycisków — i optymalizować konwersję na podstawie danych, nie domysłów.</p>
+        </div>
+        <div class="why-card">
+          <h3>💰 Wyższy zwrot z reklam</h3>
+          <p>Kierujesz ruch z Google Ads na LP dopasowany do frazy z reklamy: ta sama fraza w reklamie i w H1 strony = wyższy Quality Score = niższy CPC = więcej kliknięć za ten sam budżet. LP per grupa reklam to standard w profesjonalnych kampaniach.</p>
+        </div>
+        <div class="why-card">
+          <h3>🔍 SEO jako bonus</h3>
+          <p>Większość LP z kreatorów (Unbounce, Carrd) nie rankuje w Google — bo ma 50 słów tekstu i zero SEO. Nasze LP mają 800–1 500 słów, schema Service, Lighthouse 95+. Rankują na frazę usługową i konwertują — bez ciągłego budżetu reklamowego.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LP STRUCTURE -->
+  <section class="svc-section" id="struktura">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Anatomia landing page — 7 sekcji, 7 celów</h2>
+        <p>Każda sekcja eliminuje jedną obiekcję kupującego. Od „co to jest?" przez „dlaczego akurat wy?" po „co mam teraz zrobić?".</p>
+      </div>
+
+      <div class="structure-list">
+        {sections.map(s => (
+          <div class="structure-card">
+            <div class="structure-card__num">Sekcja {s.num}</div>
+            <div class="structure-card__content">
+              <h3 class="structure-card__name">{s.name}</h3>
+              <p class="structure-card__purpose"><strong>Cel:</strong> {s.purpose}</p>
+              <p class="structure-card__elements"><strong>Elementy:</strong> {s.elements}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="svc-section svc-section--muted" id="zastosowania">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>6 zastosowań landing page — dopasowujemy do Twojego celu</h2>
+      </div>
+
+      <div class="usecases-grid">
+        {useCases.map(uc => (
+          <div class="usecase-card">
+            <span class="usecase-card__icon">{uc.icon}</span>
+            <h3 class="usecase-card__name">{uc.name}</h3>
+            <p class="usecase-card__desc">{uc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT MAKES OUR LP DIFFERENT -->
+  <section class="svc-section" id="roznica">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Kreator LP vs nasze podejście — co dostajesz za cenę</h2>
+      </div>
+
+      <div class="diff-table-wrap">
+        <table class="diff-table">
+          <thead>
+            <tr>
+              <th>Kryterium</th>
+              <th>Kreator (Unbounce, Carrd)</th>
+              <th class="diff-table__highlight">Nasz landing page</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Copywriting</td><td>Sam piszesz tekst</td><td class="diff-table__winner">Profesjonalny copy z formułą AIDA</td></tr>
+            <tr><td>SEO</td><td>Brak (50 słów, zero schema)</td><td class="diff-table__winner">800–1 500 słów, schema, meta tagi</td></tr>
+            <tr><td>Szybkość</td><td>Zależy od kreatora (60–80 Lighthouse)</td><td class="diff-table__winner">Astro SSG — Lighthouse 95–100</td></tr>
+            <tr><td>Design</td><td>Szablon z ograniczeniami</td><td class="diff-table__winner">Indywidualny, dopasowany do marki</td></tr>
+            <tr><td>Koszt miesięczny</td><td>50–200 USD/mies. subskrypcja</td><td class="diff-table__winner">~4 zł/mies. hosting AWS</td></tr>
+            <tr><td>Schema / dane strukturalne</td><td>Brak</td><td class="diff-table__winner">Service + FAQPage + BreadcrumbList</td></tr>
+            <tr><td>Formularz</td><td>Wbudowany w kreator</td><td>Lambda / zewnętrzny (Formspree, własny)</td></tr>
+            <tr><td>Próg wejścia</td><td class="diff-table__winner">Niski (drag & drop)</td><td>Wymaga zlecenia</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="diff-note">Kreator ma sens, jeśli potrzebujesz LP na 2 tygodnie i masz budżet 0 zł na copywriting. Na dłuższą metę — nasz LP kosztuje mniej (brak subskrypcji), rankuje w Google i konwertuje lepiej (profesjonalny copy).</p>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="svc-section svc-section--muted" id="proces">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Jak tworzymy landing page — krok po kroku</h2>
+      </div>
+
+      <div class="process-timeline">
+        <div class="process-step"><div class="process-step__marker"><span class="process-step__num">01</span><div class="process-step__line"></div></div>
+          <div class="process-step__content"><div class="process-step__duration">Dzień 1–2</div><h3 class="process-step__title">Brief i analiza</h3><p class="process-step__desc">Rozmowa o celu LP: jaka usługa, jaki klient, jakie obiekcje, jaka akcja docelowa. Analiza konkurencji i fraz. Ustalenie struktury sekcji i formuły.</p></div>
+        </div>
+        <div class="process-step"><div class="process-step__marker"><span class="process-step__num">02</span><div class="process-step__line"></div></div>
+          <div class="process-step__content"><div class="process-step__duration">Dzień 3–5</div><h3 class="process-step__title">Copywriting</h3><p class="process-step__desc">Piszemy tekst per sekcja: nagłówki, akapity, CTA, FAQ, meta tagi. Każdy element testowany pytaniem: „czy to przybliża odwiedzającego do kliknięcia?" Jeśli nie — usuwamy.</p></div>
+        </div>
+        <div class="process-step"><div class="process-step__marker"><span class="process-step__num">03</span><div class="process-step__line"></div></div>
+          <div class="process-step__content"><div class="process-step__duration">Dzień 5–7 (pakiet kompletny)</div><h3 class="process-step__title">Design i kodowanie</h3><p class="process-step__desc">Indywidualny projekt w Figma → kodowanie w Astro SSG → formularz kontaktowy (Lambda lub Formspree) → hosting AWS S3+CloudFront. Mobile-first, Lighthouse 95+.</p></div>
+        </div>
+        <div class="process-step"><div class="process-step__marker"><span class="process-step__num">04</span></div>
+          <div class="process-step__content"><div class="process-step__duration">Dzień 7–10</div><h3 class="process-step__title">Testy i uruchomienie</h3><p class="process-step__desc">Test na wszystkich urządzeniach, weryfikacja formularza, schema, meta tagi, szybkość. Podpięcie analytics (GA4, GTM). Uruchomienie i zgłoszenie w GSC. Opcjonalnie: wariant A/B nagłówka.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="svc-section svc-section--dark" id="cennik">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <h2>Cennik landing pages</h2>
+        <p>Dwa pakiety: sam copywriting (Ty wdrażasz) lub kompletna strona (my robimy wszystko).</p>
+      </div>
+
+      <div class="pricing-cards pricing-cards--two">
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">Copywriting LP</h3>
+          <div class="pricing-card__price"><span class="pricing-card__amount">999 zł</span><span class="pricing-card__period">brutto / landing page</span></div>
+          <p class="pricing-card__desc">Pełny tekst strony ze strukturą sekcji, nagłówkami, CTA, FAQ, meta tagami i schema. Gotowy do wdrożenia przez Twój zespół.</p>
+          <ul class="pricing-card__features">
+            <li>800–1 500 słów profesjonalnego copy</li>
+            <li>Struktura 7 sekcji (AIDA)</li>
+            <li>3–5 wariantów nagłówka do testów A/B</li>
+            <li>FAQ 5–8 pytań (obiekcje→odpowiedzi)</li>
+            <li>Meta title + description</li>
+            <li>Schema Service + FAQPage (kod JSON-LD)</li>
+            <li>Dostawa w Google Docs z oznaczeniami</li>
+            <li>1 runda korekt</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zamów copywriting LP</a>
+          <p class="pricing-card__note">Czas: 3–5 dni roboczych</p>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-card__badge">Kompletna usługa</div>
+          <h3 class="pricing-card__name">LP kompletny</h3>
+          <div class="pricing-card__price"><span class="pricing-card__amount">2 499 zł</span><span class="pricing-card__period">brutto / landing page</span></div>
+          <p class="pricing-card__desc">Copywriting + indywidualny design + kodowanie w Astro + hosting AWS + formularz + analytics. Gotowa strona lądowania.</p>
+          <ul class="pricing-card__features">
+            <li>Wszystko z pakietu Copywriting LP</li>
+            <li>Indywidualny projekt graficzny (Figma)</li>
+            <li>Kodowanie w Astro SSG (Lighthouse 95+)</li>
+            <li>Formularz kontaktowy (Lambda / Formspree)</li>
+            <li>Hosting AWS S3 + CloudFront + SSL</li>
+            <li>Google Analytics 4 + GTM</li>
+            <li>Opcja: wariant A/B nagłówka</li>
+            <li>2 rundy korekt (copy + design)</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--primary btn--lg" style="width:100%;">Zamów kompletny LP</a>
+          <p class="pricing-card__note">Czas: 7–10 dni roboczych</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CROSS-SELL -->
+  <section class="svc-section" id="polacz">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Połącz z artykułami blogowymi — lejek content + konwersja</h2>
+        <p>Artykuł blogowy generuje ruch na frazę informacyjną. Landing page konwertuje ten ruch na leady. Razem tworzą lejek, który działa bez budżetu reklamowego.</p>
+      </div>
+      <div class="crosssell-grid">
+        <div class="crosssell-card"><h3>📝 Artykuły blogowe</h3><p>Poradniki i analizy, które generują ruch organiczny. Linkują do LP jako „następny krok" dla zainteresowanego czytelnika.</p><a href="/oferta/artykuly-blogowe" class="btn btn--outline btn--sm">Artykuły blogowe →</a></div>
+        <div class="crosssell-card"><h3>💼 Teksty na strony firmowe</h3><p>Jeśli potrzebujesz nie jednego LP, ale kompletną stronę firmową z podstronami usługowymi — mamy pakiet od 1 999 zł.</p><a href="/oferta/teksty-strony-firmowe" class="btn btn--outline btn--sm">Teksty firmowe →</a></div>
+        <div class="crosssell-card"><h3>🌐 Strony zapleczowe</h3><p>Dodatkowe domeny z treściami, które budują autorytet i linkują do Twojego LP. Więcej autorytetu = wyższe pozycje LP.</p><a href="/oferta/tworzenie-stron-zapleczowych" class="btn btn--outline btn--sm">Strony zapleczowe →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="svc-section svc-section--muted" id="faq">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center"><h2>Najczęściej zadawane pytania</h2></div>
+      <div class="faq-list">
+        {faqSchema.mainEntity.map(q => (
+          <details class="faq-item"><summary class="faq-item__question">{q.name}</summary><div class="faq-item__answer"><p>{q.acceptedAnswer.text}</p></div></details>
+        ))}
+        <details class="faq-item"><summary class="faq-item__question">Czy mogę później modyfikować LP sam?</summary><div class="faq-item__answer"><p>W pakiecie kompletnym strona jest kodowana w Astro — treść w pliku .astro z czytelną strukturą HTML. Jeśli znasz HTML — możesz edytować sam. Jeśli nie — mamy pakiet utrzymania (drobne zmiany copy/design za stałą stawkę miesięczną). Alternatywnie: dostarczamy stronę na Twoim CMS (WordPress, Webflow), jeśli wolisz edytor wizualny.</p></div></details>
+        <details class="faq-item"><summary class="faq-item__question">Czy robicie testy A/B?</summary><div class="faq-item__answer"><p>W pakiecie kompletnym dostarczamy 2 warianty nagłówka hero do testu A/B. Konfigurujemy test w Google Optimize (lub alternatywie) z pomiarem konwersji. Po 2–4 tygodniach (zależnie od ruchu) masz dane — który wariant konwertuje lepiej. Dalsze testy (CTA, układ, kolory) możemy prowadzić w ramach stałej współpracy.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="svc-section svc-section--cta">
+    <div class="container">
+      <div class="final-cta">
+        <h2>Gotowy na LP, który konwertuje?</h2>
+        <p>Opisz usługę, cel i grupę docelową — wrócimy z propozycją struktury LP i harmonogramem w ciągu 24 godzin.</p>
+        <div class="final-cta__actions">
+          <a href="/kontakt" class="btn btn--primary btn--lg">Zamów landing page</a>
+          <a href="mailto:kontakt@copywritingseo.pl" class="btn btn--outline btn--lg">kontakt@copywritingseo.pl</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+</BaseLayout>
+

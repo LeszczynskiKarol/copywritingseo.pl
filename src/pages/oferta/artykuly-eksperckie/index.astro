@@ -1,0 +1,455 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../utils';
+
+const pageTitle = "Artykuły eksperckie i specjalistyczne — treści, które budują pozycję lidera w branży";
+const pageDescription = "Piszemy artykuły eksperckie i specjalistyczne: white papers, analizy branżowe, artykuły thought leadership, publikacje do mediów i portali branżowych. Pogłębiony research, dane ze źródeł, weryfikacja merytoryczna. Od 799 zł brutto za artykuł.";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Artykuły eksperckie i specjalistyczne",
+  "description": pageDescription,
+  "provider": { "@type": "Organization", "name": SITE.title, "url": SITE.url },
+  "areaServed": { "@type": "Country", "name": "Polska" },
+  "serviceType": "Content marketing — artykuły eksperckie, thought leadership, white papers",
+  "offers": [
+    { "@type": "Offer", "name": "Artykuł ekspercki", "price": "799", "priceCurrency": "PLN", "priceSpecification": { "@type": "PriceSpecification", "price": "799", "priceCurrency": "PLN", "valueAddedTaxIncluded": true } },
+    { "@type": "Offer", "name": "White paper / raport branżowy", "price": "1999", "priceCurrency": "PLN", "priceSpecification": { "@type": "PriceSpecification", "price": "1999", "priceCurrency": "PLN", "valueAddedTaxIncluded": true } },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Czym artykuł ekspercki różni się od zwykłego artykułu blogowego?", "acceptedAnswer": { "@type": "Answer", "text": "Artykuł blogowy targetuje frazę kluczową i odpowiada na pytanie — optymalizacja pod ruch organiczny. Artykuł ekspercki robi to samo, ale dodatkowo: prezentuje oryginalną tezę lub perspektywę autora, zawiera pogłębiony research (minimum 10 źródeł), operuje danymi liczbowymi z weryfikowalnych źródeł, ma identyfikowalnego autora-eksperta z biogramem, i jest pisany na poziomie, który pozwala na publikację w mediach branżowych. To różnica między 'odpowiedzią na pytanie' a 'pozycją ekspercką w branży'." } },
+    { "@type": "Question", "name": "Czy mogę opublikować artykuł ekspercki pod swoim nazwiskiem?", "acceptedAnswer": { "@type": "Answer", "text": "Tak — i to jest standardowy model. Piszemy artykuł na podstawie Twojej ekspertyzy (rozmowa, notatki, dane), a Ty podpisujesz go swoim imieniem i nazwiskiem. Ghostwriting ekspercki to norma w content marketingu B2B. Warunek: artykuł musi odzwierciedlać Twoją realną wiedzę i doświadczenie — nie piszemy fikcyjnej ekspertyzy." } },
+    { "@type": "Question", "name": "Jakie branże obsługujecie?", "acceptedAnswer": { "@type": "Answer", "text": "Mamy doświadczenie w: technologii i IT (SaaS, AI, cyberbezpieczeństwo), e-commerce i marketingu cyfrowym, przemyśle i energetyce, edukacji i szkolnictwie wyższym, finansach i rachunkowości. W nowych branżach: przeprowadzamy pogłębiony research i konsultujemy treść z Tobą jako ekspertem merytorycznym. Nie piszemy na tematy medyczne i prawne bez weryfikacji przez specjalistę z branży." } },
+    { "@type": "Question", "name": "Ile trwa napisanie artykułu eksperckiego?", "acceptedAnswer": { "@type": "Answer", "text": "Artykuł ekspercki (2 500–4 000 słów): 7–10 dni roboczych. White paper / raport branżowy (4 000–8 000 słów): 10–15 dni roboczych. Czas obejmuje: rozmowę z ekspertem (Tobą), research źródeł, pisanie, redakcję merytoryczną, optymalizację SEO i dostarczenie. Dłuższy czas niż artykuł blogowy, bo research i weryfikacja źródeł zajmują 30–40% całego procesu." } },
+    { "@type": "Question", "name": "Czy artykuł ekspercki może być jednocześnie zoptymalizowany pod SEO?", "acceptedAnswer": { "@type": "Answer", "text": "Tak — i to jest nasze podejście. Artykuł ekspercki bez SEO to artykuł, którego nikt nie znajdzie. Artykuł SEO bez ekspertyzy to artykuł, który nie buduje autorytetu. Łączymy oba: fraza kluczowa w tytule i nagłówkach, schema Article z autorem, FAQ z „Ludzie też pytają” — ale treść na poziomie publikacji branżowej, nie generycznego poradnika." } },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": SITE.url },
+    { "@type": "ListItem", "position": 2, "name": "Oferta", "item": `${SITE.url}/oferta` },
+    { "@type": "ListItem", "position": 3, "name": "Artykuły eksperckie", "item": `${SITE.url}/oferta/artykuly-eksperckie` },
+  ],
+};
+
+const combinedSchema = [serviceSchema, faqSchema, breadcrumbSchema];
+
+const formats = [
+  {
+    icon: "🧠",
+    name: "Thought leadership",
+    words: "2 500–4 000 słów",
+    desc: "Artykuł prezentujący oryginalną tezę, perspektywę lub framework — pod nazwiskiem eksperta z Twojej firmy. Cel: pozycja lidera opinii w branży. Publikacja na blogu firmowym, LinkedIn, mediach branżowych.",
+    examples: "„Dlaczego 90% wdrożeń AI w polskim e-commerce kończy się fiaskiem — i co robić inaczej”",
+  },
+  {
+    icon: "📊",
+    name: "Analiza branżowa z danymi",
+    words: "3 000–5 000 słów",
+    desc: "Artykuł oparty na danych: badania rynku, statystyki, trendy. Minimum 10 źródeł z weryfikowalnymi danymi. Tabele porównawcze, wykresy, prognozy. Cel: referencyjna treść cytowana przez innych.",
+    examples: "„Stan SEO w polskim e-commerce 2026 — analiza 500 sklepów”",
+  },
+  {
+    icon: "📄",
+    name: "White paper / raport",
+    words: "4 000–8 000 słów",
+    desc: "Pogłębiony dokument na temat problemu branżowego z analizą, danymi i rekomendacjami. Format PDF (opcjonalnie) lub artykuł webowy. Cel: lead magnet, materiał sprzedażowy B2B, budowanie autorytetu.",
+    examples: "„Raport: Jak polskie firmy produkcyjne wdrażają content marketing — badanie 120 firm”",
+  },
+  {
+    icon: "📰",
+    name: "Artykuł do mediów branżowych",
+    words: "1 500–3 000 słów",
+    desc: "Tekst pisany pod wymagania redakcji: ton, format, długość, zasady cytowania. Do publikacji w portalach branżowych, magazynach online, serwisach eksperckich. Cel: zasięg, linki zwrotne, rozpoznawalność.",
+    examples: "„Guest post do Marketer+, Marketing i Biznes, Sprawny Marketing, NowyMarketing”",
+  },
+  {
+    icon: "🔬",
+    name: "Case study pogłębione",
+    words: "2 000–4 000 słów",
+    desc: "Rozbudowane studium przypadku: kontekst branżowy, problem, metodologia, działania krok po kroku, wyniki z liczbami, wnioski. Nie 'zrobiliśmy X i wyszło Y' — lecz pełna analiza dlaczego zadziałało i co można powtórzyć.",
+    examples: "„Jak zwiększyliśmy konwersję e-commerce o 127% w 4 miesiące — pełne case study z danymi GA4”",
+  },
+  {
+    icon: "📚",
+    name: "Seria ekspercka (cykl artykułów)",
+    words: "3–6 artykułów × 2 000–3 000 słów",
+    desc: "Cykl powiązanych artykułów tworzących kompletny kurs / przewodnik ekspercki. Spójna narracja, rosnący poziom zaawansowania, linkowanie wewnętrzne. Cel: budowanie stałej audiencji i autorytetu w konkretnym temacie.",
+    examples: "„Seria: Content operations od zera do skali — 5 artykułów od strategii po automatyzację”",
+  },
+];
+
+const vsStandard = [
+  { criteria: "Research", standard: "Analiza top 5 w Google", expert: "10+ źródeł: badania, raporty, dane branżowe, wywiady" },
+  { criteria: "Autor", standard: "Biogram ogólny", expert: "Ekspert z kwalifikacjami, zdjęciem, LinkedIn, publikacjami" },
+  { criteria: "Dane", standard: "Statystyki z popularnych źródeł", expert: "Oryginalne dane, analizy własne, dane klienta (za zgodą)" },
+  { criteria: "Teza", standard: "Odpowiedź na pytanie", expert: "Oryginalna perspektywa / framework / prognoza" },
+  { criteria: "Ton", standard: "Informacyjno-poradnikowy", expert: "Autorytatywny, merytoryczny, z opiniami podpartymi danymi" },
+  { criteria: "Cel", standard: "Ruch organiczny na frazę", expert: "Ruch + budowanie pozycji lidera + cytowania + linki" },
+  { criteria: "Weryfikacja", standard: "Sprawdzenie faktów", expert: "Weryfikacja merytoryczna + konsultacja z ekspertem branżowym" },
+  { criteria: "Czas produkcji", standard: "3–5 dni", expert: "7–15 dni" },
+  { criteria: "Żywotność", standard: "6–12 miesięcy (wymaga aktualizacji)", expert: "12–24 miesiące (referencyjna treść)" },
+];
+
+const processSteps = [
+  { num: "01", title: "Rozmowa z ekspertem", duration: "Dzień 1–2", desc: "45–60 minut rozmowy z Tobą (lub ekspertem z Twojej firmy): główna teza, kluczowe dane, doświadczenia, opinie, źródła. Nagrywamy i transkrybujemy — z tego powstaje rdzeń artykułu." },
+  { num: "02", title: "Research i źródła", duration: "Dzień 2–4", desc: "Zbieramy dane ze źródeł: badania branżowe, raporty (Statista, IBISWorld, GUS), publikacje naukowe, dokumentacja oficjalna. Minimum 10 źródeł z datą i linkiem. Weryfikujemy każdą liczbę." },
+  { num: "03", title: "Pisanie i struktura", duration: "Dzień 4–7", desc: "Piszemy artykuł sekcja po sekcji: teza → argumenty z danymi → kontrargumenty → wnioski. AI wspiera szkice, ludzka redakcja nadaje ton eksperta, dodaje niuanse i opinie podparte doświadczeniem." },
+  { num: "04", title: "Weryfikacja merytoryczna", duration: "Dzień 7–8", desc: "Przesyłamy artykuł do Twojej weryfikacji: czy dane są prawidłowe, czy opinie odzwierciedlają Twoją perspektywę, czy nic nie jest nadmiernie uproszczone. 2 rundy korekt merytorycznych w cenie." },
+  { num: "05", title: "Optymalizacja i dostawa", duration: "Dzień 8–10", desc: "SEO on-page (frazy, meta, schema Article z pełnym biogramem autora, FAQ), formatowanie finalne. Dostawa w Markdown / HTML / Google Docs / PDF. Opcjonalnie: publikacja na Twoim blogu + zgłoszenie w GSC." },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="website" jsonLd={combinedSchema}>
+
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Ścieżka nawigacyjna">
+      <ol>
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/oferta">Oferta</a></li>
+        <li aria-current="page">Artykuły eksperckie</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="svc-hero">
+    <div class="container">
+      <div class="svc-hero__badge">Thought leadership · White papers · Analizy branżowe</div>
+      <h1>Artykuły eksperckie, które<br /><span class="svc-hero__accent">budują pozycję lidera w branży</span></h1>
+      <p class="svc-hero__desc">
+        Artykuł blogowy odpowiada na pytanie. Artykuł ekspercki zmienia sposób myślenia czytelnika o temacie —
+        bo prezentuje oryginalną tezę, popiera ją danymi i nosi podpis człowieka, który ma prawo ją stawiać.
+        Piszemy treści, dzięki którym Twoja firma przestaje być „jedną z wielu" i staje się głosem, który cytują inni.
+      </p>
+      <div class="svc-hero__cta">
+        <a href="#cennik" class="btn btn--primary btn--lg">Cennik — od 799 zł / artykuł</a>
+        <a href="#formaty" class="btn btn--outline btn--lg">Jakie formaty tworzymy?</a>
+      </div>
+      <div class="svc-hero__proof">
+        <div class="proof-item"><span class="proof-num">100+</span><span class="proof-label">artykułów eksperckich</span></div>
+        <div class="proof-item"><span class="proof-num">od 799 zł</span><span class="proof-label">brutto za artykuł</span></div>
+        <div class="proof-item"><span class="proof-num">10+</span><span class="proof-label">źródeł per artykuł</span></div>
+        <div class="proof-item"><span class="proof-num">7–15 dni</span><span class="proof-label">czas realizacji</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY EXPERT CONTENT -->
+  <section class="svc-section svc-section--muted" id="dlaczego">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Dlaczego artykuły eksperckie — co dają, czego nie daje zwykły blog</h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <h3>🏆 Pozycja lidera opinii</h3>
+          <p>Firma, która publikuje oryginalne analizy i stawia tezy, jest postrzegana jako lider branży. Firma, która publikuje „10 porad o…" — jako jedna z wielu. Artykuły eksperckie zmieniają percepcję Twojej marki z wykonawcy na autorytet.</p>
+        </div>
+        <div class="why-card">
+          <h3>🔗 Linki i cytowania</h3>
+          <p>Nikt nie linkuje do generycznego poradnika — w Google jest ich setki. Ale oryginalna analiza z danymi? Artykuł z odważną tezą? To treść, do której linkują blogerzy, dziennikarze i konkurencja. Każdy link podnosi autorytet domeny.</p>
+        </div>
+        <div class="why-card">
+          <h3>📈 SEO na najtrudniejsze frazy</h3>
+          <p>Frazy o wysokiej konkurencji wymagają treści, która jest lepsza od tego, co już rankuje. Nie „dłuższa" — lepsza: oryginalne dane, perspektywa eksperta, głębsza analiza. Google nagradza treść, której nie da się zreplikować kopiowaniem.</p>
+        </div>
+        <div class="why-card">
+          <h3>🤝 Sprzedaż B2B</h3>
+          <p>Decydent w firmie B2B nie kupuje po przeczytaniu „5 korzyści z naszego produktu". Kupuje po przeczytaniu raportu, który pokazuje, że rozumiesz jego branżę lepiej niż konkurencja. White paper to najskuteczniejszy materiał sprzedażowy w B2B.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMATS -->
+  <section class="svc-section" id="formaty">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>6 formatów treści eksperckich — dopasowujemy do Twojego celu</h2>
+      </div>
+
+      <div class="formats-grid">
+        {formats.map(f => (
+          <div class="format-card">
+            <span class="format-card__icon">{f.icon}</span>
+            <h3 class="format-card__name">{f.name}</h3>
+            <div class="format-card__words">{f.words}</div>
+            <p class="format-card__desc">{f.desc}</p>
+            <p class="format-card__example">{f.examples}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERT vs STANDARD -->
+  <section class="svc-section svc-section--muted" id="porownanie">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Artykuł ekspercki vs artykuł blogowy — co konkretnie jest inne</h2>
+        <p>To nie jest ten sam produkt za wyższą cenę. To inny poziom researchu, weryfikacji, tonu i żywotności treści.</p>
+      </div>
+
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Kryterium</th>
+              <th>Artykuł blogowy (349 zł)</th>
+              <th class="comparison-table__highlight">Artykuł ekspercki (od 799 zł)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vsStandard.map(row => (
+              <tr>
+                <td class="comparison-table__metric">{row.criteria}</td>
+                <td>{row.standard}</td>
+                <td>{row.expert}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="comparison-note">Artykuł blogowy jest dobry do budowania ruchu organicznego na frazy informacyjne. Artykuł ekspercki robi to samo — plus buduje autorytet, generuje linki i ma 2× dłuższą żywotność.</p>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="svc-section" id="proces">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Jak powstaje artykuł ekspercki — 5 etapów</h2>
+        <p>Kluczowa różnica: zaczynamy od rozmowy z ekspertem (Tobą), nie od frazy kluczowej. Fraza jest ważna — ale Twoja wiedza jest ważniejsza.</p>
+      </div>
+
+      <div class="process-timeline">
+        {processSteps.map((step, i) => (
+          <div class="process-step">
+            <div class="process-step__marker">
+              <span class="process-step__num">{step.num}</span>
+              {i < processSteps.length - 1 && <div class="process-step__line"></div>}
+            </div>
+            <div class="process-step__content">
+              <div class="process-step__duration">{step.duration}</div>
+              <h3 class="process-step__title">{step.title}</h3>
+              <p class="process-step__desc">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="svc-section svc-section--muted" id="co-dostajesz">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Co dostajesz z każdym artykułem eksperckim</h2>
+      </div>
+
+      <div class="included-grid">
+        <div class="included-group">
+          <h3>📝 Treść</h3>
+          <ul>
+            <li>2 500–4 000 słów (lub 4 000–8 000 dla white paper)</li>
+            <li>Oryginalna teza / perspektywa / framework</li>
+            <li>Minimum 10 zweryfikowanych źródeł z datą i linkiem</li>
+            <li>Tabele porównawcze, dane liczbowe, analizy</li>
+            <li>FAQ 4–6 pytań (pogłębionych, nie generycznych)</li>
+            <li>Biogram autora z kwalifikacjami, publikacjami, LinkedIn</li>
+            <li>2 rundy korekt merytorycznych</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>🔍 SEO i dystrybucja</h3>
+          <ul>
+            <li>Badanie frazy głównej + 10+ fraz wspierających</li>
+            <li>Meta title + description zoptymalizowane</li>
+            <li>Schema Article z pełnym biogramem Person</li>
+            <li>Schema FAQPage + BreadcrumbList</li>
+            <li>Sugestie linków wewnętrznych (10+ per artykuł)</li>
+            <li>Rekomendacje dystrybucji (LinkedIn, media branżowe, newsletter)</li>
+            <li>Raport indeksowania GSC po 30 dniach</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>📦 Dostawa</h3>
+          <ul>
+            <li>Format: Markdown / HTML / Google Docs / PDF</li>
+            <li>Wersja do mediów branżowych (skrócona, dopasowana do redakcji)</li>
+            <li>Wersja LinkedIn (streszczenie 300–500 słów z linkiem)</li>
+            <li>Lista źródeł jako osobny dokument referencyjny</li>
+            <li>Opcjonalnie: publikacja na blogu + zgłoszenie GSC</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IS THIS FOR -->
+  <section class="svc-section" id="dla-kogo">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Dla kogo piszemy artykuły eksperckie</h2>
+      </div>
+
+      <div class="audience-grid">
+        <div class="audience-card">
+          <h3>💻 Firmy technologiczne i SaaS</h3>
+          <p>Analizy trendów, porównania technologii, artykuły thought leadership pod nazwiskiem CTO/CEO. Budowanie pozycji eksperta w niszach: AI, cyberbezpieczeństwo, cloud, fintech, e-commerce tech.</p>
+        </div>
+        <div class="audience-card">
+          <h3>🏢 Firmy B2B i usługowe</h3>
+          <p>White papers jako materiał sprzedażowy: analiza problemu branżowego → Twoje rozwiązanie. Case study z danymi. Raporty budujące zaufanie decydentów przed rozmową handlową.</p>
+        </div>
+        <div class="audience-card">
+          <h3>🎤 Eksperci i konsultanci</h3>
+          <p>Artykuły pod Twoje nazwisko: pozycja lidera opinii, publikacje w mediach branżowych, seria artykułów budująca personal brand. Ghostwriting na najwyższym poziomie merytorycznym.</p>
+        </div>
+        <div class="audience-card">
+          <h3>📈 Agencje marketingowe</h3>
+          <p>Treści dla Twoich klientów: white labeling (Twoja marka, nasz tekst). Artykuły eksperckie, których Twój zespół nie ma czasu pisać, ale Twoi klienci ich potrzebują.</p>
+        </div>
+        <div class="audience-card">
+          <h3>🏭 Przemysł i energetyka</h3>
+          <p>Analizy regulacyjne, opisy technologii, porównania rozwiązań technicznych. Treści łączące wiedzę inżynierską z przystępnym językiem — dla decydentów, którzy nie są inżynierami.</p>
+        </div>
+        <div class="audience-card">
+          <h3>🎓 Edukacja i szkolenia</h3>
+          <p>Artykuły eksperckie budujące autorytet instytucji edukacyjnej: analizy rynku pracy, trendy w nauczaniu, badania skuteczności metod. Treści, które przyciągają studentów i partnerów.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="svc-section svc-section--dark" id="cennik">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <h2>Cennik artykułów eksperckich</h2>
+        <p>Cena odzwierciedla pogłębiony research, weryfikację źródeł i czas produkcji 2–3× dłuższy niż standardowy artykuł blogowy.</p>
+      </div>
+
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">Artykuł ekspercki</h3>
+          <div class="pricing-card__price"><span class="pricing-card__amount">799 zł</span><span class="pricing-card__period">brutto / artykuł</span></div>
+          <p class="pricing-card__desc">Artykuł 2 500–4 000 słów z oryginalną tezą, minimum 10 źródłami, biogramem eksperta i pełną optymalizacją SEO.</p>
+          <ul class="pricing-card__features">
+            <li>2 500–4 000 słów</li>
+            <li>Rozmowa z ekspertem (45–60 min)</li>
+            <li>Research: 10+ zweryfikowanych źródeł</li>
+            <li>Oryginalna teza / perspektywa</li>
+            <li>Schema Article + Person + FAQPage</li>
+            <li>Meta title + description + alt texty</li>
+            <li>Biogram autora z kwalifikacjami</li>
+            <li>2 rundy korekt merytorycznych</li>
+            <li>Wersja LinkedIn (streszczenie)</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zamów artykuł ekspercki</a>
+          <p class="pricing-card__note">Czas: 7–10 dni roboczych</p>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-card__badge">Najwyższy poziom</div>
+          <h3 class="pricing-card__name">White paper / raport</h3>
+          <div class="pricing-card__price"><span class="pricing-card__amount">1 999 zł</span><span class="pricing-card__period">brutto / dokument</span></div>
+          <p class="pricing-card__desc">Pogłębiony dokument 4 000–8 000 słów: analiza branżowa, dane, rekomendacje. Format webowy + opcjonalnie PDF z layoutem.</p>
+          <ul class="pricing-card__features">
+            <li>4 000–8 000 słów</li>
+            <li>2 rozmowy z ekspertem (łącznie 90–120 min)</li>
+            <li>Research: 15–20+ źródeł</li>
+            <li>Tabele, wykresy, wizualizacje danych</li>
+            <li>Streszczenie wykonawcze (executive summary)</li>
+            <li>Wersja webowa (HTML/Markdown) + PDF (opcjonalnie)</li>
+            <li>Schema Article + FAQPage</li>
+            <li>Wersja skrócona do mediów + LinkedIn</li>
+            <li>3 rundy korekt merytorycznych</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--primary btn--lg" style="width:100%;">Zamów white paper</a>
+          <p class="pricing-card__note">Czas: 10–15 dni roboczych</p>
+        </div>
+
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">Seria ekspercka</h3>
+          <div class="pricing-card__price"><span class="pricing-card__amount">od 3 499 zł</span><span class="pricing-card__period">brutto / seria 5 artykułów</span></div>
+          <p class="pricing-card__desc">Cykl 5 powiązanych artykułów eksperckich tworzących kompletny przewodnik / kurs. Spójna narracja, rosnące zaawansowanie.</p>
+          <ul class="pricing-card__features">
+            <li>5 artykułów eksperckich (12 500–20 000 słów)</li>
+            <li>Spójna strategia tematyczna i narracyjna</li>
+            <li>Linkowanie wewnętrzne między artykułami</li>
+            <li>Strona filarowa serii (opcjonalnie)</li>
+            <li>Kalendarz publikacji</li>
+            <li>Research i źródła per artykuł</li>
+            <li>Wersje LinkedIn per artykuł</li>
+            <li>Raport GSC po 30 dniach od ostatniej publikacji</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zapytaj o serię ekspercką</a>
+          <p class="pricing-card__note">Oszczędność 496 zł vs zamówienie pojedyncze</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CROSS-SELL -->
+  <section class="svc-section" id="polacz">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Połącz z innymi usługami — kompletna strategia content</h2>
+      </div>
+      <div class="crosssell-grid">
+        <div class="crosssell-card"><h3>📝 Artykuły blogowe</h3><p>Artykuły eksperckie budują autorytet — blogowe budują ruch. Razem: autorytet + wolumen. 2–3 eksperckie + 8 blogowych miesięcznie = optymalny mix.</p><a href="/oferta/artykuly-blogowe" class="btn btn--outline btn--sm">Artykuły blogowe →</a></div>
+        <div class="crosssell-card"><h3>🎯 Landing pages</h3><p>White paper jako lead magnet na landing page. Czytelnik zostawia e-mail → dostaje raport → trafia do lejka sprzedażowego. Najskuteczniejsza kombinacja w B2B.</p><a href="/oferta/landing-pages" class="btn btn--outline btn--sm">Landing pages →</a></div>
+        <div class="crosssell-card"><h3>💼 Teksty firmowe</h3><p>Artykuły eksperckie na blogu + profesjonalne teksty na stronach usługowych = kompletna strategia content, która buduje ruch, autorytet i konwersje jednocześnie.</p><a href="/oferta/teksty-strony-firmowe" class="btn btn--outline btn--sm">Teksty firmowe →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="svc-section svc-section--muted" id="faq">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center"><h2>Najczęściej zadawane pytania</h2></div>
+      <div class="faq-list">
+        {faqSchema.mainEntity.map(q => (
+          <details class="faq-item"><summary class="faq-item__question">{q.name}</summary><div class="faq-item__answer"><p>{q.acceptedAnswer.text}</p></div></details>
+        ))}
+        <details class="faq-item">
+          <summary class="faq-item__question">Czy mogę użyć artykułu eksperckiego jako materiału sprzedażowego?</summary>
+          <div class="faq-item__answer"><p>Tak — i to jest jeden z głównych celów. White paper jako PDF do wysyłki prospektom, analiza branżowa jako załącznik do oferty, case study jako dowód kompetencji na spotkaniu. Dostarczamy artykuł w formatach webowych i PDF — gotowy do obu zastosowań: publikacji online i dystrybucji offline.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-item__question">Czy oferujecie white labeling dla agencji?</summary>
+          <div class="faq-item__answer"><p>Tak — tworzymy artykuły eksperckie pod marką Twojej agencji, bez wzmianek o naszej firmie. Twój klient widzi Twoją markę i Twój zespół. Cena standardowa + 20% za white label. NDA w cenie. Stała współpraca z dedykowanym redaktorem po 3 zleceniach.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="svc-section svc-section--cta">
+    <div class="container">
+      <div class="final-cta">
+        <h2>Gotowy na treści, które budują pozycję lidera?</h2>
+        <p>Opisz temat, branżę i cel — wrócimy z propozycją formatu, struktury i harmonogramu w ciągu 24 godzin.</p>
+        <div class="final-cta__actions">
+          <a href="/kontakt" class="btn btn--primary btn--lg">Zamów artykuł ekspercki</a>
+          <a href="mailto:kontakt@copywritingseo.pl" class="btn btn--outline btn--lg">kontakt@copywritingseo.pl</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+</BaseLayout>
+

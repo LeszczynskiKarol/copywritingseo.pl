@@ -1,0 +1,632 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE } from '../../../utils';
+
+const pageTitle = "Opisy kategorii SEO — teksty na strony kategorii, które przyciągają ruch z Google";
+const pageDescription = "Tworzymy opisy kategorii dla sklepów internetowych: tekst wprowadzający nad produktami, FAQ pod produktami, optymalizacja pod frazy ogólne o wysokim wolumenie. Od 149 zł brutto za kategorię. Dla WooCommerce, PrestaShop, Shopify, IdoSell.";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Pisanie opisów kategorii SEO",
+  "description": pageDescription,
+  "provider": { "@type": "Organization", "name": SITE.title, "url": SITE.url },
+  "areaServed": { "@type": "Country", "name": "Polska" },
+  "serviceType": "SEO copywriting — opisy kategorii e-commerce",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Opis kategorii — standard",
+      "price": "149",
+      "priceCurrency": "PLN",
+      "priceSpecification": { "@type": "PriceSpecification", "price": "149", "priceCurrency": "PLN", "valueAddedTaxIncluded": true },
+    },
+    {
+      "@type": "Offer",
+      "name": "Opis kategorii — rozszerzony",
+      "price": "249",
+      "priceCurrency": "PLN",
+      "priceSpecification": { "@type": "PriceSpecification", "price": "249", "priceCurrency": "PLN", "valueAddedTaxIncluded": true },
+    },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Dlaczego strona kategorii potrzebuje tekstu, skoro i tak wyświetla produkty?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Strona kategorii bez tekstu to dla Google pusta strona z listą linków. Nie ma sygnału tematycznego — Google nie wie, czego dotyczy kategoria i na jakie frazy ją wyświetlać. 200–400 słów unikalnego tekstu nad produktami daje Google kontekst, pokrywa frazy ogólne o wysokim wolumenie i jednocześnie pomaga kupującemu zrozumieć, co znajdzie w kategorii i na co zwrócić uwagę przy wyborze.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Gdzie umieścić tekst kategorii — nad czy pod produktami?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Idealnie: krótkie wprowadzenie (150–250 słów) NAD produktami i rozszerzony tekst z FAQ (200–400 słów) POD produktami. Google nadaje większą wagę treści bliżej początku strony — dlatego kluczowe frazy i definicja kategorii muszą być na górze. Tekst pod produktami rozszerza pokrycie fraz i odpowiada na pytania kupujących, nie przesuwając produktów w dół.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Ile słów powinien mieć opis kategorii?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Łącznie 300–700 słów: 150–250 słów wprowadzenia nad produktami i 200–400 słów rozszerzenia pod produktami (w tym FAQ). To zakres, który pokrywa frazy kluczowe bez przytłaczania kupującego. Więcej niż 700 słów na stronie kategorii jest rzadko uzasadnione — to nie artykuł blogowy, lecz strona nawigacyjna z dodatkiem SEO.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Czy opisy kategorii pomagają w rankowaniu stron produktowych?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tak — na dwa sposoby. Po pierwsze, strona kategorii z opisem i linkami wewnętrznymi przekazuje wartość rankingową do stron produktowych. Po drugie, zoptymalizowana kategoria rankuje na frazy ogólne (np. 'silniki elektryczne'), generując ruch, który następnie przechodzi na konkretne strony produktowe. Kategoria bez opisu nie rankuje na frazy ogólne — i cały ten ruch trafia do konkurencji.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Czy mogę zamówić opisy kategorii razem z opisami produktów?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tak — i to jest rekomendowane podejście. Opisy kategorii i produktów tworzą spójną strategię SEO: kategorie targetują frazy ogólne o wysokim wolumenie, produkty targetują frazy szczegółowe z długiego ogona. Zamawiając razem, zapewniamy spójność fraz, tonu i linkowania wewnętrznego między kategoriami a produktami.",
+      },
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": SITE.url },
+    { "@type": "ListItem", "position": 2, "name": "Oferta", "item": `${SITE.url}/oferta` },
+    { "@type": "ListItem", "position": 3, "name": "Opisy kategorii SEO", "item": `${SITE.url}/oferta/opisy-kategorii` },
+  ],
+};
+
+const combinedSchema = [serviceSchema, faqSchema, breadcrumbSchema];
+
+const anatomyParts = [
+  {
+    position: "NAD produktami",
+    title: "Nagłówek H1 + wprowadzenie",
+    words: "150–250 słów",
+    purpose: "Sygnał tematyczny dla Google, fraza kluczowa kategorii, kontekst dla kupującego",
+    elements: [
+      "H1 z frazą kategorii + element wartości (np. „wybierz model dopasowany do zastosowania”)",
+      "1–2 akapity: co znajdzie kupujący, na co zwrócić uwagę, jakie różnice między produktami",
+      "Fraza kluczowa w pierwszym zdaniu — naturalnie, nie na siłę",
+      "Link do poradnika zakupowego (jeśli istnieje na blogu)",
+    ],
+  },
+  {
+    position: "POD produktami",
+    title: "Rozszerzenie + FAQ",
+    words: "200–400 słów",
+    purpose: "Dodatkowe frazy z długiego ogona, odpowiedzi na pytania kupujących, linkowanie wewnętrzne",
+    elements: [
+      "2–3 akapity rozwijające temat: zastosowania, kryteria wyboru, informacje o gwarancji/dostawie",
+      "FAQ 3–4 pytania z sekcji „Ludzie też pytają” na frazę kategorii",
+      "Linki wewnętrzne do podkategorii i powiązanych kategorii",
+      "Frazy z długiego ogona osadzone naturalnie w tekście",
+    ],
+  },
+];
+
+const comparisonRows = [
+  { metric: "Wolumen fraz", category: "Wysoki (frazy ogólne)", product: "Niski (frazy szczegółowe)" },
+  { metric: "Konkurencja", category: "Wysoka", product: "Niska–średnia" },
+  { metric: "Intencja", category: "Komercyjna / informacyjna", product: "Transakcyjna" },
+  { metric: "Rola w lejku", category: "Środek (porównywanie)", product: "Dół (zakup)" },
+  { metric: "Liczba stron", category: "10–50 kategorii", product: "50–5 000 produktów" },
+  { metric: "Typ tekstu", category: "Wprowadzenie + FAQ", product: "Opis z korzyściami + parametry" },
+  { metric: "Generowanie ruchu", category: "Ruch na dziesiątki produktów jednocześnie", product: "Ruch na 1 produkt" },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogType="website"
+  jsonLd={combinedSchema}
+>
+
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Ścieżka nawigacyjna">
+      <ol>
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/oferta">Oferta</a></li>
+        <li aria-current="page">Opisy kategorii SEO</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="svc-hero">
+    <div class="container">
+      <div class="svc-hero__badge">SEO e-commerce — strony kategorii</div>
+      <h1>
+        Opisy kategorii, które<br />
+        <span class="svc-hero__accent">przyciągają ruch z fraz ogólnych</span>
+      </h1>
+      <p class="svc-hero__desc">
+        Strony kategorii to najbardziej zaniedbane strony w sklepach internetowych — i jednocześnie te o najwyższym potencjale SEO.
+        Fraza „silniki elektryczne" ma wielokrotnie wyższy wolumen niż jakikolwiek pojedynczy produkt. Jeśli Twoja kategoria nie ma tekstu — ten ruch trafia do konkurencji.
+      </p>
+      <div class="svc-hero__cta">
+        <a href="#cennik" class="btn btn--primary btn--lg">Cennik — od 149 zł / kategoria</a>
+        <a href="#anatomia" class="btn btn--outline btn--lg">Zobacz strukturę opisu</a>
+      </div>
+      <div class="svc-hero__proof">
+        <div class="proof-item">
+          <span class="proof-num">300+</span>
+          <span class="proof-label">opisów kategorii</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">od 149 zł</span>
+          <span class="proof-label">brutto za kategorię</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">2 bloki</span>
+          <span class="proof-label">nad + pod produktami</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-num">+FAQ</span>
+          <span class="proof-label">w każdym opisie</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="svc-section svc-section--muted" id="problem">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Problem: 90% stron kategorii to pusta siatka produktów</h2>
+        <p>Otwierasz kategorię w sklepie i widzisz: nagłówek, filtry, produkty. Zero tekstu. Zero kontekstu. Zero sygnału dla Google.</p>
+      </div>
+
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-card__icon">🕳️</div>
+          <h3>Pusta strona = niewidoczna strona</h3>
+          <p>Google potrzebuje tekstu, żeby zrozumieć, o czym jest strona. Siatka produktów z cenami to za mało — crawler widzi listę linków, nie treść tematyczną. Efekt: kategoria nie rankuje na frazę ogólną, bo nie ma na nią żadnego sygnału.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card__icon">💰</div>
+          <h3>Frazy ogólne = największy ruch</h3>
+          <p>Fraza „buty do biegania" ma 10× wyższy wolumen niż „Nike Pegasus 41 damskie 39". Kategoria z opisem rankuje na frazy ogólne i kieruje ruch na dziesiątki produktów jednocześnie. Kategoria bez opisu — nie rankuje wcale.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card__icon">🔗</div>
+          <h3>Brak przekazywania wartości</h3>
+          <p>Strona kategorii jest naturalnym węzłem linkowania wewnętrznego: łączy produkty, podkategorie, poradniki. Bez tekstu nie ma naturalnych linków kontekstowych — wartość rankingowa nie przepływa do produktów.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card__icon">🤔</div>
+          <h3>Kupujący nie wie, co wybrać</h3>
+          <p>Klient trafia na kategorię z 80 produktami i nie wie, od czego zacząć. Krótki tekst wyjaśniający różnice między produktami, kryteria wyboru i zastosowania pomaga podjąć decyzję — i obniża współczynnik odrzuceń.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="svc-section" id="anatomia">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Anatomia opisu kategorii — dwa bloki, dwa cele</h2>
+        <p>Tekst na stronie kategorii nie jest jednym wielkim blokiem. To dwa celowane fragmenty w strategicznych miejscach.</p>
+      </div>
+
+      <div class="anatomy-blocks">
+        {anatomyParts.map(part => (
+          <div class="anatomy-block">
+            <div class="anatomy-block__header">
+              <span class="anatomy-block__position">{part.position}</span>
+              <span class="anatomy-block__words">{part.words}</span>
+            </div>
+            <h3 class="anatomy-block__title">{part.title}</h3>
+            <p class="anatomy-block__purpose"><strong>Cel:</strong> {part.purpose}</p>
+            <ul class="anatomy-block__elements">
+              {part.elements.map(el => <li>{el}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div class="anatomy-visual">
+        <div class="av-row av-row--text">
+          <div class="av-label">H1 + Wprowadzenie</div>
+          <div class="av-desc">150–250 słów · fraza kluczowa · kontekst dla kupującego</div>
+        </div>
+        <div class="av-row av-row--products">
+          <div class="av-label">📦 Siatka produktów</div>
+          <div class="av-desc">Twoje produkty — nienaruszone, bez przesuwania</div>
+        </div>
+        <div class="av-row av-row--text">
+          <div class="av-label">Rozszerzenie + FAQ</div>
+          <div class="av-desc">200–400 słów · frazy z długiego ogona · linki wewnętrzne</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY vs PRODUCT — WHY BOTH -->
+  <section class="svc-section svc-section--muted" id="kategoria-vs-produkt">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Kategoria vs produkt — dlaczego potrzebujesz obu</h2>
+        <p>Opisy kategorii i produktów to nie alternatywa. To dwa poziomy tej samej strategii SEO.</p>
+      </div>
+
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Parametr</th>
+              <th>Strona kategorii</th>
+              <th>Strona produktu</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map(row => (
+              <tr>
+                <td class="comparison-table__metric">{row.metric}</td>
+                <td>{row.category}</td>
+                <td>{row.product}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="comparison-note">
+        Kategoria przyciąga ruch na frazy ogólne i rozdziela go na produkty.
+        Produkt konwertuje ruch na konkretne frazy. Razem tworzą lejek: kategoria (środek) → produkt (dół).
+      </p>
+    </div>
+  </section>
+
+  <!-- WHAT A GOOD CATEGORY DESCRIPTION DOES -->
+  <section class="svc-section" id="efekty">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Co daje zoptymalizowany opis kategorii</h2>
+      </div>
+
+      <div class="effects-grid">
+        <div class="effect-card">
+          <div class="effect-card__icon">📈</div>
+          <h3>Ranking na frazy ogólne</h3>
+          <p>Kategoria z opisem targetuje frazy o wolumenie 500–50 000 wyszukiwań/mies. Bez opisu — te frazy są niedostępne dla Twojego sklepu. To najbardziej bezpośredni efekt.</p>
+        </div>
+        <div class="effect-card">
+          <div class="effect-card__icon">🔗</div>
+          <h3>Wzmocnienie stron produktowych</h3>
+          <p>Strona kategorii, która rankuje i zbiera linki, przekazuje wartość do każdego produktu w kategorii przez linki wewnętrzne. Jeden silny opis kategorii podnosi pozycje dziesiątek produktów.</p>
+        </div>
+        <div class="effect-card">
+          <div class="effect-card__icon">🧭</div>
+          <h3>Niższy współczynnik odrzuceń</h3>
+          <p>Kupujący, który trafia na kategorię z 80 produktami i nie wie, co wybrać, wychodzi. Kupujący, który czyta „jeśli szukasz silnika do warsztatu, zwróć uwagę na klasę IE3 i poziom hałasu" — klika w produkt.</p>
+        </div>
+        <div class="effect-card">
+          <div class="effect-card__icon">🤖</div>
+          <h3>Widoczność w AI Overviews</h3>
+          <p>Google AI Overviews cytują treści z frazą kluczową kategorii. Strona kategorii z tekstem „Silniki elektryczne trójfazowe — jak wybrać model dopasowany do zastosowania" ma szansę na cytowanie. Pusta siatka produktów — nie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAMPLE -->
+  <section class="svc-section svc-section--muted" id="przyklad">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Przykład — przed i po dodaniu opisu kategorii</h2>
+      </div>
+
+      <div class="example-grid">
+        <div class="example-card example-card--before">
+          <div class="example-card__tag">❌ Przed — typowa kategoria</div>
+          <h3>Silniki elektryczne</h3>
+          <div class="example-card__content">
+            <p class="example-card__muted">[filtry: moc | napięcie | producent]</p>
+            <div class="example-card__products">
+              <div class="mini-product"></div>
+              <div class="mini-product"></div>
+              <div class="mini-product"></div>
+              <div class="mini-product"></div>
+              <div class="mini-product"></div>
+              <div class="mini-product"></div>
+            </div>
+            <p class="example-card__verdict">Zero tekstu. Zero kontekstu. Google nie wie, czego dotyczy ta strona poza listą URL-i do produktów.</p>
+          </div>
+        </div>
+
+        <div class="example-card example-card--after">
+          <div class="example-card__tag">✅ Po — zoptymalizowana kategoria</div>
+          <h3>Silniki elektryczne trójfazowe — wybierz model dopasowany do zastosowania</h3>
+          <div class="example-card__content">
+            <div class="example-card__intro">
+              <p><strong>Silniki elektryczne trójfazowe</strong> to najpopularniejszy typ napędu w przemyśle, warsztatach i instalacjach wentylacyjnych. W naszym katalogu znajdziesz modele o mocy od 0,37 kW do 45 kW, w klasach energetycznych IE2 i IE3, z obudowami aluminiowymi i żeliwnymi.</p>
+              <p>Nie wiesz, który silnik wybrać? Zwróć uwagę na trzy parametry: moc dopasowaną do obciążenia, klasę energetyczną (IE3 oszczędza 15–20% energii vs IE1) i stopień ochrony IP (IP55 dla warunków przemysłowych, IP56 dla pracy na zewnątrz).</p>
+            </div>
+            <p class="example-card__muted">[filtry + produkty — bez zmian]</p>
+            <div class="example-card__faq">
+              <p><strong>FAQ:</strong> Jaka moc silnika do wentylatora? | Silnik jednofazowy vs trójfazowy — kiedy który? | Jak obliczyć zużycie prądu silnika?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="svc-section" id="co-dostajesz">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Co dostajesz z każdym opisem kategorii</h2>
+      </div>
+
+      <div class="included-grid">
+        <div class="included-group">
+          <h3>📝 Treść</h3>
+          <ul>
+            <li>Wprowadzenie nad produktami (150–250 słów)</li>
+            <li>Rozszerzenie pod produktami (200–400 słów)</li>
+            <li>H1 z frazą kategorii + element wartości</li>
+            <li>FAQ 3–4 pytania z „Ludzie też pytają"</li>
+            <li>Korzyści i kryteria wyboru dla kupującego</li>
+            <li>Ton dopasowany do Twojej marki</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>🔍 SEO</h3>
+          <ul>
+            <li>Meta title (40–60 znaków z frazą kategorii)</li>
+            <li>Meta description (135–155 znaków z zachętą)</li>
+            <li>Frazy kluczowe: główna + 3–5 z długiego ogona</li>
+            <li>Linki wewnętrzne do podkategorii i poradników</li>
+            <li>Alt text do ewentualnego bannera kategorii</li>
+            <li>Sugestie URL-a kategorii (jeśli do poprawy)</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>📦 Dostawa</h3>
+          <ul>
+            <li>Tekst w formacie HTML / Markdown / TXT</li>
+            <li>Gotowy do wklejenia w CMS (WooCommerce, PrestaShop, Shopify, IdoSell)</li>
+            <li>Osobne pliki: intro nad produktami + rozszerzenie pod</li>
+            <li>Raport z frazami kluczowymi per kategoria</li>
+          </ul>
+        </div>
+        <div class="included-group">
+          <h3>📊 Opcja rozszerzona</h3>
+          <ul>
+            <li>Schema FAQPage (gotowy JSON-LD)</li>
+            <li>Schema BreadcrumbList per kategoria</li>
+            <li>Analiza podkategorii filtrowych (URL per filtr)</li>
+            <li>Strategia fraz: główna + podkategorie + filtry</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="svc-section svc-section--muted" id="proces">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Jak wygląda współpraca</h2>
+        <p>Zwykle 3–7 dni roboczych na pierwszą partię kategorii. Im więcej kategorii zamawiasz, tym niższy koszt jednostkowy.</p>
+      </div>
+
+      <div class="process-timeline">
+        <div class="process-step">
+          <div class="process-step__marker">
+            <span class="process-step__num">01</span>
+            <div class="process-step__line"></div>
+          </div>
+          <div class="process-step__content">
+            <div class="process-step__duration">Dzień 1</div>
+            <h3 class="process-step__title">Analiza kategorii i fraz</h3>
+            <p class="process-step__desc">Analizujemy strukturę Twojego sklepu, badamy frazy kluczowe per kategoria, sprawdzamy co rankuje konkurencja. Ustalamy priorytety: które kategorie mają najwyższy potencjał ruchu.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__marker">
+            <span class="process-step__num">02</span>
+            <div class="process-step__line"></div>
+          </div>
+          <div class="process-step__content">
+            <div class="process-step__duration">Dzień 2</div>
+            <h3 class="process-step__title">Szablon i wytyczne</h3>
+            <p class="process-step__desc">Tworzymy szablon opisu per typ kategorii (główna / podkategoria / filtrowa). Ustalamy ton, styl i powtarzalne elementy — żeby opisy były spójne na całym sklepie.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__marker">
+            <span class="process-step__num">03</span>
+            <div class="process-step__line"></div>
+          </div>
+          <div class="process-step__content">
+            <div class="process-step__duration">Dzień 3–5</div>
+            <h3 class="process-step__title">Pisanie i optymalizacja</h3>
+            <p class="process-step__desc">Piszemy opisy z AI wspieranym ludzką redakcją. Każdy opis przechodzi weryfikację: frazy, korzyści, FAQ, linkowanie, meta tagi. Tempo: 5–10 kategorii dziennie.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step__marker">
+            <span class="process-step__num">04</span>
+          </div>
+          <div class="process-step__content">
+            <div class="process-step__duration">Dzień 5–7</div>
+            <h3 class="process-step__title">Dostawa i wsparcie</h3>
+            <p class="process-step__desc">Dostarczamy opisy w formacie gotowym do wklejenia w CMS. Sprawdzamy poprawność po wdrożeniu. Dajemy rekomendacje kolejnych działań (opisy produktów, blog, linkowanie).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="svc-section svc-section--dark" id="cennik">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <h2>Cennik opisów kategorii</h2>
+        <p>Cena za jedną kategorię — zawiera wprowadzenie + rozszerzenie + FAQ + meta tagi.</p>
+      </div>
+
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">Opis standardowy</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">149 zł</span>
+            <span class="pricing-card__period">brutto / kategoria</span>
+          </div>
+          <p class="pricing-card__desc">Wprowadzenie 150–250 słów + rozszerzenie 150–200 słów + FAQ 3 pytania. Meta title + description.</p>
+          <ul class="pricing-card__features">
+            <li>300–450 słów łącznie (intro + rozszerzenie)</li>
+            <li>H1 z frazą kategorii</li>
+            <li>FAQ 3 pytania z „Ludzie też pytają"</li>
+            <li>Meta title + meta description</li>
+            <li>Fraza główna + 3 frazy wspierające</li>
+            <li>Format HTML / Markdown do wklejenia</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zamów opisy standardowe</a>
+          <p class="pricing-card__note">Min. zamówienie: 5 kategorii</p>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-card__badge">Rekomendowany</div>
+          <h3 class="pricing-card__name">Opis rozszerzony</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">249 zł</span>
+            <span class="pricing-card__period">brutto / kategoria</span>
+          </div>
+          <p class="pricing-card__desc">Pełna optymalizacja: intro 250 słów + rozszerzenie 300–400 słów + FAQ 4 pytania + schema + strategia podkategorii.</p>
+          <ul class="pricing-card__features">
+            <li>550–700 słów łącznie</li>
+            <li>Pełne badanie fraz per kategoria</li>
+            <li>FAQ 4 pytania + schema FAQPage JSON-LD</li>
+            <li>Analiza podkategorii filtrowych (URL per filtr)</li>
+            <li>Linki wewnętrzne do podkategorii + poradników</li>
+            <li>Sugestie URL-i, jeśli obecne wymagają poprawy</li>
+            <li>Meta title + description + alt text bannera</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--primary btn--lg" style="width:100%;">Zamów opisy rozszerzone</a>
+          <p class="pricing-card__note">Min. zamówienie: 3 kategorie</p>
+        </div>
+
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">Pakiet sklepowy</h3>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount">od 1 999 zł</span>
+            <span class="pricing-card__period">brutto / 15 kategorii</span>
+          </div>
+          <p class="pricing-card__desc">Kompletna optymalizacja wszystkich kategorii w sklepie. Strategia fraz, szablony, hierarchia, linkowanie wewnętrzne.</p>
+          <ul class="pricing-card__features">
+            <li>15+ kategorii (rozszerzone opisy)</li>
+            <li>Strategia fraz dla całego drzewa kategorii</li>
+            <li>Mapowanie podkategorii i filtrów</li>
+            <li>Rekomendacje struktury URL</li>
+            <li>Schema FAQPage per kategoria</li>
+            <li>Raport z frazami i priorytetami</li>
+            <li>Wdrożenie w CMS (opcjonalnie)</li>
+          </ul>
+          <a href="/kontakt" class="btn btn--outline btn--lg" style="width:100%;">Zapytaj o pakiet sklepowy</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CROSS-SELL -->
+  <section class="svc-section" id="polacz">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Połącz z opisami produktów — pełna strategia e-commerce SEO</h2>
+        <p>Opisy kategorii + opisy produktów = kompletna strategia, która pokrywa frazy od ogólnych po szczegółowe.</p>
+      </div>
+
+      <div class="crosssell-grid">
+        <div class="crosssell-card">
+          <h3>📦 Opisy produktów</h3>
+          <p>Unikalne opisy z formułą cecha→korzyść→scenariusz. Schema Product. Od 29 zł/szt.</p>
+          <a href="/oferta/opisy-produktow" class="btn btn--outline btn--sm">Sprawdź opisy produktów →</a>
+        </div>
+        <div class="crosssell-card">
+          <h3>📝 Artykuły blogowe</h3>
+          <p>Poradniki zakupowe targetujące frazy informacyjne. Budują ruch na górze lejka i linkują do kategorii.</p>
+          <a href="/oferta/artykuly-blogowe" class="btn btn--outline btn--sm">Sprawdź artykuły blogowe →</a>
+        </div>
+        <div class="crosssell-card">
+          <h3>🌐 Strony zapleczowe</h3>
+          <p>Dodatkowe domeny budujące autorytet tematyczny i profil linkowy Twojego sklepu.</p>
+          <a href="/oferta/tworzenie-stron-zapleczowych" class="btn btn--outline btn--sm">Sprawdź strony zapleczowe →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="svc-section svc-section--muted" id="faq">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Najczęściej zadawane pytania</h2>
+      </div>
+
+      <div class="faq-list">
+        {faqSchema.mainEntity.map(q => (
+          <details class="faq-item">
+            <summary class="faq-item__question">{q.name}</summary>
+            <div class="faq-item__answer">
+              <p>{q.acceptedAnswer.text}</p>
+            </div>
+          </details>
+        ))}
+
+        <details class="faq-item">
+          <summary class="faq-item__question">Czy dodanie tekstu do kategorii nie „zepchnę" produktów w dół strony?</summary>
+          <div class="faq-item__answer">
+            <p>Nie — wprowadzenie nad produktami to 150–250 słów, co zajmuje 3–5 linii na desktopie. Produkty pozostają widoczne bez przewijania. Na mobile: tekst zajmuje 1–2 ekrany przewinięcia, ale kupujący, który trafił z Google, oczekuje treści — nie przeszkadza mu krótki kontekst przed produktami. Badania UX konsekwentnie pokazują, że strony z wprowadzeniem mają niższy współczynnik odrzuceń niż puste siatki.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__question">Czy opisy kategorii działają na podkategoriach i stronach filtrów?</summary>
+          <div class="faq-item__answer">
+            <p>Tak — każda podkategoria i każda istotna strona filtrowa (np. „silniki 0,75 kW" albo „silniki na 400V") może mieć własny URL z unikalnym opisem. To tworzy dodatkowe strony docelowe dla fraz z długiego ogona. W pakiecie rozszerzonym analizujemy, które podkategorie i filtry warto zoptymalizować, a które nie mają potencjału.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-item__question">Na jakiej platformie e-commerce to działa?</summary>
+          <div class="faq-item__answer">
+            <p>Na każdej, która pozwala dodać tekst na stronę kategorii: WooCommerce (pole „opis kategorii"), PrestaShop (opis kategorii), Shopify (collection description), IdoSell, Magento, BaseLinker, Sky-Shop i inne. Dostarczamy tekst w formacie gotowym do wklejenia w Twój CMS.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="svc-section svc-section--cta">
+    <div class="container">
+      <div class="final-cta">
+        <h2>Gotowy na opisy kategorii, które generują ruch?</h2>
+        <p>Wyślij link do sklepu i listę kategorii — wrócimy z analizą potencjału fraz i propozycją pakietu w ciągu 24 godzin.</p>
+        <div class="final-cta__actions">
+          <a href="/kontakt" class="btn btn--primary btn--lg">Zamów opisy kategorii</a>
+          <a href="mailto:kontakt@copywritingseo.pl" class="btn btn--outline btn--lg">kontakt@copywritingseo.pl</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</BaseLayout>

@@ -103,11 +103,11 @@ export function slugify(text: string): string {
  * Site-wide constants
  */
 export const SITE = {
-  title: "CopywritingSEO.pl",
+  title: "SEO copywriting - pisanie tekstów do Google i pozycjonowania",
   description:
     "Praktyczne poradniki SEO copywritingu, strategii treści, AI w content marketingu i Generative Engine Optimization. Twórz treści, które rankują.",
   author: "Karol Leszczyński",
-  url: "https://copywritingseo.pl",
+  url: "https://www.copywritingseo.pl",
   ogImage: "/images/og-default.jpg",
   postsPerPage: 12,
 } as const;

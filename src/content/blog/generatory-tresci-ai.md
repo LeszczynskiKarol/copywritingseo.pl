@@ -5,7 +5,7 @@ pubDate: 2026-04-20
 updatedDate: 2026-04-20
 heroImage: "/images/blog/generatory-tresci-ai-porownanie.jpg"
 heroImageAlt: "Generatory treści AI — porównanie narzędzi vs ChatGPT"
-category: "ai-seo"
+category: "ai-copywriting"
 tags:
   [
     "generatory treści ai",

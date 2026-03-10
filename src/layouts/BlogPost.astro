@@ -3,7 +3,6 @@ import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import AuthorBox from '../components/AuthorBox.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
-import Newsletter from '../components/Newsletter.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import { formatDate, formatDateISO, getCategoryInfo, SITE } from '../utils';
 
@@ -48,7 +47,7 @@ const articleSchema = {
   "author": {
     "@type": "Person",
     "name": author,
-    "url": `${SITE.url}/o-mnie`,
+    "url": `${SITE.url}`,
   },
   "publisher": {
     "@type": "Organization",
@@ -173,7 +172,6 @@ const breadcrumbSchema = {
 
     <div class="container">
       <RelatedPosts category={category} currentSlug={slug} />
-      <Newsletter />
     </div>
   </article>
 </BaseLayout>
