@@ -8,7 +8,7 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
     <div class="header-inner">
       <a href="/" class="logo" aria-label="CopywritingSEO — Strona główna">
         <span class="logo-icon">CS</span>
-        <span>Copywriting<strong>SEO</strong></span>
+        <span>Copywriting<strong>SEO</strong>.pl</span>
       </a>
 
       <button class="menu-toggle" id="menu-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="main-nav">
@@ -21,10 +21,7 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
 
       <nav class="nav-main" id="main-nav" aria-label="Nawigacja główna">
         <a href="/blog" class:list={["nav-link", { active: isActive('/blog') }]}>Blog</a>
-        <a href="/kategoria/ai-copywriting" class:list={["nav-link", { active: isActive('/kategoria/ai-copywriting') }]}>AI & SEO</a>
-        <a href="/kategoria/geo-optymalizacja" class:list={["nav-link", { active: isActive('/kategoria/geo-optymalizacja') }]}>GEO</a>
-        <a href="/szablony" class:list={["nav-link", { active: isActive('/szablony') }]}>Szablony</a>
-        <a href="/o-mnie" class:list={["nav-link", { active: isActive('/o-mnie') }]}>O mnie</a>
+        <a href="/kategoria/ai-copywriting" class:list={["nav-link", { active: isActive('/kategoria/ai-copywriting') }]}>AI & SEO</a>                        
         <a href="/kontakt" class="nav-cta">Kontakt</a>
       </nav>
     </div>
