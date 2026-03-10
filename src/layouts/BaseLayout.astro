@@ -35,6 +35,30 @@ const fullTitle = title === SITE.title ? title : `${title} | ${SITE.title}`;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+  <!-- ============================================================
+       Google Consent Mode v2 — DEFAULT DENY
+       MUSI być PRZED jakimkolwiek skryptem Google (gtag, GTM)
+       ============================================================ -->
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+    // Region-specific: dla EU/EEA domyślnie denied (już jest),
+    // opcjonalnie dla reszty świata można dać granted
+    window.gtag = gtag;
+  </script>
+  <!-- Google Analytics — ładowany warunkowo przez CookieBanner po zgodzie -->
+  <!-- NIE dodawaj tutaj skryptu gtag.js — banner załaduje go dynamicznie -->
+
   <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

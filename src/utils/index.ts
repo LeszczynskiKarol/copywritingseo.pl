@@ -60,19 +60,6 @@ export const CATEGORIES: Record<
     color: "#d97706",
     icon: "🤖",
   },
-  "geo-optymalizacja": {
-    name: "GEO — Generative Engine Optimization",
-    description:
-      "Optymalizacja treści pod ChatGPT, Perplexity, Google AI Overviews.",
-    color: "#dc2626",
-    icon: "🚀",
-  },
-  "content-operations": {
-    name: "Content Operations",
-    description: "Zarządzanie produkcją treści, workflow, KPI i analityka.",
-    color: "#0891b2",
-    icon: "⚙️",
-  },
   "seo-techniczne": {
     name: "SEO Techniczne",
     description:
