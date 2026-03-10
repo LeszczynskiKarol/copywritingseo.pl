@@ -20,8 +20,9 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
       </button>
 
       <nav class="nav-main" id="main-nav" aria-label="Nawigacja główna">
-        <a href="/blog" class:list={["nav-link", { active: isActive('/blog') }]}>Blog</a>
-        <a href="/kategoria/ai-copywriting" class:list={["nav-link", { active: isActive('/kategoria/ai-copywriting') }]}>AI & SEO</a>                        
+        <a href="/" class:list={["nav-link", { active: pathname === '/' }]}>Strona główna</a>
+        <a href="/blog" class:list={["nav-link", { active: isActive('/blog') || isActive('/kategoria') }]}>Blog</a>
+        <a href="/oferta" class:list={["nav-link", { active: isActive('/oferta') }]}>Oferta</a>
         <a href="/kontakt" class="nav-cta">Kontakt</a>
       </nav>
     </div>
@@ -29,7 +30,6 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
 </header>
 
 <script>
-  // Mobile menu toggle
   const toggle = document.getElementById('menu-toggle');
   const nav = document.getElementById('main-nav');
   toggle?.addEventListener('click', () => {
@@ -37,7 +37,6 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
     toggle.setAttribute('aria-expanded', String(isOpen));
   });
 
-  // Sticky header shadow on scroll
   const header = document.getElementById('site-header');
   const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 10);
   window.addEventListener('scroll', onScroll, { passive: true });

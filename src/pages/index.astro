@@ -10,6 +10,7 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 const featuredPost = sortedPosts.find(p => p.data.pillar) || sortedPosts[0];
 const recentPosts = sortedPosts.filter(p => p !== featuredPost).slice(0, 6);
 const categoryEntries = Object.entries(CATEGORIES);
+const totalPosts = allPosts.length;
 
 const homeSchema = {
   "@context": "https://schema.org",
@@ -24,91 +25,285 @@ const homeSchema = {
     "query-input": "required name=search_term_string",
   },
 };
+
+const services = [
+  { icon: "📝", name: "Artykuły blogowe SEO", price: "od 349 zł", href: "/oferta/artykuly-blogowe", desc: "Poradniki, rankingi i analizy zoptymalizowane pod frazy kluczowe. Strategia klastrów tematycznych." },
+  { icon: "📦", name: "Opisy produktów", price: "od 29 zł", href: "/oferta/opisy-produktow", desc: "Unikalne opisy z formułą cecha→korzyść→scenariusz. Schema Product. Skalowanie AI+redakcja." },
+  { icon: "🗂️", name: "Opisy kategorii", price: "od 149 zł", href: "/oferta/opisy-kategorii", desc: "Tekst nad i pod produktami — frazy ogólne o najwyższym wolumenie. FAQ z „Ludzie też pytają”." },
+  { icon: "💼", name: "Teksty na strony firmowe", price: "od 499 zł", href: "/oferta/teksty-strony-firmowe", desc: "Główna, O nas, Oferta, Usługi, Kontakt — z E-E-A-T i formułą problem→rozwiązanie→dowód." },
+  { icon: "🎯", name: "Landing pages", price: "od 999 zł", href: "/oferta/landing-pages", desc: "Strony lądowania z formułą AIDA. Sam copywriting lub kompletna strona (design + Astro + hosting)." },
+  { icon: "🧠", name: "Artykuły eksperckie", price: "od 799 zł", href: "/oferta/artykuly-eksperckie", desc: "Thought leadership, white papers, analizy branżowe. Ghostwriting pod Twoje nazwisko." },
+  { icon: "🌐", name: "Strony zapleczowe SEO", price: "od 1 499 zł", href: "/oferta/tworzenie-stron-zapleczowych", desc: "Kompletna strona od A do Z: 5 artykułów + Astro SSG + AWS + CMS. Lighthouse 95–100." },
+];
+
+const stats = [
+  { value: `${totalPosts}+`, label: "artykułów na blogu" },
+  { value: "7", label: "filarów tematycznych" },
+  { value: "15+", label: "zrealizowanych stron" },
+  { value: "<1$", label: "hosting/mies. (AWS)" },
+];
+
+const audiences = [
+  { icon: "🛒", title: "Sklepy internetowe", problem: "Kopiujesz opisy producenta jak 80 innych sklepów. Kategorie bez tekstu. Blog nieistniejący. Google nie ma powodu Cię wyróżnić.", solution: "Unikalne opisy produktów i kategorii + artykuły blogowe (poradniki zakupowe) = ruch organiczny na każdym poziomie lejka.", links: [{ label: "Opisy produktów", href: "/oferta/opisy-produktow" }, { label: "Opisy kategorii", href: "/oferta/opisy-kategorii" }, { label: "Artykuły blogowe", href: "/oferta/artykuly-blogowe" }] },
+  { icon: "🏢", title: "Firmy usługowe", problem: "Strona firmowa z 3 zdaniami na podstronie „O nas”. Zero bloga. Konkurencja z 50 artykułami zabiera Ci ruch na frazy usługowe.", solution: "Profesjonalne teksty firmowe + blog SEO (klastry tematyczne) + landing pages pod kampanie = widoczność + konwersja.", links: [{ label: "Teksty firmowe", href: "/oferta/teksty-strony-firmowe" }, { label: "Landing pages", href: "/oferta/landing-pages" }, { label: "Blog SEO", href: "/oferta/artykuly-blogowe" }] },
+  { icon: "📈", title: "Eksperci i firmy B2B", problem: "Masz wiedzę, ale nie masz czasu pisać. Konkurencja publikuje raporty i analizy — Ty milczysz. Klienci B2B idą do tego, kto wygląda jak lider.", solution: "Artykuły eksperckie pod Twoje nazwisko + white papers jako materiał sprzedażowy + strony zapleczowe budujące profil linkowy.", links: [{ label: "Artykuły eksperckie", href: "/oferta/artykuly-eksperckie" }, { label: "Strony zapleczowe", href: "/oferta/tworzenie-stron-zapleczowych" }] },
+];
+
+const processSteps = [
+  { num: "01", title: "Strategia i frazy", who: "Człowiek", desc: "Badamy Twoją niszę, analizujemy konkurencję, dobieramy frazy kluczowe i planujemy klastry tematyczne. To etap, którego AI nie zrobi — wymaga zrozumienia Twojego biznesu, klientów i celów.", blogLink: { label: "Jak badać frazy kluczowe →", href: "/blog/badanie-slow-kluczowych-proces-krok-po-kroku" } },
+  { num: "02", title: "Struktura i brief", who: "Człowiek + AI", desc: "Analizujemy top 5 w Google na każdą frazę: nagłówki, długość, format, luki. AI pomaga przetwarzać dane. Człowiek decyduje o strukturze — bo rozumie intencję lepiej niż algorytm.", blogLink: { label: "Anatomia tekstu SEO →", href: "/blog/anatomia-tekstu-seo-struktura-ktora-rankuje" } },
+  { num: "03", title: "Pisanie z AI + redakcja", who: "AI → Człowiek", desc: "AI generuje szkice sekcja po sekcji. Każda sekcja przechodzi ludzką redakcję: weryfikacja faktów, dodanie ekspertyzy, humanizacja stylu, usunięcie wzorców AI. Efekt: tekst, pod którym autor podpisuje się z nazwiska.", blogLink: { label: "Workflow AI + człowiek →", href: "/blog/workflow-ai-czlowiek-system-produkcji-tresci" } },
+  { num: "04", title: "Optymalizacja SEO", who: "Człowiek + narzędzia", desc: "Meta title, description, schema JSON-LD, linki wewnętrzne, alt texty, hierarchia nagłówków. Każdy element ma cel — nie dodajemy niczego „na wszelki wypadek”.", blogLink: { label: "Dane strukturalne Schema →", href: "/blog/dane-strukturalne-schema-markup-tworca-tresci" } },
+  { num: "05", title: "Publikacja i monitoring", who: "Człowiek", desc: "Dostawa w Twoim formacie, zgłoszenie w GSC, linki z istniejących artykułów. Po 30 dniach: raport indeksowania, pozycje, rekomendacje.", blogLink: { label: "Checklist SEO copywritera →", href: "/blog/checklist-seo-copywritera-lista-kontrolna" } },
+];
+
+const knowledgeBridges = [
+  { question: "Jak pisać treści, które Google umieści wysoko?", answer: "Google nie nagradza „dobrych tekstów” — nagradza treści, które najlepiej odpowiadają na pytanie użytkownika w formacie, jakiego oczekuje. To oznacza: prawidłowe rozpoznanie intencji wyszukiwania, strukturę dopasowaną do top 10, unikalne dane i perspektywę, których nie ma konkurencja.", readMore: { label: "Czytaj: Intencja wyszukiwania — fundament tekstu SEO", href: "/blog/intencja-wyszukiwania-fundament-tekstu-seo" }, serviceLink: { label: "Zamów artykuły blogowe SEO →", href: "/oferta/artykuly-blogowe" } },
+  { question: "Czy AI pisze teksty SEO tak dobrze jak człowiek?", answer: "AI oszczędza ~30% czasu na artykuł — nie 80%, jak reklamują narzędzia. Halucynuje 30–50% statystyk bez źródła. Generuje generyczny tekst bez danych z pierwszej ręki. Ale jako asystent jest potężny: przyspiesza research, generuje warianty, pomaga ze strukturą. Klucz: workflow AI+człowiek, nie AI zamiast człowieka.", readMore: { label: "Czytaj: AI w SEO copywritingu — co naprawdę działa", href: "/blog/ai-seo-copywriting-co-naprawde-dziala" }, serviceLink: { label: "Zamów artykuły z ludzką redakcją →", href: "/oferta/artykuly-blogowe" } },
+  { question: "Co to jest E-E-A-T i dlaczego moja strona tego potrzebuje?", answer: "E-E-A-T to framework Google: Doświadczenie, Ekspertyza, Autorytet, Wiarygodność. Strona bez identyfikowalnego autora, bez danych kontaktowych, bez dowodów kompetencji — jest niska jakość, niezależnie od tekstu. Wbudowujemy E-E-A-T: biogramy, źródła, dane, schema Person.", readMore: { label: "Czytaj: E-E-A-T w praktyce — budowanie wiarygodności", href: "/blog/eeat-w-praktyce-jak-budowac-wiarygodnosc-tresci" }, serviceLink: { label: "Zamów teksty firmowe z E-E-A-T →", href: "/oferta/teksty-strony-firmowe" } },
+  { question: "Dlaczego moje opisy produktów nie generują ruchu z Google?", answer: "Bo 80 innych sklepów ma te same opisy producenta. Google widzi 80 identycznych stron i nie ma powodu wyróżniać żadnej. Potrzebujesz unikalnych opisów z frazami klientów (nie numerami katalogowymi), z korzyściami zamiast parametrów, z danymi strukturalnymi Product.", readMore: { label: "Czytaj: SEO copywriting e-commerce", href: "/blog/seo-copywriting-ecommerce-opisy-produktow-kategorii" }, serviceLink: { label: "Zamów opisy produktów od 29 zł →", href: "/oferta/opisy-produktow" } },
+  { question: "Co to jest GEO i dlaczego powinienem się tym interesować?", answer: "GEO (Generative Engine Optimization) to optymalizacja pod systemy AI: ChatGPT, Perplexity, Google AI Overviews. Cytują one treści ze stron — ale tylko te z pogrubionym akapitem otwierającym, danymi ze źródeł i samodzielnymi sekcjami H2. Jeśli Twoje treści nie są GEO-ready — AI Cię pomija.", readMore: { label: "Czytaj: GEO — przewodnik", href: "/blog/geo-generative-engine-optimization-przewodnik" }, serviceLink: { label: "Zamów artykuły GEO-ready →", href: "/oferta/artykuly-eksperckie" } },
+];
+
+const techPoints = [
+  { icon: "⚡", title: "Lighthouse 95–100", desc: "Czysty HTML bez runtime JavaScript. Czas ładowania poniżej 1 sekundy. Core Web Vitals w zielonej strefie z automatu." },
+  { icon: "🔒", title: "Zero powierzchni ataku", desc: "Brak bazy danych, serwera, panelu logowania. Nie istnieje punkt ataku typowy dla WordPress." },
+  { icon: "🌍", title: "CDN — 225+ lokalizacji", desc: "CloudFront serwuje stronę z najbliższego edge location. Auto-scaling wbudowany w architekturę." },
+  { icon: "💰", title: "Hosting <10 zł/mies.", desc: "Średnio 10 zł/mies. na podstawie 18 mies. rachunków AWS. WordPress na VPS: 60–200 zł/mies." },
+  { icon: "🕵️", title: "Brak footprintu", desc: "Unikatowy czysty HTML. Brak wp-content/, wspólnych wtyczek, wspólnego IP. SpamBrain nie ma czego łączyć." },
+  { icon: "📊", title: "Pełne SEO z automatu", desc: "Sitemap, RSS, breadcrumbs, canonical, Open Graph, hreflang, Schema.org JSON-LD — z konfiguracji." },
+];
 ---
 
-<BaseLayout title={SITE.title} description={SITE.description} jsonLd={homeSchema}>
+<BaseLayout title={SITE.title} description="SEO copywriting — tworzymy treści, które rankują w Google i konwertują. Artykuły blogowe, opisy produktów, teksty firmowe, strony zapleczowe. Praktyczna wiedza + profesjonalna usługa. Od 29 zł." jsonLd={homeSchema}>
 
-  <!-- Hero Section -->
-  <section class="hero">
+  <!-- HERO -->
+  <section class="hp-hero">
     <div class="container">
-      <span class="hero-label">🚀 Nowy na stronie? Zacznij tutaj</span>
-      <h1>
-        Twórz treści, które <span class="highlight">rankują</span> i konwertują
-      </h1>
-      <p class="hero-desc">
-        Praktyczne poradniki SEO copywritingu, strategii content, sztucznej inteligencji w tworzeniu treści i Generative Engine Optimization — dla twórców, marketerów i firm.
-      </p>
-      <div class="hero-actions">
-        <a href="/blog" class="btn btn--primary">Przeglądaj poradniki</a>        
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Post -->
-  {featuredPost && (
-    <section class="container" style="margin-bottom: var(--space-16);">
-      <div class="section-heading">
-        <h2>Wyróżniony artykuł</h2>
-      </div>
-      <PostCard
-        title={featuredPost.data.title}
-        description={featuredPost.data.description}
-        pubDate={featuredPost.data.pubDate}
-        heroImage={featuredPost.data.heroImage}
-        category={featuredPost.data.category}
-        slug={featuredPost.slug}
-        readingTime={featuredPost.data.readingTime}
-        pillar={featuredPost.data.pillar}
-        featured={true}
-      />
-    </section>
-  )}
-
-  <!-- Categories -->
-  <section class="container" style="padding: var(--space-16) 0;">
-    <div class="section-heading section-heading--center">
-      <h2>Odkryj tematy</h2>
-      <p>Kompleksowe poradniki w 7 filarach tematycznych — od podstaw SEO po optymalizację pod AI.</p>
-    </div>
-    <div class="categories-grid">
-      {categoryEntries.map(([slug, cat]) => (
-        <a href={`/kategoria/${slug}`} class="category-card">
-          <span class="category-card__icon">{cat.icon}</span>
-          <div>
-            <div class="category-card__name">{cat.name}</div>
-            <p class="category-card__desc">{cat.description}</p>
+      <div class="hp-hero__inner">
+        <div class="hp-hero__content">
+          <h1>SEO copywriting —<br />treści, które <span class="hp-hero__accent">rankują</span><br />i&nbsp;konwertują</h1>
+          <p class="hp-hero__desc">Piszemy artykuły blogowe, opisy produktów, teksty firmowe i landing pages zoptymalizowane pod Google. Budujemy strony zapleczowe od A do Z. Dzielimy się wiedzą na blogu z {totalPosts}+ poradnikami. Jedno miejsce — wiedza i usługa.</p>
+          <div class="hp-hero__actions">
+            <a href="/oferta" class="btn btn--primary">Sprawdź ofertę</a>
+            <a href="/blog" class="btn btn--outline">Czytaj poradniki</a>
           </div>
-        </a>
-      ))}
+        </div>
+        <div class="hp-hero__aside">
+          <div class="hp-hero__card">
+            <div class="hp-hero__card-label">Popularne usługi</div>
+            {[services[0], services[1], services[6], services[5]].map(s => (
+              <a href={s.href} class="hp-hero__service-link"><span>{s.icon} {s.name}</span><span class="hp-hero__price">{s.price}</span></a>
+            ))}
+            <a href="/oferta" class="hp-hero__all-link">Wszystkie usługi i cennik →</a>
+          </div>
+        </div>
+      </div>
+      <div class="hp-stats">{stats.map(s => (<div class="hp-stat"><span class="hp-stat__value">{s.value}</span><span class="hp-stat__label">{s.label}</span></div>))}</div>
     </div>
   </section>
 
-  <!-- Recent Posts -->
-  {recentPosts.length > 0 && (
-    <section class="container" style="padding-bottom: var(--space-16);">
-      <div class="section-heading">
-        <h2>Najnowsze wpisy</h2>
-        <p>Świeże artykuły, poradniki i analizy ze świata SEO i content marketingu.</p>
+  <!-- CZYM JEST SEO COPYWRITING -->
+  <section class="hp-section" id="co-robimy">
+    <div class="container container--wide">
+      <div class="hp-intro-grid">
+        <div class="hp-intro__text">
+          <h2>Czym jest SEO copywriting — i dlaczego Twoja firma go potrzebuje</h2>
+          <p><strong>SEO copywriting to pisanie treści, które jednocześnie odpowiadają na pytania ludzi i spełniają wymagania algorytmów Google.</strong> Nie chodzi o „upychanie fraz kluczowych" — chodzi o tworzenie treści, które są najlepszą odpowiedzią na pytanie Twojego potencjalnego klienta, z strukturą i sygnałami technicznymi, które pomagają Google to rozpoznać.</p>
+          <p>86% specjalistów SEO używa AI do tworzenia treści. Google w 2025 roku zaktualizował Quality Rater Guidelines, instruując oceniających, żeby niskooceniali treści automatycznie generowane bez ludzkiego nadzoru. Jednocześnie oficjalnie potwierdził: „odpowiednie użycie AI nie jest sprzeczne z naszymi wytycznymi".</p>
+          <p>Wygrywają ci, którzy łączą prędkość AI z ludzką ekspertyzą, weryfikacją faktów i unikalną perspektywą. Dokładnie to robimy — i o tym piszemy na blogu.</p>
+        </div>
+        <div class="hp-intro__aside">
+          <div class="hp-intro__fact-box">
+            <div class="hp-intro__fact"><span class="hp-intro__fact-num">86%</span><span class="hp-intro__fact-label">specjalistów SEO używa AI</span></div>
+            <div class="hp-intro__fact"><span class="hp-intro__fact-num">30–50%</span><span class="hp-intro__fact-label">statystyk AI jest zmyślonych</span></div>
+            <div class="hp-intro__fact"><span class="hp-intro__fact-num">~30%</span><span class="hp-intro__fact-label">oszczędność czasu z AI (nie 80%)</span></div>
+            <div class="hp-intro__fact"><span class="hp-intro__fact-num">33–60%</span><span class="hp-intro__fact-label">title tagów Google przepisuje</span></div>
+          </div>
+        </div>
       </div>
-      <div class="posts-grid">
-        {recentPosts.map(post => (
-          <PostCard
-            title={post.data.title}
-            description={post.data.description}
-            pubDate={post.data.pubDate}
-            heroImage={post.data.heroImage}
-            category={post.data.category}
-            slug={post.slug}
-            readingTime={post.data.readingTime}
-            pillar={post.data.pillar}
-          />
+    </div>
+  </section>
+
+  <!-- KOMU POMAGAMY -->
+  <section class="hp-section hp-section--muted" id="komu-pomagamy">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Komu pomagamy — znajdź swój scenariusz</h2>
+        <p>Trzy najczęstsze sytuacje. Znajdź swoją i zobacz, jakie usługi dadzą Ci najszybsze efekty.</p>
+      </div>
+      <div class="hp-audiences">
+        {audiences.map(a => (
+          <div class="hp-audience">
+            <div class="hp-audience__icon">{a.icon}</div>
+            <h3 class="hp-audience__title">{a.title}</h3>
+            <div class="hp-audience__problem"><div class="hp-audience__label">Problem</div><p>{a.problem}</p></div>
+            <div class="hp-audience__solution"><div class="hp-audience__label">Rozwiązanie</div><p>{a.solution}</p></div>
+            <div class="hp-audience__links">{a.links.map(l => (<a href={l.href}>{l.label} →</a>))}</div>
+          </div>
         ))}
       </div>
-      <div style="text-align:center; margin-top: var(--space-10);">
-        <a href="/blog" class="btn btn--outline">Zobacz wszystkie wpisy →</a>
+    </div>
+  </section>
+
+  <!-- USŁUGI -->
+  <section class="hp-section" id="uslugi">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <h2>Usługi SEO copywritingu — od 29 zł do kompletnych stron</h2>
+        <p>Jedna ekipa, jeden cel: widoczność w Google, która przekłada się na klientów.</p>
+      </div>
+      <div class="hp-services">
+        {services.map(svc => (
+          <a href={svc.href} class="hp-svc"><span class="hp-svc__icon">{svc.icon}</span><div class="hp-svc__body"><div class="hp-svc__name">{svc.name}</div><p class="hp-svc__desc">{svc.desc}</p></div><span class="hp-svc__price">{svc.price}</span></a>
+        ))}
+      </div>
+      <div style="text-align:center; margin-top: var(--space-8);"><a href="/oferta" class="btn btn--primary">Pełna oferta z cennikiem →</a></div>
+    </div>
+  </section>
+
+  <!-- WIEDZA + USŁUGA — bridge -->
+  <section class="hp-section hp-section--muted" id="wiedza">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Wiedza za darmo — usługa na zamówienie</h2>
+        <p>Każde pytanie, na które odpowiadamy na blogu, to problem, który rozwiązujemy dla klientów. Czytaj i ucz się — albo zamów i oszczędź czas.</p>
+      </div>
+      <div class="hp-bridges">
+        {knowledgeBridges.map(kb => (
+          <div class="hp-bridge">
+            <h3 class="hp-bridge__question">{kb.question}</h3>
+            <p class="hp-bridge__answer">{kb.answer}</p>
+            <div class="hp-bridge__links">
+              <a href={kb.readMore.href} class="hp-bridge__read">{kb.readMore.label}</a>
+              <a href={kb.serviceLink.href} class="hp-bridge__order">{kb.serviceLink.label}</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCES -->
+  <section class="hp-section" id="proces">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Jak tworzymy treści — 5 etapów, każdy z ludzkim nadzorem</h2>
+        <p>Co robimy, kto to robi i jaki artykuł na blogu to wyjaśnia szczegółowo.</p>
+      </div>
+      <div class="hp-process">
+        {processSteps.map((step, i) => (
+          <div class="hp-proc-step">
+            <div class="hp-proc-step__marker"><span class="hp-proc-step__num">{step.num}</span>{i < processSteps.length - 1 && <div class="hp-proc-step__line"></div>}</div>
+            <div class="hp-proc-step__content">
+              <div class="hp-proc-step__who">{step.who}</div>
+              <h3 class="hp-proc-step__title">{step.title}</h3>
+              <p class="hp-proc-step__desc">{step.desc}</p>
+              {step.blogLink && (<a href={step.blogLink.href} class="hp-proc-step__link">{step.blogLink.label}</a>)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DLACZEGO MY -->
+  <section class="hp-section hp-section--muted" id="dlaczego">
+    <div class="container">
+      <div class="section-heading section-heading--center"><h2>Dlaczego CopywritingSEO</h2></div>
+      <div class="hp-why">
+        <div class="hp-why__card"><div class="hp-why__icon">🔬</div><h3>SEO wbudowane od pierwszego zdania</h3><p>Frazy, Schema.org, linkowanie wewnętrzne i meta tagi od briefu — nie dodatek po napisaniu. Dlatego nasze treści rankują szybciej.</p></div>
+        <div class="hp-why__card"><div class="hp-why__icon">🤖</div><h3>AI + człowiek</h3><p>AI generuje szkice. Człowiek dodaje ekspertyzę, weryfikuje fakty (AI halucynuje 30–50% statystyk), humanizuje styl i podpisuje się pod tekstem.</p></div>
+        <div class="hp-why__card"><div class="hp-why__icon">⚡</div><h3>Astro SSG + AWS</h3><p>Lighthouse 95–100, hosting poniżej 10 zł/mies. Czysty HTML na globalnym CDN z 225+ edge locations — nie WordPress z Lighthouse 40.</p></div>
+        <div class="hp-why__card"><div class="hp-why__icon">📊</div><h3>Dane, nie obietnice</h3><p>Każda statystyka ma źródło. Raport GSC po 30 dniach. Mierzymy efekty — nie zgadujemy.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGIA -->
+  <section class="hp-section" id="technologia">
+    <div class="container container--wide">
+      <div class="section-heading section-heading--center">
+        <h2>Technologia — Astro SSG + AWS</h2>
+        <p>Tworzymy nie tylko treści, ale kompletne strony. Oto stack i dlaczego ma znaczenie dla SEO.</p>
+      </div>
+      <div class="hp-tech-grid">
+        {techPoints.map(tp => (<div class="hp-tech-card"><span class="hp-tech-card__icon">{tp.icon}</span><h3>{tp.title}</h3><p>{tp.desc}</p></div>))}
+      </div>
+      <div class="hp-tech-cta">
+        <p>Kompletna strona zapleczowa z 5 artykułami, hostingiem i CMS-em — <strong>od 1 499 zł brutto</strong>.</p>
+        <a href="/oferta/tworzenie-stron-zapleczowych" class="btn btn--outline">Sprawdź strony zapleczowe →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED POST -->
+  {featuredPost && (
+    <section class="hp-section hp-section--muted">
+      <div class="container">
+        <div class="section-heading"><h2>Zacznij tutaj — wyróżniony przewodnik</h2><p>Kompletny obraz SEO copywritingu — od podstaw po zaawansowane techniki.</p></div>
+        <PostCard title={featuredPost.data.title} description={featuredPost.data.description} pubDate={featuredPost.data.pubDate} heroImage={featuredPost.data.heroImage} category={featuredPost.data.category} slug={featuredPost.slug} readingTime={featuredPost.data.readingTime} pillar={featuredPost.data.pillar} featured={true} />
       </div>
     </section>
   )}
+
+  <!-- 7 FILARÓW -->
+  <section class="hp-section" id="tematy">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <h2>7 filarów wiedzy o SEO copywritingu</h2>
+        <p>Od podstaw pisania pod wyszukiwarki po optymalizację pod AI — kompletna baza wiedzy za darmo.</p>
+      </div>
+      <div class="categories-grid">
+        {categoryEntries.map(([slug, cat]) => (
+          <a href={`/kategoria/${slug}`} class="category-card"><span class="category-card__icon">{cat.icon}</span><div><div class="category-card__name">{cat.name}</div><p class="category-card__desc">{cat.description}</p></div></a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- NAJNOWSZE ARTYKUŁY -->
+  {recentPosts.length > 0 && (
+    <section class="hp-section hp-section--muted">
+      <div class="container">
+        <div class="section-heading"><h2>Najnowsze artykuły</h2><p>Świeże poradniki, analizy i instrukcje krok po kroku.</p></div>
+        <div class="posts-grid">
+          {recentPosts.map(post => (<PostCard title={post.data.title} description={post.data.description} pubDate={post.data.pubDate} heroImage={post.data.heroImage} category={post.data.category} slug={post.slug} readingTime={post.data.readingTime} pillar={post.data.pillar} />))}
+        </div>
+        <div style="text-align:center; margin-top: var(--space-10);"><a href="/blog" class="btn btn--outline">Wszystkie artykuły ({totalPosts}) →</a></div>
+      </div>
+    </section>
+  )}
+
+  <!-- JAK ZACZĄĆ -->
+  <section class="hp-section" id="jak-zaczac">
+    <div class="container">
+      <div class="section-heading section-heading--center"><h2>Jak zacząć współpracę</h2><p>3 kroki — bez zbędnej biurokracji.</p></div>
+      <div class="hp-steps">
+        <div class="hp-step"><div class="hp-step__num">1</div><h3>Opisz czego potrzebujesz</h3><p>Formularz, e-mail lub telefon. Jaka usługa, branża, ile treści. Pomożemy doprecyzować.</p></div>
+        <div class="hp-step__arrow">→</div>
+        <div class="hp-step"><div class="hp-step__num">2</div><h3>Propozycja w 24h</h3><p>Wycena, harmonogram, propozycja fraz. Bez zobowiązań.</p></div>
+        <div class="hp-step__arrow">→</div>
+        <div class="hp-step"><div class="hp-step__num">3</div><h3>Realizacja i dostawa</h3><p>Brief → pisanie → redakcja → SEO → dostawa. Płatność po dostarczeniu. Faktura VAT.</p></div>
+      </div>
+      <div style="text-align:center; margin-top: var(--space-8);"><a href="/kontakt" class="btn btn--primary">Napisz do nas — wycena w 24h</a></div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="hp-section hp-section--cta">
+    <div class="container">
+      <div class="hp-final-cta">
+        <h2>Treści, które pracują na Twój biznes — codziennie, bez budżetu reklamowego</h2>
+        <p>Artykuł opublikowany dziś generuje ruch przez 12–24 miesięcy. Opis produktu w top 10 sprzedaje bez przerwy. Strona zapleczowa buduje autorytet miesiąc po miesiącu. To inwestycja z kumulującym się zwrotem.</p>
+        <div class="hp-final-cta__actions">
+          <a href="/kontakt" class="btn btn--primary btn--lg">Zamów treści — wycena w 24h</a>
+          <a href="/oferta" class="btn btn--outline btn--lg">Przejrzyj pełną ofertę</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
 
 </BaseLayout>

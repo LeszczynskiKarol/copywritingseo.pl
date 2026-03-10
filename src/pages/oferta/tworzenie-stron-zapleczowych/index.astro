@@ -3,7 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE } from '../../../utils';
 
 const pageTitle = "Tworzenie stron zapleczowych SEO — od treści po hosting | Od 1 499 zł";
-const pageDescription = "Tworzymy strony zapleczowe (satellite sites) od A do Z: strategia, treści eksperckie, projekt graficzny, Astro SSG, hosting AWS, CMS do zarządzania treścią. Lighthouse 95–100, koszt hostingu <1 USD/mies. Cena od 1 499 zł brutto.";
+const pageDescription = "Tworzymy strony zapleczowe (satellite sites) od A do Z: strategia, treści eksperckie, projekt graficzny, Astro SSG, hosting AWS, CMS do zarządzania treścią. Lighthouse 95–100, koszt hostingu <10 zł/mies. Cena od 1 499 zł brutto.";
 
 const serviceSchema = {
   "@context": "https://schema.org",
@@ -52,7 +52,7 @@ const faqSchema = {
       "name": "Ile kosztuje utrzymanie strony zapleczowej miesięcznie?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Hosting na AWS S3 + CloudFront kosztuje poniżej 1 USD miesięcznie (ok. 4 zł). Nie ma opłat za serwer, licencje ani aktualizacje bezpieczeństwa. To 50–100× taniej niż utrzymanie strony WordPress na VPS.",
+        "text": "Hosting na AWS S3 + CloudFront kosztuje poniżej 10 zł miesięcznie. Nie ma opłat za serwer, licencje ani aktualizacje bezpieczeństwa. To 50–100× taniej niż utrzymanie strony WordPress na VPS.",
       },
     },
     {
@@ -114,7 +114,7 @@ const techFeatures = [
 const comparisonRows = [
   { feature: "Lighthouse Performance", astro: "95–100", wp: "40–70", winner: "astro" },
   { feature: "Czas ładowania (LCP)", astro: "< 1 sek.", wp: "2–5 sek.", winner: "astro" },
-  { feature: "Koszt hostingu / mies.", astro: "~4 zł (< 1 USD)", wp: "60–200 zł (VPS)", winner: "astro" },
+  { feature: "Koszt hostingu / mies.", astro: "~10 zł", wp: "60–200 zł (VPS)", winner: "astro" },
   { feature: "JavaScript na stronie", astro: "0 KB (domyślnie)", wp: "200–800 KB", winner: "astro" },
   { feature: "Aktualizacje bezpieczeństwa", astro: "Niepotrzebne", wp: "Co tydzień", winner: "astro" },
   { feature: "Footprint technologiczny", astro: "Brak (czysty HTML)", wp: "wp-content/, wp-admin/", winner: "astro" },
@@ -247,7 +247,7 @@ const comparisonRows = [
             Hosting na <strong>AWS S3 + CloudFront CDN</strong> z certyfikatem SSL i 225+ edge locations na świecie.
           </p>
           <p>
-            Efekt: Lighthouse 95–100, czas ładowania poniżej 1 sekundy, zero footprintu technologicznego, koszty hostingu poniżej 1 USD miesięcznie.
+            Efekt: Lighthouse 95–100, czas ładowania poniżej 1 sekundy, zero footprintu technologicznego, koszty hostingu poniżej 10 zł miesięcznie.
             Google widzi profesjonalną, szybką, bezpieczną stronę — bo nią jest.
           </p>
         </div>
@@ -508,7 +508,7 @@ const comparisonRows = [
         <div class="stat-card">
           <div class="stat-card__value">&lt; 10 zł</div>
           <div class="stat-card__label">średni koszt hostingu / mies.</div>
-          <div class="stat-card__detail">Na podstawie 18 mies. danych z rachunków AWS. Z czego 0,51 USD to Route 53 hosted zone.</div>
+          <div class="stat-card__detail">Na podstawie 18 mies. danych z rachunków AWS.</div>
         </div>
         <div class="stat-card">
           <div class="stat-card__value">&lt; 0,5 sek.</div>

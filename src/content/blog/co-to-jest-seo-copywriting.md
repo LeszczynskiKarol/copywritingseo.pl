@@ -142,7 +142,7 @@ Nie w pełni. AI jest potężnym narzędziem wspomagającym research, generowani
 
 ### Ile kosztuje SEO copywriting?
 
-Ceny zależą od rynku, złożoności tematu i doświadczenia autora. Na polskim rynku profesjonalny artykuł SEO (2 000–4 000 słów, z researchem i optymalizacją) kosztuje od 500 do 3 000 PLN. Na rynku anglojęzycznym stawki sięgają 200–2 000 USD za artykuł. Inwestycja zwraca się w postaci organicznego ruchu, który — w przeciwieństwie do płatnych reklam — nie znika po wyłączeniu budżetu.
+Ceny zależą od rynku, złożoności tematu i doświadczenia autora. Na polskim rynku profesjonalny artykuł SEO (2 000–4 000 słów, z researchem i optymalizacją) kosztuje od 500 do 3 000 PLN. Na rynku anglojęzycznym stawki sięgają 200–2 000 zł za artykuł. Inwestycja zwraca się w postaci organicznego ruchu, który — w przeciwieństwie do płatnych reklam — nie znika po wyłączeniu budżetu.
 
 ### Jak szybko SEO copywriting przynosi efekty?
 
