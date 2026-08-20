@@ -5,7 +5,7 @@
 set -e
 
 BUCKET="copywritingseo.pl"
-DISTRIBUTION_ID="" # Add your CloudFront distribution ID
+DISTRIBUTION_ID="E1LN5XTQYDWI7O" # CloudFront distribution for copywritingseo.pl (alias-verified via aws cloudfront list-distributions)
 REGION="eu-central-1"
 
 echo "🔨 Building site..."
