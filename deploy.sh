@@ -4,8 +4,11 @@
 
 set -e
 
-BUCKET="copywritingseo.pl"
-DISTRIBUTION_ID="E1LN5XTQYDWI7O" # CloudFront distribution for copywritingseo.pl (alias-verified via aws cloudfront list-distributions)
+# Live site is served from www.copywritingseo.pl (apex 301-redirects to www).
+# Distribution E2XKLUITT2JYBM (alias www.copywritingseo.pl) -> origin bucket www.copywritingseo.pl.
+# The old bucket "copywritingseo.pl" / distribution E1LN5XTQYDWI7O only back the apex redirect.
+BUCKET="www.copywritingseo.pl"
+DISTRIBUTION_ID="E2XKLUITT2JYBM"
 REGION="eu-central-1"
 
 echo "🔨 Building site..."
